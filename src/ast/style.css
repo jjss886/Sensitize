@@ -1,0 +1,14 @@
+/* ----------------- GLOBAL ELEMENT ----------------- */
+
+/* ----------------- NAVBAR ELEMENT ----------------- */
+.navBarFull {
+  background-color: lightgray;
+  position: fixed;
+  width: 100vw;
+  height: 10vh;
+  z-index: 2;
+}
+
+.belowNavBarFullDiv {
+  padding-top: 10vh;
+}
