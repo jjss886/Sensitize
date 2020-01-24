@@ -12,7 +12,8 @@ import Table from "./Table";
 
 class AppScatter extends Component {
   state = {
-    data: []
+    data: [],
+    activeName: null
   };
 
   componentDidMount() {
@@ -20,15 +21,27 @@ class AppScatter extends Component {
       .then(data => {
         this.setState({ data });
       })
-      .catch(err => console.log("ERROR -", err));
+      .catch(err => console.error("ERROR -", err));
   }
 
   updateData = data => this.setState({ data });
 
+  updateName = activeName => this.setState({ activeName });
+
   renderData(status) {
     if (!this.state.data.length) return "Loading Data !";
-    if (!status) return <ChartWrapperScatter data={this.state.data} />;
-    else return <Table data={this.state.data} updateData={this.updateData} />;
+    return !status ? (
+      <ChartWrapperScatter
+        data={this.state.data}
+        updateName={this.updateName}
+      />
+    ) : (
+      <Table
+        data={this.state.data}
+        updateData={this.updateData}
+        activeName={this.state.activeName}
+      />
+    );
   }
 
   render() {

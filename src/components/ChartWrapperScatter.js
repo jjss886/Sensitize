@@ -4,13 +4,13 @@ import ScatterPlotD3 from "../d3/ScatterPlotD3";
 class ChartWrapperScatter extends Component {
   componentDidMount() {
     this.setState({
-      scatterChart: new ScatterPlotD3(this.refs.scatterChart, this.props.data)
+      scatterChart: new ScatterPlotD3(
+        this.refs.scatterChart,
+        this.props.data,
+        this.props.updateName
+      )
     });
   }
-
-  // shouldComponentUpdate() {
-  //   return false;
-  // }
 
   componentDidUpdate(prevProps) {
     if (this.props.data.length !== prevProps.data.length) {

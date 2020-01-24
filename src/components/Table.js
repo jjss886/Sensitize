@@ -29,11 +29,19 @@ class Table extends Component {
   };
 
   renderRows() {
-    const { data } = this.props;
+    const { data, activeName } = this.props;
 
     return data.map(student => {
+      const background =
+        student.name === activeName ? "rgba(125,210,235,0.8)" : "white";
+
       return (
-        <Row key={student.name} style={{ marginTop: "10px" }}>
+        <Row
+          key={student.name}
+          className="studentRow"
+          // style={{ marginTop: "10px", backgroundColor: background }}
+          style={{ backgroundColor: background }}
+        >
           <Col xs={3}>{student.name}</Col>
           <Col xs={3}>{student.height}</Col>
           <Col xs={3}>{student.age}</Col>
