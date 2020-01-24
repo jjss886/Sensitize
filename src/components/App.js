@@ -42,7 +42,7 @@ class App extends Component {
 
           <div className="contentPageFullDiv">
             <img src={logo} className="appLogo" alt="logo" />
-            <p>JAMES SHEN ROOLZ</p>
+            <p>JAMES SHEN</p>
 
             <TestUpload updateData={this.updateData} />
 

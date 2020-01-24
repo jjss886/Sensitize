@@ -1,6 +1,7 @@
 import * as Papa from "papaparse";
 import React, { Component } from "react";
 import fbDatabase from "../firebase";
+import axios from "./index";
 
 class TestUpload extends Component {
   constructor(props) {
@@ -61,6 +62,12 @@ class TestUpload extends Component {
       );
     } else {
       this.props.updateData(this.state.test);
+      const jsonObj = JSON.stringify(this.state.test);
+      console.log("launching ...", jsonObj, axios);
+      axios
+        .post("/data.json", jsonObj)
+        .then(resp => console.log("FIREBASE -", resp))
+        .catch(err => console.error("WAH ERROR -", err));
     }
   };
 
@@ -95,14 +102,14 @@ class TestUpload extends Component {
           Upload
         </button>
 
-        <img
+        {/* <img
           className="testUploadImg"
           src={
             this.state.url ||
             "https://cdn.pixabay.com/photo/2016/01/03/00/43/upload-1118928_960_720.png"
           }
           alt="Upload Completed!"
-        />
+        /> */}
       </div>
     );
   }
