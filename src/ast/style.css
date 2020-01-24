@@ -34,4 +34,22 @@
   font-size: calc(10px + 2vmin);
   color: white;
   text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* ----------------- CONTAINER ELEMENT ----------------- */
+.containerDiv {
+  background-color: rgba(200, 200, 200, 0.9);
+  border-radius: 10px;
+  padding: 35px;
+  margin-bottom: 50px;
+}
+
+/* ----------------- CHART ELEMENT ----------------- */
+.chartArea {
+  background-color: #282c34;
+  border-radius: 5px;
+  padding: 15px;
 }

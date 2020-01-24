@@ -7,7 +7,7 @@ const WIDTH = 800 - MARGIN.LEFT - MARGIN.RIGHT;
 const HEIGHT = 500 - MARGIN.TOP - MARGIN.BOTTOM;
 
 class BarChartD3 {
-  constructor(element) {
+  constructor(element, data) {
     const vis = this;
 
     vis.svg = d3
