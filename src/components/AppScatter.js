@@ -5,7 +5,7 @@ import Container from "react-bootstrap/Container";
 import { json } from "d3";
 
 // IMPORT COMPONENTS
-import logo from "../images/logo.svg";
+
 import ChartWrapperScatter from "./ChartWrapperScatter";
 import Table from "./Table";
 
@@ -45,30 +45,22 @@ class AppScatter extends Component {
 
   render() {
     return (
-      <div className="App">
-        <nav className="navBarFull">
-          <h1 className="navBarHeader">SENSITIZE</h1>
-        </nav>
+      <div className="appScatterDiv">
+        <Container className="containerDiv">
+          <Row className="row row1">
+            <Col md={11} xs={12}>
+              {this.renderData(false)}
+            </Col>
+          </Row>
 
-        <div className="belowNavBarFullDiv">
-          <img src={logo} className="appLogo" alt="logo" />
-          <p>JAMES SHEN ROOLZ</p>
+          <Row className="row row2">
+            <Col md={11} xs={12}>
+              {this.renderData(true)}
+            </Col>
+          </Row>
+        </Container>
 
-          <Container className="containerDiv">
-            <Row className="row row1">
-              <Col md={11} xs={12}>
-                {this.renderData(false)}
-              </Col>
-            </Row>
-
-            <Row className="row row2">
-              <Col md={11} xs={12}>
-                {this.renderData(true)}
-              </Col>
-            </Row>
-          </Container>
-
-          {/* <div className="containerDiv">
+        {/* <div className="containerDiv">
             <div className="row row1">
               <div className="col col1">{this.renderData(false)}</div>
             </div>
@@ -77,7 +69,6 @@ class AppScatter extends Component {
               <div className="col col2">{this.renderData(true)}</div>
             </div>
           </div> */}
-        </div>
       </div>
     );
   }

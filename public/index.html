@@ -11,8 +11,7 @@
     />
     <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
     <!--
-      manifest.json provides metadata used when your web app is installed on a
-      user's mobile device or desktop. See https://developers.google.com/web/fundamentals/web-app-manifest/
+      manifest.json provides metadata used when your web app is installed on a user's mobile device or desktop. See https://developers.google.com/web/fundamentals/web-app-manifest/
     -->
     <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
     <link
@@ -22,18 +21,33 @@
       crossorigin="anonymous"
     />
     <!--
-      Notice the use of %PUBLIC_URL% in the tags above.
-      It will be replaced with the URL of the `public` folder during the build.
-      Only files inside the `public` folder can be referenced from the HTML.
-
-      Unlike "/favicon.ico" or "favicon.ico", "%PUBLIC_URL%/favicon.ico" will
-      work correctly both with client-side routing and a non-root public URL.
-      Learn how to configure a non-root public URL by running `npm run build`.
+      Notice the use of %PUBLIC_URL% in the tags above. It will be replaced with the URL of the `public` folder during the build. Only files inside the `public` folder can be referenced from the HTML.
     -->
     <title>Sensitize</title>
   </head>
   <body>
-    <noscript>You need to enable JavaScript to run this app.</noscript>
     <div id="root"></div>
+
+    <!-- ----------------------- FIREBASE -----------------------  -->
+    <script src="https://www.gstatic.com/firebasejs/7.7.0/firebase-app.js"></script>
+
+    <!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#available-libraries -->
+    <script src="https://www.gstatic.com/firebasejs/7.7.0/firebase-analytics.js"></script>
+
+    <script>
+      var firebaseConfig = {
+        apiKey: "AIzaSyByETasiITMQ9ZRv4TxC5Oot9oe3bcXsMk",
+        authDomain: "sensitize-56568.firebaseapp.com",
+        databaseURL: "https://sensitize-56568.firebaseio.com",
+        projectId: "sensitize-56568",
+        storageBucket: "sensitize-56568.appspot.com",
+        messagingSenderId: "662919213348",
+        appId: "1:662919213348:web:d3733ecfe14fc2721dc3b1",
+        measurementId: "G-JQLL4GNG72"
+      };
+      firebase.initializeApp(firebaseConfig);
+      firebase.analytics();
+    </script>
   </body>
 </html>

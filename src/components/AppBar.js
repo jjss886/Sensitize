@@ -18,29 +18,20 @@ class AppBar extends Component {
 
   render() {
     return (
-      <div className="App">
-        <Navbar bg="light" className="navBarFull">
-          <Navbar.Brand>SENSITIZE</Navbar.Brand>
-        </Navbar>
+      <div className="appBarDiv">
+        <Container>
+          <Row>
+            <Col xs={12}>
+              <GenderDropdown genderSelected={this.genderSelected} />
+            </Col>
+          </Row>
 
-        <div className="belowNavBarFullDiv">
-          <img src={logo} className="appLogo" alt="logo" />
-          <p>JAMES SHEN ROOLZ</p>
-
-          <Container>
-            <Row>
-              <Col xs={12}>
-                <GenderDropdown genderSelected={this.genderSelected} />
-              </Col>
-            </Row>
-
-            <Row>
-              <Col xs={12}>
-                <ChartWrapperBar gender={this.state.gender} />
-              </Col>
-            </Row>
-          </Container>
-        </div>
+          <Row>
+            <Col xs={12}>
+              <ChartWrapperBar gender={this.state.gender} />
+            </Col>
+          </Row>
+        </Container>
       </div>
     );
   }
