@@ -5,7 +5,7 @@ class ChartWrapper extends Component {
   constructor() {
     super();
     this.state = {
-      chart: "Ages"
+      chart: "Men"
     };
     this.handleChartChange = this.handleChartChange.bind(this);
   }
@@ -33,8 +33,8 @@ class ChartWrapper extends Component {
           value={this.state.chart}
           onChange={this.handleChartChange}
         >
-          <option>Ages</option>
           <option>Men</option>
+          <option>Ages</option>
         </select>
         <div ref="chart"></div>
       </div>
