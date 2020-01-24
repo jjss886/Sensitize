@@ -21,7 +21,7 @@ class ChartWrapperBar extends Component {
   }
 
   render() {
-    return <div ref="chart" className="chartArea"></div>;
+    return <div ref="chart" className="barChartArea"></div>;
   }
 }
 

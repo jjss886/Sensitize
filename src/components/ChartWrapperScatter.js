@@ -19,7 +19,7 @@ class ChartWrapperScatter extends Component {
   }
 
   render() {
-    return <div ref="scatterChart" className="chartArea"></div>;
+    return <div ref="scatterChart" className="scatterChartArea"></div>;
   }
 }
 

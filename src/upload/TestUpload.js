@@ -5,22 +5,23 @@ class ImageUpload extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      image: null,
+      test: null,
       url: "",
       progress: 0
     };
   }
 
   handleChange = e => {
+    console.log("changing -", e.target.files);
     if (e.target.files[0]) {
-      const image = e.target.files[0];
-      this.setState(() => ({ image }));
+      const test = e.target.files[0];
+      this.setState(() => ({ test }));
     }
   };
 
   handleUpload = () => {
-    const { image } = this.state;
-    const uploadTask = storage.ref(`images/${image.name}`).put(image);
+    const { test } = this.state;
+    const uploadTask = storage.ref(`test/${test.name}`).put(test);
     uploadTask.on(
       "state_changed",
       snapshot => {
@@ -34,10 +35,10 @@ class ImageUpload extends Component {
         console.log(error);
       },
       () => {
-        // COMPLETE FUNCTION
+        // COMPLETE UPLOAD FUNCTION
         storage
-          .ref("images")
-          .child(image.name)
+          .ref("test")
+          .child(test.name)
           .getDownloadURL()
           .then(url => {
             this.setState({ url });
@@ -48,10 +49,10 @@ class ImageUpload extends Component {
 
   render() {
     return (
-      <div className="testImageUpload">
-        <h2 className="imageHeaderText">Image Upload Section [TEST]</h2>
+      <div className="testUploadFullDiv">
+        <h2 className="testHeaderText">test Upload Section [TEST]</h2>
 
-        <div className="imageProgressBarDiv">
+        <div className="testProgressBarDiv">
           <progress
             value={this.state.progress}
             max="100"
@@ -59,31 +60,31 @@ class ImageUpload extends Component {
           />
         </div>
 
-        <div className="imageSelectSection">
-          <div className="imageSelectBtnDiv">
+        <div className="testSelectSection">
+          <div className="testSelectBtnDiv">
             <input
-              className="imageFileBtn"
+              className="testFileBtn"
               type="file"
               onChange={this.handleChange}
             />
           </div>
 
-          <div className="imageFilePathDiv">
-            <input className="imageFilePathInput" type="text" />
+          <div className="testFilePathDiv">
+            <input className="testFilePathInput" type="text" />
           </div>
         </div>
 
-        <button onClick={this.handleUpload} className="imageUploadBtn">
+        <button onClick={this.handleUpload} className="testUploadBtn">
           Upload
         </button>
 
         <img
-          className="imageUploadImg"
+          className="testUploadImg"
           src={
             this.state.url ||
             "https://cdn.pixabay.com/photo/2016/01/03/00/43/upload-1118928_960_720.png"
           }
-          alt="Uploaded Images"
+          alt="Upload Completed!"
         />
       </div>
     );

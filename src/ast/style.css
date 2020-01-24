@@ -94,6 +94,13 @@ code {
   width: 70%;
 }
 
+.barChartArea {
+  background-color: rgba(40, 44, 52, 0.8);
+  height: 100%;
+  border-radius: 5px;
+  padding: 15px;
+}
+
 /* ----------------- APP SCATTER ELEMENT ----------------- */
 .appScatterDiv {
   width: 100%;
@@ -115,16 +122,14 @@ code {
   height: 100%;
 }
 
-/* ----------------- CHART ELEMENT ----------------- */
-.chartArea {
-  background-color: #282c34;
+.scatterChartArea {
+  background-color: rgba(40, 44, 52, 0.8);
   height: 100%;
   border-radius: 5px;
   padding: 15px;
 }
 
-/* ----------------- FORM ELEMENT ----------------- */
-.studentRow {
+.scatterStudentRow {
   display: flex;
   color: rgba(100, 100, 100, 1);
   font-weight: bold;
@@ -135,7 +140,7 @@ code {
 }
 
 /* ----------------- IMAGE UPLOAD ELEMENT ----------------- */
-.testImageUpload {
+.testUploadFullDiv {
   background-color: lightgray;
   color: black;
   border-radius: 10px;
@@ -149,7 +154,7 @@ code {
   align-items: center;
 }
 
-.imageProgressBarDiv {
+.testProgressBarDiv {
   display: flex;
   justify-content: center;
   width: 50%;
@@ -159,7 +164,7 @@ code {
   width: 100%;
 }
 
-.imageSelectSection {
+.testSelectSection {
   width: 80%;
   display: flex;
   flex-direction: column;
@@ -167,30 +172,30 @@ code {
   align-items: center;
 }
 
-.imageSelectBtnDiv {
+.testSelectBtnDiv {
   display: flex;
   justify-content: center;
   align-items: center;
   padding-bottom: 15px;
 }
 
-.imageFileBtn {
+.testFileBtn {
   width: 70%;
   font-size: 14px;
 }
 
-.imageFilePathInput {
+.testFilePathInput {
   border-radius: 5px;
 }
 
-.imageUploadBtn {
+.testUploadBtn {
   background-color: lightblue;
   width: 150px;
   border-radius: 10px;
   font-weight: bold;
 }
 
-.imageUploadImg {
+.testUploadImg {
   width: 150px;
   height: 150px;
 }

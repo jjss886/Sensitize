@@ -39,7 +39,7 @@ class Table extends Component {
       return (
         <Row
           key={student.name}
-          className="studentRow"
+          className="scatterStudentRow"
           style={{ backgroundColor: background }}
         >
           <Col xs={3}>{student.name}</Col>
