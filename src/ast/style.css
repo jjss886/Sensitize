@@ -47,6 +47,16 @@
   margin-bottom: 50px;
 }
 
+/* .row {
+  display: block;
+  width: 50%;
+  margin: 0;
+}
+
+.col-12 {
+  width: 100%;
+} */
+
 /* ----------------- CHART ELEMENT ----------------- */
 .chartArea {
   background-color: #282c34;

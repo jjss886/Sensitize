@@ -8,6 +8,7 @@ import { json } from "d3";
 // IMPORT COMPONENTS
 import logo from "../images/logo.svg";
 import ChartWrapperScatter from "./ChartWrapperScatter";
+import Table from "./Table";
 
 class AppScatter extends Component {
   state = {
@@ -22,9 +23,10 @@ class AppScatter extends Component {
       .catch(err => console.log("ERROR -", err));
   }
 
-  renderChart() {
+  renderData(status) {
     if (!this.state.data.length) return "Loading Data !";
-    return <ChartWrapperScatter data={this.state.data} />;
+    if (!status) return <ChartWrapperScatter data={this.state.data} />;
+    else return <Table data={this.state.data} />;
   }
 
   render() {
@@ -39,14 +41,17 @@ class AppScatter extends Component {
           <p>JAMES SHEN ROOLZ</p>
 
           <Container className="containerDiv">
-            <Row>
+            <Row className="row row1">
               <Col md={6} xs={12}>
-                {this.renderChart()}
+                {this.renderData(false)}
               </Col>
             </Row>
 
-            <Row>
-              <Col md={6} xs={12}></Col>
+            <Row className="row row2">
+              <Col md={6} xs={12}>
+                {/* <Table data={this.state.data} /> */}
+                {this.renderData(true)}
+              </Col>
             </Row>
           </Container>
         </div>
