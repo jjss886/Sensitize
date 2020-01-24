@@ -29,12 +29,14 @@ class App extends Component {
 
           <Container>
             <Row>
+              {/* <Col md={6} xs={12}> */}
               <Col xs={12}>
                 <GenderDropdown genderSelected={this.genderSelected} />
               </Col>
             </Row>
 
             <Row>
+              {/* <Col md={6} xs={12}> */}
               <Col xs={12}>
                 <ChartWrapper gender={this.state.gender} />
               </Col>

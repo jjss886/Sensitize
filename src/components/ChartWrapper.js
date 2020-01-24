@@ -1,9 +1,9 @@
 import React, { Component } from "react";
-import D3Chart from "../d3/D3Chart";
+import BarChartD3 from "../d3/BarChartD3";
 
 class ChartWrapper extends Component {
   componentDidMount() {
-    this.setState({ chart: new D3Chart(this.refs.chart) });
+    this.setState({ chart: new BarChartD3(this.refs.chart) });
   }
 
   // shouldComponentUpdate() {

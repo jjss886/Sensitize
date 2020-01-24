@@ -2,11 +2,11 @@ import * as d3 from "d3";
 
 const tallMen = "https://udemy-react-d3.firebaseio.com/tallest_men.json";
 const tallLadies = "https://udemy-react-d3.firebaseio.com/tallest_women.json";
-const MARGIN = { TOP: 10, BOTTOM: 70, LEFT: 70, RIGHT: 10 };
+const MARGIN = { TOP: 10, BOTTOM: 80, LEFT: 70, RIGHT: 10 };
 const WIDTH = 800 - MARGIN.LEFT - MARGIN.RIGHT;
 const HEIGHT = 500 - MARGIN.TOP - MARGIN.BOTTOM;
 
-class D3Chart {
+class BarChartD3 {
   constructor(element) {
     const vis = this;
 
@@ -125,4 +125,4 @@ class D3Chart {
   }
 }
 
-export default D3Chart;
+export default BarChartD3;
