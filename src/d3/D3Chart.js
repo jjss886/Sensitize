@@ -2,7 +2,7 @@ import * as d3 from "d3";
 
 const tallMen = "https://udemy-react-d3.firebaseio.com/tallest_men.json";
 const tallLadies = "https://udemy-react-d3.firebaseio.com/tallest_women.json";
-const MARGIN = { TOP: 10, BOTTOM: 50, LEFT: 70, RIGHT: 10 };
+const MARGIN = { TOP: 10, BOTTOM: 70, LEFT: 70, RIGHT: 10 };
 const WIDTH = 800 - MARGIN.LEFT - MARGIN.RIGHT;
 const HEIGHT = 500 - MARGIN.TOP - MARGIN.BOTTOM;
 
@@ -18,12 +18,11 @@ class D3Chart {
       .append("g")
       .attr("transform", `translate(${MARGIN.LEFT}, ${MARGIN.TOP})`);
 
-    vis.svg
+    vis.xLabel = vis.svg
       .append("text")
       .attr("x", WIDTH / 2)
       .attr("y", HEIGHT + 50)
-      .attr("text-anchor", "middle")
-      .text("The world's tallest men");
+      .attr("text-anchor", "middle");
 
     vis.svg
       .append("text")
@@ -40,22 +39,29 @@ class D3Chart {
     vis.yAxisGroup = vis.svg.append("g");
 
     Promise.all([d3.json(tallMen), d3.json(tallLadies)]).then(dataSets => {
-      const [men, ladies] = dataSets;
-      let flag = true;
+      vis.menData = dataSets[0];
+      vis.ladiesData = dataSets[1];
+      vis.update("men");
 
-      vis.data = men;
-      vis.update();
+      // const [men, ladies] = dataSets;
+      // let flag = true;
 
-      d3.interval(() => {
-        vis.data = flag ? men : ladies;
-        vis.update();
-        flag = !flag;
-      }, 1000);
+      // vis.data = men;
+      // vis.update();
+
+      // d3.interval(() => {
+      //   vis.data = flag ? men : ladies;
+      //   // vis.update();
+      //   flag = !flag;
+      // }, 1000);
     });
   }
 
-  update() {
+  update(gender) {
     const vis = this;
+    vis.data = gender === "men" ? vis.menData : vis.ladiesData;
+    vis.xLabel.text(`The world's tallest ${gender}`);
+
     const y = d3
       .scaleLinear()
       .domain([
@@ -73,7 +79,7 @@ class D3Chart {
     const xAxisCall = d3.axisBottom(x);
     vis.xAxisGroup
       .transition()
-      .duration(500)
+      .duration(100)
       .call(xAxisCall);
 
     const yAxisCall = d3.axisLeft(y);
@@ -116,8 +122,6 @@ class D3Chart {
       .duration(500)
       .attr("height", d => HEIGHT - y(d.height))
       .attr("y", d => y(d.height));
-
-    console.log("TESTING --", rects);
   }
 }
 

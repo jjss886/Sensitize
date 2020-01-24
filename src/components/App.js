@@ -10,6 +10,12 @@ import ChartWrapper from "./ChartWrapper";
 import GenderDropdown from "./GenderDropdown";
 
 class App extends Component {
+  state = {
+    gender: "men"
+  };
+
+  genderSelected = gender => this.setState({ gender });
+
   render() {
     return (
       <div className="App">
@@ -24,13 +30,13 @@ class App extends Component {
           <Container>
             <Row>
               <Col xs={12}>
-                <GenderDropdown />
+                <GenderDropdown genderSelected={this.genderSelected} />
               </Col>
             </Row>
 
             <Row>
               <Col xs={12}>
-                <ChartWrapper />
+                <ChartWrapper gender={this.state.gender} />
               </Col>
             </Row>
           </Container>
