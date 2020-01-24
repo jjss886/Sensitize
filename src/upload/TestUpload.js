@@ -1,7 +1,8 @@
+import * as Papa from "papaparse";
 import React, { Component } from "react";
-import storage from "../firebase";
+import fbDatabase from "../firebase";
 
-class ImageUpload extends Component {
+class TestUpload extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -12,45 +13,61 @@ class ImageUpload extends Component {
   }
 
   handleChange = e => {
-    console.log("changing -", e.target.files);
     if (e.target.files[0]) {
       const test = e.target.files[0];
-      this.setState(() => ({ test }));
+      console.log("UMM -", test);
+
+      Papa.parse(test, {
+        header: true,
+        download: true,
+        dynamicTyping: true,
+        complete: result => {
+          console.log("ending -", result);
+          this.setState({ test: result.data });
+        }
+      });
     }
   };
 
   handleUpload = () => {
     const { test } = this.state;
-    const uploadTask = storage.ref(`test/${test.name}`).put(test);
-    uploadTask.on(
-      "state_changed",
-      snapshot => {
-        // PROGRESS FUNCTION
-        const progress = Math.round(
-          (snapshot.bytesTransferred / snapshot.totalBytes) * 100
-        );
-        this.setState({ progress });
-      },
-      error => {
-        console.log(error);
-      },
-      () => {
-        // COMPLETE UPLOAD FUNCTION
-        storage
-          .ref("test")
-          .child(test.name)
-          .getDownloadURL()
-          .then(url => {
-            this.setState({ url });
-          });
-      }
-    );
+    console.log("GO GO GO ---", this.state, this.props);
+    const moo = false;
+    if (moo) {
+      // ---------- GOTTA WORK ON THIS DAMN UPLOAD ---------- //
+      const uploadTask = fbDatabase.ref(`test/${test.name}`).put(test);
+      uploadTask.on(
+        "state_changed",
+        snapshot => {
+          // PROGRESS FUNCTION
+          const progress = Math.round(
+            (snapshot.bytesTransferred / snapshot.totalBytes) * 100
+          );
+          this.setState({ progress });
+        },
+        error => {
+          console.log(error);
+        },
+        () => {
+          // COMPLETE UPLOAD FUNCTION
+          fbDatabase
+            .ref("test")
+            .child(test.name)
+            .getDownloadURL()
+            .then(url => {
+              this.setState({ url });
+            });
+        }
+      );
+    } else {
+      this.props.updateData(this.state.test);
+    }
   };
 
   render() {
     return (
       <div className="testUploadFullDiv">
-        <h2 className="testHeaderText">test Upload Section [TEST]</h2>
+        <h2 className="testHeaderText">[TEST] Upload Section</h2>
 
         <div className="testProgressBarDiv">
           <progress
@@ -91,4 +108,4 @@ class ImageUpload extends Component {
   }
 }
 
-export default ImageUpload;
+export default TestUpload;

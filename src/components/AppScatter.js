@@ -15,30 +15,36 @@ class AppScatter extends Component {
     activeName: null
   };
 
-  componentDidMount() {
-    json("https://udemy-react-d3.firebaseio.com/children.json")
-      .then(data => {
-        this.setState({ data });
-      })
-      .catch(err => console.error("ERROR -", err));
-  }
+  // componentDidMount() {
+  //   json("https://udemy-react-d3.firebaseio.com/children.json")
+  //     .then(data => {
+  //       this.setState({ data });
+  //     })
+  //     .catch(err => console.error("ERROR -", err));
+  // }
 
-  updateData = data => this.setState({ data });
+  // updateData = data => this.setState({ data });
 
-  updateName = activeName => this.setState({ activeName });
+  // updateName = activeName => this.setState({ activeName });
 
   renderData(status) {
-    if (!this.state.data.length) return "Loading Data !";
+    const { data, activeName } = this.props.state;
+    if (!data.length) return "Loading Data !";
     return !status ? (
       <ChartWrapperScatter
-        data={this.state.data}
-        updateName={this.updateName}
+        // data={this.state.data}
+        // updateName={this.updateName}
+        data={data}
+        updateName={this.props.updateName}
       />
     ) : (
       <Table
-        data={this.state.data}
-        updateData={this.updateData}
-        activeName={this.state.activeName}
+        // data={this.state.data}
+        // updateData={this.updateData}
+        // activeName={this.state.activeName}
+        data={data}
+        updateData={this.props.updateData}
+        activeName={activeName}
       />
     );
   }

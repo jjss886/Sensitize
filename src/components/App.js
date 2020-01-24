@@ -3,12 +3,33 @@ import React, { Component } from "react";
 // IMPORT COMPONENTS
 import AppBar from "./AppBar";
 import AppScatter from "./AppScatter";
+import Sidebar from "./Sidebar";
 import { TestUpload } from "../upload";
+import { json } from "d3";
 
 // ADDITIONAL INTERNAL IMPORTS
 import logo from "../images/logo.svg";
 
 class App extends Component {
+  // ----------------------- TEMP MAYBE ----------------------- //
+  state = {
+    data: [],
+    activeName: null
+  };
+
+  componentDidMount() {
+    json("https://udemy-react-d3.firebaseio.com/children.json")
+      .then(data => {
+        this.setState({ data });
+      })
+      .catch(err => console.error("ERROR -", err));
+  }
+
+  updateData = data => this.setState({ data });
+
+  updateName = activeName => this.setState({ activeName });
+  // ----------------------- TEMP MAYBE ----------------------- //
+
   render() {
     return (
       <div className="App">
@@ -17,19 +38,22 @@ class App extends Component {
         </nav>
 
         <div className="belowNavBarFullDiv">
-          <img src={logo} className="appLogo" alt="logo" />
-          <p>JAMES SHEN ROOLZ</p>
+          <Sidebar />
 
-          <div className="fileSubmitDiv">
-            <input type="file" className="fileSelect" accept="image/*" />
-            <button className="fileSubmit">Upload File</button>
+          <div className="contentPageFullDiv">
+            <img src={logo} className="appLogo" alt="logo" />
+            <p>JAMES SHEN ROOLZ</p>
+
+            <TestUpload updateData={this.updateData} />
+
+            <AppScatter
+              state={this.state}
+              updateData={this.updateData}
+              updateName={this.updateName}
+            />
+
+            <AppBar />
           </div>
-
-          <TestUpload />
-
-          <AppBar />
-
-          <AppScatter />
         </div>
       </div>
     );
