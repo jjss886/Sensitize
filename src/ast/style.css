@@ -29,10 +29,11 @@
 }
 
 .belowNavBarFullDiv {
-  padding-top: 10vh;
   background-color: #282c34;
   font-size: calc(10px + 2vmin);
   color: white;
+  min-height: 100vh;
+  padding-top: 10vh;
   text-align: center;
   display: flex;
   flex-direction: column;
@@ -45,16 +46,20 @@
   border-radius: 10px;
   padding: 35px;
   margin-bottom: 50px;
+  display: flex;
+  justify-content: center;
+  /* width: 70%; */
 }
 
 /* .row {
-  display: block;
-  width: 50%;
+  display: flex;
+  width: 45%;
   margin: 0;
-}
+} */
 
-.col-12 {
+/* .col {
   width: 100%;
+  padding: 0;
 } */
 
 /* ----------------- CHART ELEMENT ----------------- */
@@ -62,4 +67,5 @@
   background-color: #282c34;
   border-radius: 5px;
   padding: 15px;
+  /* padding-top: 25px; */
 }

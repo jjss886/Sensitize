@@ -23,10 +23,12 @@ class AppScatter extends Component {
       .catch(err => console.log("ERROR -", err));
   }
 
+  updateData = data => this.setState({ data });
+
   renderData(status) {
     if (!this.state.data.length) return "Loading Data !";
     if (!status) return <ChartWrapperScatter data={this.state.data} />;
-    else return <Table data={this.state.data} />;
+    else return <Table data={this.state.data} updateData={this.updateData} />;
   }
 
   render() {
@@ -42,18 +44,27 @@ class AppScatter extends Component {
 
           <Container className="containerDiv">
             <Row className="row row1">
-              <Col md={6} xs={12}>
+              <Col md={11} xs={12}>
                 {this.renderData(false)}
               </Col>
             </Row>
 
             <Row className="row row2">
-              <Col md={6} xs={12}>
-                {/* <Table data={this.state.data} /> */}
+              <Col md={11} xs={12}>
                 {this.renderData(true)}
               </Col>
             </Row>
           </Container>
+
+          {/* <div className="containerDiv">
+            <div className="row row1">
+              <div className="col col1">{this.renderData(false)}</div>
+            </div>
+
+            <div className="row row2">
+              <div className="col col2">{this.renderData(true)}</div>
+            </div>
+          </div> */}
         </div>
       </div>
     );

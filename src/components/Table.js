@@ -5,18 +5,99 @@ import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 
 class Table extends Component {
-  // componentDidMount() {}
+  state = {
+    name: "",
+    height: "",
+    age: ""
+  };
 
-  render() {
+  handleInputChange = evt => {
+    this.setState({
+      ...this.state,
+      [evt.target.name]: evt.target.value
+    });
+  };
+
+  handleAdd = () => {
+    const age = this.state.age,
+      height = this.state.height,
+      name = this.state.name,
+      newStudent = { age, height, name };
+
+    this.props.updateData([...this.props.data, newStudent]);
+  };
+
+  handleRemove = evt => {
+    const targetName = evt.target.name;
+    const newData = this.props.data.filter(x => x.name !== targetName);
+    this.props.updateData(newData);
+  };
+
+  renderRows() {
     const { data } = this.props;
 
+    return data.map(student => {
+      return (
+        <Row key={student.name} style={{ marginTop: "10px" }}>
+          <Col xs={3}>{student.name}</Col>
+          <Col xs={3}>{student.height}</Col>
+          <Col xs={3}>{student.age}</Col>
+          <Col>
+            <Button
+              variant={"danger"}
+              type={"button"}
+              style={{ width: "100%" }}
+              name={student.name}
+              onClick={this.handleRemove}
+            >
+              Remove
+            </Button>
+          </Col>
+        </Row>
+      );
+    });
+  }
+
+  render() {
     return (
       <div>
         <Row>
           <Col xs={3}>
-            <Form.Control />
+            <Form.Control
+              placeholder={"Name"}
+              name={"name"}
+              value={this.state.name}
+              onChange={this.handleInputChange}
+            />
+          </Col>
+          <Col xs={3}>
+            <Form.Control
+              placeholder={"Height"}
+              name={"height"}
+              value={this.state.height}
+              onChange={this.handleInputChange}
+            />
+          </Col>
+          <Col xs={3}>
+            <Form.Control
+              placeholder={"Age"}
+              name={"age"}
+              value={this.state.age}
+              onChange={this.handleInputChange}
+            />
+          </Col>
+          <Col>
+            <Button
+              variant={"primary"}
+              type={"button"}
+              style={{ width: "100%" }}
+              onClick={this.handleAdd}
+            >
+              Add
+            </Button>
           </Col>
         </Row>
+        {this.renderRows()}
       </div>
     );
   }
