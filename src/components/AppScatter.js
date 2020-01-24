@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import Navbar from "react-bootstrap/Navbar";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Container from "react-bootstrap/Container";
@@ -47,9 +46,9 @@ class AppScatter extends Component {
   render() {
     return (
       <div className="App">
-        <Navbar bg="light" className="navBarFull">
-          <Navbar.Brand>SENSITIZE</Navbar.Brand>
-        </Navbar>
+        <nav className="navBarFull">
+          <h1 className="navBarHeader">SENSITIZE</h1>
+        </nav>
 
         <div className="belowNavBarFullDiv">
           <img src={logo} className="appLogo" alt="logo" />

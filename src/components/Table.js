@@ -12,8 +12,9 @@ class Table extends Component {
   };
 
   handleInputChange = evt => {
+    const stateName = evt.target.name;
     this.setState({
-      [evt.target.name]: evt.target.value
+      [stateName]: evt.target.value
     });
   };
 
@@ -39,7 +40,6 @@ class Table extends Component {
         <Row
           key={student.name}
           className="studentRow"
-          // style={{ marginTop: "10px", backgroundColor: background }}
           style={{ backgroundColor: background }}
         >
           <Col xs={3}>{student.name}</Col>

@@ -21,11 +21,16 @@
 
 /* ----------------- NAVBAR ELEMENT ----------------- */
 .navBarFull {
-  background-color: lightgray;
+  background-color: rgba(234, 234, 234, 1);
   position: fixed;
   width: 100vw;
   height: 10vh;
   z-index: 2;
+  padding: 10px;
+}
+
+.navBarHeader {
+  font-weight: bold;
 }
 
 .belowNavBarFullDiv {
@@ -71,11 +76,11 @@
 
 /* ----------------- FORM ELEMENT ----------------- */
 .studentRow {
-  margin-top: 10px;
+  display: flex;
   color: rgba(100, 100, 100, 1);
   font-weight: bold;
-  display: flex;
   align-items: center;
-  border-radius: 10px;
   height: 45px;
+  margin-top: 10px;
+  border-radius: 10px;
 }
