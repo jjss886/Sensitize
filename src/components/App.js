@@ -3,6 +3,7 @@ import React, { Component } from "react";
 // IMPORT COMPONENTS
 import AppBar from "./AppBar";
 import AppScatter from "./AppScatter";
+import { ImageUpload } from "../upload";
 
 // ADDITIONAL INTERNAL IMPORTS
 import logo from "../images/logo.svg";
@@ -23,6 +24,8 @@ class App extends Component {
             <input type="file" className="fileSelect" accept="image/*" />
             <button className="fileSubmit">Upload File</button>
           </div>
+
+          <ImageUpload />
 
           <AppBar />
 

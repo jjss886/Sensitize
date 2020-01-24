@@ -17,7 +17,7 @@ class AppBar extends Component {
   render() {
     return (
       <div className="appBarDiv">
-        <Container>
+        <Container className="containerBarDiv">
           <Row>
             <Col xs={12}>
               <GenderDropdown genderSelected={this.genderSelected} />

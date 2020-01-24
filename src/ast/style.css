@@ -26,6 +26,7 @@ code {
 }
 
 .navBarHeader {
+  color: rgba(0, 152, 195, 0.8);
   font-weight: bold;
   margin: 0;
 }
@@ -43,6 +44,7 @@ code {
 }
 
 /* ----------------- APP ELEMENT ----------------- */
+
 .fileSubmitDiv {
   background-color: lightgray;
   color: black;
@@ -51,6 +53,14 @@ code {
   padding: 15px;
   margin: 25px 0;
   border-radius: 10px;
+}
+
+.testImageUpload {
+  background-color: lightgray;
+  color: black;
+  border-radius: 10px;
+  padding: 15px 80px;
+  margin: 15px 0;
 }
 
 /* ----------------- REACT LOGO ----------------- */
@@ -74,27 +84,40 @@ code {
   }
 }
 
-/* ----------------- CONTAINER ELEMENT ----------------- */
-.containerDiv {
+/* ----------------- APP BAR ELEMENT ----------------- */
+.appBarDiv {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.containerBarDiv {
   background-color: rgba(200, 200, 200, 0.9);
   border-radius: 10px;
   padding: 35px;
-  margin-bottom: 50px;
+  margin: 0 0 50px 0;
   display: flex;
+  flex-direction: column;
   justify-content: center;
-  /* width: 70%; */
+  width: 70%;
 }
 
-/* .row {
-  display: flex;
-  width: 45%;
-  margin: 0;
-} */
-
-/* .col {
+/* ----------------- APP SCATTER ELEMENT ----------------- */
+.appScatterDiv {
   width: 100%;
-  padding: 0;
-} */
+  display: flex;
+  justify-content: center;
+}
+
+.containerScatterDiv {
+  background-color: rgba(200, 200, 200, 0.9);
+  border-radius: 10px;
+  padding: 35px;
+  margin: 0 0 50px 0;
+  display: flex;
+  justify-content: center;
+  width: 70%;
+}
 
 /* ----------------- CHART ELEMENT ----------------- */
 .chartArea {

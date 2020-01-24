@@ -46,7 +46,7 @@ class AppScatter extends Component {
   render() {
     return (
       <div className="appScatterDiv">
-        <Container className="containerDiv">
+        <Container className="containerScatterDiv">
           <Row className="row row1">
             <Col md={11} xs={12}>
               {this.renderData(false)}

@@ -22,14 +22,20 @@ class BarChartD3 {
       .append("text")
       .attr("x", WIDTH / 2)
       .attr("y", HEIGHT + 50)
+      .attr("font-size", 20)
+      .attr("fill", "white")
+      .attr("font-weight", "bold")
       .attr("text-anchor", "middle");
 
     vis.svg
       .append("text")
       .attr("x", -(HEIGHT / 2))
       .attr("y", -50)
+      .attr("font-size", 20)
+      .attr("fill", "white")
+      .attr("font-weight", "bold")
       .attr("text-anchor", "middle")
-      .text("Height in CM")
+      .text("Height (cm)")
       .attr("transform", `rotate(-90)`);
 
     vis.xAxisGroup = vis.svg
@@ -60,7 +66,7 @@ class BarChartD3 {
   update(gender) {
     const vis = this;
     vis.data = gender === "men" ? vis.menData : vis.ladiesData;
-    vis.xLabel.text(`The world's tallest ${gender}`);
+    vis.xLabel.text(`The World's Tallest ${gender}`);
 
     const y = d3
       .scaleLinear()
