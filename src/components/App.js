@@ -1,9 +1,13 @@
 import React, { Component } from "react";
-import ChartWrapper from "./ChartWrapper";
-import logo from "../images/logo.svg";
-import "../ast/app.css";
 import Navbar from "react-bootstrap/Navbar";
+import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
 import Container from "react-bootstrap/Container";
+
+// IMPORT COMPONENTS
+import logo from "../images/logo.svg";
+import ChartWrapper from "./ChartWrapper";
+import GenderDropdown from "./GenderDropdown";
 
 class App extends Component {
   render() {
@@ -14,13 +18,22 @@ class App extends Component {
         </Navbar>
 
         <div className="belowNavBarFullDiv">
-          <header className="App-header">
-            <img src={logo} className="App-logo" alt="logo" />
-            <p>JAMES SHEN ROOLZ</p>
-            <Container>
-              <ChartWrapper />
-            </Container>
-          </header>
+          <img src={logo} className="appLogo" alt="logo" />
+          <p>JAMES SHEN ROOLZ</p>
+
+          <Container>
+            <Row>
+              <Col xs={12}>
+                <GenderDropdown />
+              </Col>
+            </Row>
+
+            <Row>
+              <Col xs={12}>
+                <ChartWrapper />
+              </Col>
+            </Row>
+          </Container>
         </div>
       </div>
     );

@@ -1,16 +1,16 @@
 import * as d3 from "d3";
 
-// eslint-disable-next-line
-const testData = [20, 12, 16, 25, 20];
-const ageData = "https://udemy-react-d3.firebaseio.com/ages.json";
 const tallMen = "https://udemy-react-d3.firebaseio.com/tallest_men.json";
-const MARGIN = { TOP: 10, BOTTOM: 50, LEFT: 50, RIGHT: 10 };
+const tallLadies = "https://udemy-react-d3.firebaseio.com/tallest_women.json";
+const MARGIN = { TOP: 10, BOTTOM: 50, LEFT: 70, RIGHT: 10 };
 const WIDTH = 800 - MARGIN.LEFT - MARGIN.RIGHT;
 const HEIGHT = 500 - MARGIN.TOP - MARGIN.BOTTOM;
 
 class D3Chart {
-  constructor(element, chart) {
-    const svg = d3
+  constructor(element) {
+    const vis = this;
+
+    vis.svg = d3
       .select(element)
       .append("svg")
       .attr("width", WIDTH + MARGIN.LEFT + MARGIN.RIGHT)
@@ -18,44 +18,106 @@ class D3Chart {
       .append("g")
       .attr("transform", `translate(${MARGIN.LEFT}, ${MARGIN.TOP})`);
 
-    let input = chart === "Ages" ? ageData : tallMen,
-      heightAttr = input.includes("ages") ? "age" : "height";
+    vis.svg
+      .append("text")
+      .attr("x", WIDTH / 2)
+      .attr("y", HEIGHT + 50)
+      .attr("text-anchor", "middle")
+      .text("The world's tallest men");
 
-    d3.json(input).then(resp => {
-      const y = d3
-        .scaleLinear()
-        .domain([
-          d3.min(resp, x => x.height) * 0.95,
-          d3.max(resp, x => x.height)
-        ])
-        .range([HEIGHT, 0]);
+    vis.svg
+      .append("text")
+      .attr("x", -(HEIGHT / 2))
+      .attr("y", -50)
+      .attr("text-anchor", "middle")
+      .text("Height in CM")
+      .attr("transform", `rotate(-90)`);
 
-      const x = d3
-        .scaleBand()
-        .domain(resp.map(x => x.name))
-        .range([0, WIDTH])
-        .padding(0.4);
+    vis.xAxisGroup = vis.svg
+      .append("g")
+      .attr("transform", `translate(0, ${HEIGHT})`);
 
-      const xAxisCall = d3.axisBottom(x);
-      svg
-        .append("g")
-        .attr("transform", `translate(0, ${HEIGHT})`)
-        .call(xAxisCall);
+    vis.yAxisGroup = vis.svg.append("g");
 
-      const yAxisCall = d3.axisLeft(y);
-      svg.append("g").call(yAxisCall);
+    Promise.all([d3.json(tallMen), d3.json(tallLadies)]).then(dataSets => {
+      const [men, ladies] = dataSets;
+      let flag = true;
 
-      const rects = svg.selectAll("rect").data(resp);
+      vis.data = men;
+      vis.update();
 
-      rects
-        .enter()
-        .append("rect")
-        .attr("x", (d, i) => i * 100)
-        .attr("y", d => y(d[heightAttr]))
-        .attr("width", x.bandwidth)
-        .attr("height", d => HEIGHT - y(d[heightAttr]))
-        .attr("fill", (d, i) => (i % 2 === 0 ? "red" : "blue"));
+      d3.interval(() => {
+        vis.data = flag ? men : ladies;
+        vis.update();
+        flag = !flag;
+      }, 1000);
     });
+  }
+
+  update() {
+    const vis = this;
+    const y = d3
+      .scaleLinear()
+      .domain([
+        d3.min(vis.data, x => x.height) * 0.95,
+        d3.max(vis.data, x => x.height)
+      ])
+      .range([HEIGHT, 0]);
+
+    const x = d3
+      .scaleBand()
+      .domain(vis.data.map(x => x.name))
+      .range([0, WIDTH])
+      .padding(0.4);
+
+    const xAxisCall = d3.axisBottom(x);
+    vis.xAxisGroup
+      .transition()
+      .duration(500)
+      .call(xAxisCall);
+
+    const yAxisCall = d3.axisLeft(y);
+    vis.yAxisGroup
+      .transition()
+      .duration(500)
+      .call(yAxisCall);
+
+    // DATA JOIN
+    const rects = vis.svg.selectAll("rect").data(vis.data);
+
+    // EXIT
+    rects
+      .exit()
+      .transition()
+      .duration(500)
+      .attr("height", 0)
+      .attr("y", HEIGHT)
+      .attr("fill", "green")
+      .remove();
+
+    // UPDATE
+    rects
+      .transition()
+      .duration(500)
+      .attr("x", d => x(d.name))
+      .attr("y", d => y(d.height))
+      .attr("width", x.bandwidth)
+      .attr("height", d => HEIGHT - y(d.height));
+
+    // ENTER
+    rects
+      .enter()
+      .append("rect")
+      .attr("x", d => x(d.name))
+      .attr("width", x.bandwidth)
+      .attr("fill", (d, i) => (i % 2 === 0 ? "red" : "blue"))
+      .attr("y", HEIGHT)
+      .transition()
+      .duration(500)
+      .attr("height", d => HEIGHT - y(d.height))
+      .attr("y", d => y(d.height));
+
+    console.log("TESTING --", rects);
   }
 }
 
