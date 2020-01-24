@@ -18,7 +18,14 @@ class App extends Component {
         <div className="belowNavBarFullDiv">
           <img src={logo} className="appLogo" alt="logo" />
           <p>JAMES SHEN ROOLZ</p>
+
+          <div className="fileSubmitDiv">
+            <input type="file" className="fileSelect" accept="image/*" />
+            <button className="fileSubmit">Upload File</button>
+          </div>
+
           <AppBar />
+
           <AppScatter />
         </div>
       </div>

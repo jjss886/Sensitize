@@ -1,11 +1,9 @@
 import React, { Component } from "react";
-import Navbar from "react-bootstrap/Navbar";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Container from "react-bootstrap/Container";
 
 // IMPORT COMPONENTS
-import logo from "../images/logo.svg";
 import ChartWrapperBar from "./ChartWrapperBar";
 import GenderDropdown from "./GenderDropdown";
 

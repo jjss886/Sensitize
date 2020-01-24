@@ -46,7 +46,12 @@
         appId: "1:662919213348:web:d3733ecfe14fc2721dc3b1",
         measurementId: "G-JQLL4GNG72"
       };
+
       firebase.initializeApp(firebaseConfig);
+
+      const storageService = firebase.storage();
+      const storageRef = storageService.ref();
+
       firebase.analytics();
     </script>
   </body>
