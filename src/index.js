@@ -6,11 +6,11 @@ import * as serviceWorker from "./ast/serviceWorker";
 
 // COMPONENTS
 // eslint-disable-next-line
-import App from "./components/App";
+import AppBar from "./components/AppBar";
 // eslint-disable-next-line
 import AppScatter from "./components/AppScatter";
 
-// ReactDOM.render(<App />, document.getElementById("root"));
+// ReactDOM.render(<AppBar />, document.getElementById("root"));
 ReactDOM.render(<AppScatter />, document.getElementById("root"));
 
 // If you want your app to work offline and load faster, you can change

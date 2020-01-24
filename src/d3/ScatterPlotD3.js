@@ -7,7 +7,8 @@ const HEIGHT = 300 - MARGIN.TOP - MARGIN.BOTTOM;
 class ScatterPlotD3 {
   constructor(element, data) {
     const vis = this;
-    vis.data = data;
+
+    console.log("DATA TIME -", data);
 
     vis.g = d3
       .select(element)
@@ -45,11 +46,12 @@ class ScatterPlotD3 {
       .attr("text-anchor", "middle")
       .text("Height (cm)");
 
-    vis.update();
+    vis.update(data);
   }
 
-  update() {
+  update(data) {
     const vis = this;
+    vis.data = data;
 
     vis.x.domain([0, d3.max(vis.data, d => Number(d.age))]);
     vis.y.domain([0, d3.max(vis.data, d => Number(d.height))]);

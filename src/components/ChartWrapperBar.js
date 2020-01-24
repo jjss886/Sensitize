@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import BarChartD3 from "../d3/BarChartD3";
 
-class ChartWrapper extends Component {
+class ChartWrapperBar extends Component {
   componentDidMount() {
     this.setState({ chart: new BarChartD3(this.refs.chart) });
   }
@@ -25,4 +25,4 @@ class ChartWrapper extends Component {
   }
 }
 
-export default ChartWrapper;
+export default ChartWrapperBar;

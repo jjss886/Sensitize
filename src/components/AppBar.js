@@ -6,10 +6,10 @@ import Container from "react-bootstrap/Container";
 
 // IMPORT COMPONENTS
 import logo from "../images/logo.svg";
-import ChartWrapper from "./ChartWrapper";
+import ChartWrapperBar from "./ChartWrapperBar";
 import GenderDropdown from "./GenderDropdown";
 
-class App extends Component {
+class AppBar extends Component {
   state = {
     gender: "men"
   };
@@ -36,7 +36,7 @@ class App extends Component {
 
             <Row>
               <Col xs={12}>
-                <ChartWrapper gender={this.state.gender} />
+                <ChartWrapperBar gender={this.state.gender} />
               </Col>
             </Row>
           </Container>
@@ -46,4 +46,4 @@ class App extends Component {
   }
 }
 
-export default App;
+export default AppBar;

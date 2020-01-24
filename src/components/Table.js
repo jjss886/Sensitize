@@ -13,18 +13,13 @@ class Table extends Component {
 
   handleInputChange = evt => {
     this.setState({
-      ...this.state,
       [evt.target.name]: evt.target.value
     });
   };
 
   handleAdd = () => {
-    const age = this.state.age,
-      height = this.state.height,
-      name = this.state.name,
-      newStudent = { age, height, name };
-
-    this.props.updateData([...this.props.data, newStudent]);
+    this.props.updateData([...this.props.data, this.state]);
+    this.setState({ name: "", height: "", age: "" });
   };
 
   handleRemove = evt => {

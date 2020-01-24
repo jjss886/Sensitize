@@ -4,23 +4,19 @@ import ScatterPlotD3 from "../d3/ScatterPlotD3";
 class ChartWrapperScatter extends Component {
   componentDidMount() {
     this.setState({
-      chart: new ScatterPlotD3(this.refs.scatterChart, this.props.data)
+      scatterChart: new ScatterPlotD3(this.refs.scatterChart, this.props.data)
     });
   }
 
-  shouldComponentUpdate() {
-    return false;
+  // shouldComponentUpdate() {
+  //   return false;
+  // }
+
+  componentDidUpdate(prevProps) {
+    if (this.props.data.length !== prevProps.data.length) {
+      this.state.scatterChart.update(this.props.data);
+    }
   }
-
-  // componentWillReceiveProps(nextProps) {
-  //   this.state.chart.update(nextProps);
-  // }
-
-  // componentDidUpdate(prevProps) {
-  //   if (this.props.gender !== prevProps.gender) {
-  //     this.state.chart.update(this.props.gender);
-  //   }
-  // }
 
   render() {
     return <div ref="scatterChart" className="chartArea"></div>;
