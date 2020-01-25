@@ -31,13 +31,17 @@ class DataUpload extends Component {
         newName = stateName !== "" ? stateName : curName,
         newFile = new File([data], newName);
 
+      // PARSING CSV TO JSON
       Papa.parse(newFile, {
         header: true,
         download: true,
         dynamicTyping: true,
         complete: result => {
+          const { data: fileData } = result;
+          // ADDING NAME TO INDEX 0 OF DATA SET
+          fileData.unshift({ fileName: newName });
           this.setState({
-            tempData: result.data,
+            tempData: fileData,
             lastName: newName,
             name: "",
             queue: true
@@ -49,10 +53,12 @@ class DataUpload extends Component {
 
   handleUpload = () => {
     const { tempData } = this.state;
+    if (!tempData) return alert("Choose File First!");
 
-    this.props.updateData(tempData);
-    this.props.setData(tempData);
+    this.props.updateData(tempData.slice(1));
+    this.props.setData(tempData.slice(1));
 
+    // UPLOAD TO FIREBASE AND STORING IN STORE
     const uploadTask = fbDatabase.ref().child("data");
     uploadTask.push(tempData);
     uploadTask.on("value", snap => {
@@ -90,7 +96,7 @@ class DataUpload extends Component {
             key={key}
             onClick={() => this.props.setData(fullData[key])}
           >
-            {key.slice(0, 15)}
+            {fullData[key][0].fileName.slice(0, 15)}
           </li>
         ))}
       </ul>
