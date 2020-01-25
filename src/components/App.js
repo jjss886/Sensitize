@@ -1,14 +1,12 @@
 import React, { Component } from "react";
+import { json } from "d3";
 
 // IMPORT COMPONENTS
 import AppBar from "./AppBar";
 import AppScatter from "./AppScatter";
 import Sidebar from "./Sidebar";
+import NavBar from "./NavBar";
 import { DataUpload } from "./upload";
-import { json } from "d3";
-
-// ADDITIONAL INTERNAL IMPORTS
-import logo from "../images/logo.svg";
 
 class App extends Component {
   // ----------------------- TEMP MAYBE ----------------------- //
@@ -33,17 +31,12 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <nav className="navBarFull">
-          <h1 className="navBarHeader">SENSITIZE</h1>
-        </nav>
+        <NavBar />
 
         <div className="belowNavBarFullDiv">
           <Sidebar />
 
           <div className="contentPageFullDiv">
-            <img src={logo} className="appLogo" alt="logo" />
-            <p>JAMES SHEN</p>
-
             <DataUpload updateData={this.updateData} />
 
             <AppScatter

@@ -5,7 +5,7 @@ import { DataUpload } from "./upload";
 
 class Sidebar extends Component {
   componentDidMount() {
-    this.props.setType("URL");
+    this.props.setType("CSV Upload");
   }
 
   handleModeChange = evt => {
@@ -34,8 +34,8 @@ class Sidebar extends Component {
       <div className="sideBarFullDiv">
         <p>Sidebar</p>
         <select className="sideBarSelect" onChange={this.handleModeChange}>
-          <option>URL</option>
           <option>CSV Upload</option>
+          <option>URL</option>
           <option>Algo</option>
         </select>
 

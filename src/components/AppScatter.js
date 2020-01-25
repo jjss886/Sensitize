@@ -2,10 +2,8 @@ import React, { Component } from "react";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Container from "react-bootstrap/Container";
-import { json } from "d3";
 
 // IMPORT COMPONENTS
-
 import ChartWrapperScatter from "./ChartWrapperScatter";
 import Table from "./Table";
 
@@ -15,33 +13,13 @@ class AppScatter extends Component {
     activeName: null
   };
 
-  // componentDidMount() {
-  //   json("https://udemy-react-d3.firebaseio.com/children.json")
-  //     .then(data => {
-  //       this.setState({ data });
-  //     })
-  //     .catch(err => console.error("ERROR -", err));
-  // }
-
-  // updateData = data => this.setState({ data });
-
-  // updateName = activeName => this.setState({ activeName });
-
   renderData(status) {
     const { data, activeName } = this.props.state;
     if (!data.length) return "Loading Data !";
     return !status ? (
-      <ChartWrapperScatter
-        // data={this.state.data}
-        // updateName={this.updateName}
-        data={data}
-        updateName={this.props.updateName}
-      />
+      <ChartWrapperScatter data={data} updateName={this.props.updateName} />
     ) : (
       <Table
-        // data={this.state.data}
-        // updateData={this.updateData}
-        // activeName={this.state.activeName}
         data={data}
         updateData={this.props.updateData}
         activeName={activeName}
@@ -65,16 +43,6 @@ class AppScatter extends Component {
             </Col>
           </Row>
         </Container>
-
-        {/* <div className="containerDiv">
-            <div className="row row1">
-              <div className="col col1">{this.renderData(false)}</div>
-            </div>
-
-            <div className="row row2">
-              <div className="col col2">{this.renderData(true)}</div>
-            </div>
-          </div> */}
       </div>
     );
   }

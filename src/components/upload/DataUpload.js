@@ -2,27 +2,38 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import * as Papa from "papaparse";
 import fbDatabase from "../../firebase";
+import { setData } from "../../store";
 
 class DataUpload extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      data: null
+      data: null,
+      name: ""
     };
   }
 
-  handleChange = e => {
-    if (e.target.files[0]) {
-      const data = e.target.files[0];
-      console.log("UMM -", data);
+  handleNameChange = evt => {
+    this.setState({ ...this.state, [evt.target.name]: evt.target.value });
+  };
 
-      Papa.parse(data, {
+  handleChange = e => {
+    const { name: stateName } = this.state;
+    if (e.target.files[0]) {
+      const data = e.target.files[0],
+        curName = data.name,
+        newName = stateName !== "" ? stateName : curName,
+        newFile = new File([data], newName);
+
+      console.log("UMM -", data, newFile);
+
+      Papa.parse(newFile, {
         header: true,
         download: true,
         dynamicTyping: true,
         complete: result => {
           console.log("ending -", result);
-          this.setState({ data: result.data });
+          this.setState({ data: result.data, name: "" });
         }
       });
     }
@@ -47,29 +58,24 @@ class DataUpload extends Component {
   render() {
     return (
       <div className="dataUploadFullDiv">
-        <h2 className="dataHeaderText">[data] Upload Section</h2>
+        <h2 className="dataHeaderText">Upload a CSV</h2>
 
-        <div className="dataProgressBarDiv">
-          <progress
-            value={this.state.progress}
-            max="100"
-            className="progress"
-          />
-        </div>
+        <input
+          className="dataFileNameInput"
+          type="text"
+          name="name"
+          value={this.state.name}
+          placeholder="File Name"
+          onFocus={e => (e.target.placeholder = "")}
+          onBlur={e => (e.target.placeholder = "File Name")}
+          onChange={this.handleNameChange}
+        />
 
-        <div className="dataSelectSection">
-          <div className="dataSelectBtnDiv">
-            <input
-              className="dataFileBtn"
-              type="file"
-              onChange={this.handleChange}
-            />
-          </div>
-
-          <div className="dataFilePathDiv">
-            <input className="dataFilePathInput" type="text" />
-          </div>
-        </div>
+        <input
+          className="dataFileBtn"
+          type="file"
+          onChange={this.handleChange}
+        />
 
         <button onClick={this.handleUpload} className="dataUploadBtn">
           Upload
@@ -80,11 +86,15 @@ class DataUpload extends Component {
 }
 
 const mapState = state => {
-  return {};
+  return {
+    data: state.data
+  };
 };
 
 const mapDispatch = dispatch => {
-  return {};
+  return {
+    setData: data => dispatch(setData(data))
+  };
 };
 
 export default connect(mapState, mapDispatch)(DataUpload);
