@@ -8,7 +8,7 @@ class DataUpload extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      data: null,
+      tempData: null,
       name: "",
       lastName: "",
       queue: true
@@ -35,7 +35,7 @@ class DataUpload extends Component {
         dynamicTyping: true,
         complete: result => {
           this.setState({
-            data: result.data,
+            tempData: result.data,
             lastName: newName,
             name: "",
             queue: true
@@ -46,26 +46,29 @@ class DataUpload extends Component {
   };
 
   handleUpload = () => {
-    const { data } = this.state;
+    const { tempData } = this.state;
 
-    this.props.updateData(data);
+    this.props.updateData(tempData);
+    this.props.setData(tempData);
+    this.props.setFullData(tempData);
+
     const uploadTask = fbDatabase.ref().child("data");
-    uploadTask.push(data);
-
+    uploadTask.push(tempData);
     uploadTask.on("value", snap => {
-      this.setState({ data: snap.val(), queue: false });
+      this.setState({ tempData: null, queue: false });
     });
   };
 
-  showLatestFile = () => {
-    const { lastName, queue } = this.state;
+  showLatestFile = status => {
+    if (!status) return null;
 
+    const { lastName, queue } = this.state;
     return lastName ? (
       <div className="fileStatusTextDiv">
         {queue ? (
           <span className="queuedStatusText">In Queue:</span>
         ) : (
-          <span className="uploadedStatusText">Uploaded:</span>
+          <span className="uploadedStatusText">Uploaded / Viewing:</span>
         )}
         <span className="lastFileUploadText">
           {lastName.length > 15 ? `${lastName.slice(0, 15)}...` : lastName}
@@ -99,7 +102,7 @@ class DataUpload extends Component {
             Choose File
           </label>
 
-          {this.showLatestFile()}
+          {this.showLatestFile(this.state.queue)}
 
           <button
             onClick={this.handleUpload}
@@ -107,6 +110,8 @@ class DataUpload extends Component {
           >
             Upload
           </button>
+
+          {this.showLatestFile(!this.state.queue)}
         </div>
 
         <div className="postUploadFileDiv">

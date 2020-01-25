@@ -8,11 +8,6 @@ import ChartWrapperScatter from "./ChartWrapperScatter";
 import Table from "./Table";
 
 class AppScatter extends Component {
-  state = {
-    data: [],
-    activeName: null
-  };
-
   renderData(status) {
     const { data, activeName } = this.props.state;
     if (!data.length) return "Loading Data !";

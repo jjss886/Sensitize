@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Button from "react-bootstrap/Button";
@@ -12,9 +13,8 @@ class Table extends Component {
   };
 
   handleInputChange = evt => {
-    const stateName = evt.target.name;
     this.setState({
-      [stateName]: evt.target.value
+      [evt.target.name]: evt.target.value
     });
   };
 
@@ -73,6 +73,7 @@ class Table extends Component {
               onChange={this.handleInputChange}
             />
           </Col>
+
           <Col xs={3}>
             <Form.Control
               placeholder={"Height"}
@@ -81,6 +82,7 @@ class Table extends Component {
               onChange={this.handleInputChange}
             />
           </Col>
+
           <Col xs={3}>
             <Form.Control
               placeholder={"Age"}
@@ -89,6 +91,7 @@ class Table extends Component {
               onChange={this.handleInputChange}
             />
           </Col>
+
           <Col>
             <Button
               variant={"primary"}
@@ -106,4 +109,4 @@ class Table extends Component {
   }
 }
 
-export default Table;
+export default connect(null)(Table);
