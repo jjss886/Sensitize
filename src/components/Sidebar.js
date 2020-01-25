@@ -40,7 +40,8 @@ class Sidebar extends Component {
   render() {
     return (
       <div className="sideBarFullDiv">
-        <p>Sidebar</p>
+        <p>Choose Your Dataset</p>
+
         <div className="modeSelectDiv">
           <span className="modeLabel">Mode: </span>
           <select

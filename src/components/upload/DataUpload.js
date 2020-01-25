@@ -10,7 +10,8 @@ class DataUpload extends Component {
     this.state = {
       data: null,
       name: "",
-      lastName: ""
+      lastName: "",
+      queue: true
     };
   }
 
@@ -31,7 +32,12 @@ class DataUpload extends Component {
         download: true,
         dynamicTyping: true,
         complete: result => {
-          this.setState({ data: result.data, lastName: newName, name: "" });
+          this.setState({
+            data: result.data,
+            lastName: newName,
+            name: "",
+            queue: true
+          });
         }
       });
     }
@@ -39,33 +45,34 @@ class DataUpload extends Component {
 
   handleUpload = () => {
     const { data } = this.state;
-    console.log("GO GO GO ---", this.state, this.props);
 
     this.props.updateData(data);
     const uploadTask = fbDatabase.ref().child("data");
     uploadTask.push(data);
 
     uploadTask.on("value", snap => {
-      console.log("YOO --", snap, snap.val());
-      this.setState({ data: snap.val() }, () =>
-        console.log("Moo -", this.state.data)
-      );
+      this.setState({ data: snap.val(), queue: false });
     });
   };
 
   showLatestFile = () => {
-    const { lastName } = this.state;
+    const { lastName, queue } = this.state;
+
     return lastName ? (
-      <p className="lastFileUploadText">
-        {lastName.length > 15
-          ? `Latest: ${lastName.slice(0, 15)}...`
-          : `Latest: ${lastName}`}
-      </p>
+      <div className="fileStatusTextDiv">
+        {queue ? (
+          <span className="queuedStatusText">In Queue:</span>
+        ) : (
+          <span className="uploadedStatusText">Uploaded:</span>
+        )}
+        <span className="lastFileUploadText">
+          {lastName.length > 15 ? `${lastName.slice(0, 15)}...` : lastName}
+        </span>
+      </div>
     ) : null;
   };
 
   render() {
-    console.log("render --", this.state);
     return (
       <div className="dataFullDiv">
         <div className="dataUploadFullDiv">
