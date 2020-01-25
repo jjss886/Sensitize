@@ -53,7 +53,19 @@ class DataUpload extends Component {
     });
   };
 
+  showLatestFile = () => {
+    const { lastName } = this.state;
+    return lastName ? (
+      <p className="lastFileUploadText">
+        {lastName.length > 15
+          ? `Latest: ${lastName.slice(0, 15)}...`
+          : `Latest: ${lastName}`}
+      </p>
+    ) : null;
+  };
+
   render() {
+    console.log("render --", this.state);
     return (
       <div className="dataFullDiv">
         <div className="dataUploadFullDiv">
@@ -77,6 +89,8 @@ class DataUpload extends Component {
           <label htmlFor="file" className="uploadFileLink linkText">
             Choose File
           </label>
+
+          {this.showLatestFile()}
 
           <button
             onClick={this.handleUpload}
