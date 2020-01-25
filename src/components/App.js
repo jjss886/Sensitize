@@ -34,11 +34,9 @@ class App extends Component {
         <NavBar />
 
         <div className="belowNavBarFullDiv">
-          <Sidebar />
+          <Sidebar updateData={this.updateData} />
 
           <div className="contentPageFullDiv">
-            <DataUpload updateData={this.updateData} />
-
             <AppScatter
               state={this.state}
               updateData={this.updateData}

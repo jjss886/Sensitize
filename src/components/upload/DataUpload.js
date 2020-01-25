@@ -9,7 +9,8 @@ class DataUpload extends Component {
     super(props);
     this.state = {
       data: null,
-      name: ""
+      name: "",
+      lastName: ""
     };
   }
 
@@ -25,15 +26,12 @@ class DataUpload extends Component {
         newName = stateName !== "" ? stateName : curName,
         newFile = new File([data], newName);
 
-      console.log("UMM -", data, newFile);
-
       Papa.parse(newFile, {
         header: true,
         download: true,
         dynamicTyping: true,
         complete: result => {
-          console.log("ending -", result);
-          this.setState({ data: result.data, name: "" });
+          this.setState({ data: result.data, lastName: newName, name: "" });
         }
       });
     }
@@ -76,11 +74,14 @@ class DataUpload extends Component {
             id="file"
             onChange={this.handleChange}
           />
-          <label htmlFor="file" className="uploadFileLink">
+          <label htmlFor="file" className="uploadFileLink linkText">
             Choose File
           </label>
 
-          <button onClick={this.handleUpload} className="dataUploadBtn">
+          <button
+            onClick={this.handleUpload}
+            className="dataUploadBtn linkText"
+          >
             Upload
           </button>
         </div>

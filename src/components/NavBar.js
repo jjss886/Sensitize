@@ -6,8 +6,8 @@ class NavBar extends Component {
   render() {
     return (
       <nav className="navBarFull">
-        <h1 className="navBarHeader">SENSITIZE</h1>
         <img src={logo} className="appLogo" alt="logo" />
+        <h1 className="navBarHeader">SENSITIZE</h1>
       </nav>
     );
   }

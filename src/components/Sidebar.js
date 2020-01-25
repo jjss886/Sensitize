@@ -5,7 +5,7 @@ import { DataUpload } from "./upload";
 
 class Sidebar extends Component {
   componentDidMount() {
-    this.props.setType("CSV Upload");
+    this.props.setType("CSV");
   }
 
   handleModeChange = evt => {
@@ -16,13 +16,21 @@ class Sidebar extends Component {
   strategyLayout = mode => {
     if (!mode) return <span>Loading Data !</span>;
 
-    if (mode === "CSV Upload") {
-      return <DataUpload />;
+    if (mode === "CSV") {
+      return <DataUpload updateData={this.props.updateData} />;
     } else if (mode === "URL") {
-      return <input type="text"></input>;
+      return (
+        <input
+          type="text"
+          className="urlTextInput"
+          placeholder="URL Here"
+          onFocus={e => (e.target.placeholder = "")}
+          onBlur={e => (e.target.placeholder = "URL Here")}
+        ></input>
+      );
     } else if (mode === "Algo") {
       return (
-        <select>
+        <select className="algoModeSelect">
           <option>Game of Life</option>
         </select>
       );
@@ -33,11 +41,17 @@ class Sidebar extends Component {
     return (
       <div className="sideBarFullDiv">
         <p>Sidebar</p>
-        <select className="sideBarSelect" onChange={this.handleModeChange}>
-          <option>CSV Upload</option>
-          <option>URL</option>
-          <option>Algo</option>
-        </select>
+        <div className="modeSelectDiv">
+          <span className="modeLabel">Mode: </span>
+          <select
+            className="modeSideBarSelect"
+            onChange={this.handleModeChange}
+          >
+            <option>CSV</option>
+            <option>URL</option>
+            <option>Algo</option>
+          </select>
+        </div>
 
         {this.strategyLayout(this.props.mode)}
       </div>

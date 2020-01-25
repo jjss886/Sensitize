@@ -43,7 +43,6 @@ code {
   z-index: 2;
   padding: 10px;
   display: flex;
-  justify-content: space-between;
   align-items: center;
 }
 
@@ -83,11 +82,34 @@ code {
 }
 
 /* ----------------- SIDEBAR ELEMENT ----------------- */
-.sideBarSelect {
-  font-size: 14px;
-  width: 70%;
-  height: 25px;
+.modeSelectDiv {
+  width: 100%;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
   margin-bottom: 15px;
+}
+
+.modeSideBarSelect {
+  font-size: 14px;
+  width: 60%;
+  height: 25px;
+}
+
+.modeLabel {
+  font-size: 14px;
+}
+
+.urlTextInput {
+  width: 90%;
+  height: 25px;
+  border-radius: 5px;
+}
+
+.algoModeSelect {
+  width: 90%;
+  height: 25px;
+  font-size: 14px;
 }
 
 /* ----------------- DATA UPLOAD ELEMENT ----------------- */
@@ -137,11 +159,7 @@ code {
   width: 90%;
   background-color: rgba(50, 50, 50, 0.8);
   color: white;
-}
-
-.uploadFileLink:hover {
-  background-color: rgba(108, 175, 82, 0.9);
-  text-decoration: underline;
+  cursor: pointer;
 }
 
 .dataUploadBtn {
@@ -149,6 +167,10 @@ code {
   width: 90%;
   border-radius: 5px;
   font-weight: bold;
+}
+
+.linkText:hover {
+  text-decoration: underline;
 }
 
 /* ----------------- APP ELEMENT ----------------- */
@@ -163,43 +185,18 @@ code {
   border-radius: 10px;
 }
 
-/* ----------------- APP BAR ELEMENT ----------------- */
-.appBarDiv {
-  width: 100%;
-  display: flex;
-  justify-content: center;
-}
-
-.containerBarDiv {
-  background-color: rgba(200, 200, 200, 0.9);
-  border-radius: 10px;
-  padding: 35px;
-  margin: 0 0 50px 0;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  width: 70%;
-}
-
-.barChartArea {
-  background-color: rgba(40, 44, 52, 0.8);
-  height: 100%;
-  border-radius: 5px;
-  padding: 15px;
-}
-
 /* ----------------- APP SCATTER ELEMENT ----------------- */
 .appScatterDiv {
   width: 100%;
   display: flex;
   justify-content: center;
+  margin: 25px 0;
 }
 
 .containerScatterDiv {
   background-color: rgba(200, 200, 200, 0.9);
   border-radius: 10px;
   padding: 35px;
-  margin: 0 0 50px 0;
   display: flex;
   justify-content: center;
   width: 70%;
@@ -224,4 +221,29 @@ code {
   height: 45px;
   margin-top: 10px;
   border-radius: 10px;
+}
+
+/* ----------------- APP BAR ELEMENT ----------------- */
+.appBarDiv {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin: 25px 0;
+}
+
+.containerBarDiv {
+  background-color: rgba(200, 200, 200, 0.9);
+  border-radius: 10px;
+  padding: 35px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 70%;
+}
+
+.barChartArea {
+  background-color: rgba(40, 44, 52, 0.8);
+  height: 100%;
+  border-radius: 5px;
+  padding: 15px;
 }
