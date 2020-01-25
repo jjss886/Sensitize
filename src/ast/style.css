@@ -84,7 +84,71 @@ code {
 
 /* ----------------- SIDEBAR ELEMENT ----------------- */
 .sideBarSelect {
+  font-size: 14px;
+  width: 70%;
+  height: 25px;
   margin-bottom: 15px;
+}
+
+/* ----------------- DATA UPLOAD ELEMENT ----------------- */
+.dataFullDiv {
+  display: flex;
+  justify-content: center;
+}
+
+.dataUploadFullDiv {
+  background-color: lightgray;
+  color: black;
+  border-radius: 10px;
+  width: 85%;
+  padding: 10px;
+  margin: 15px 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+.dataFileNameInput {
+  border-radius: 5px;
+  width: 90%;
+  font-size: 14px;
+  margin-bottom: 15px;
+  padding: 0 5px;
+}
+
+.dataFileNameInput:focus {
+  background-color: rgba(184, 231, 122, 0.9);
+}
+
+.dataFileBtn {
+  width: 0.1px;
+  height: 0.1px;
+  opacity: 0;
+  overflow: hidden;
+  position: absolute;
+  z-index: -100;
+}
+
+.uploadFileLink {
+  display: inline-block;
+  text-align: center;
+  border-radius: 5px;
+  width: 90%;
+  background-color: rgba(50, 50, 50, 0.8);
+  color: white;
+}
+
+.uploadFileLink:hover {
+  background-color: rgba(108, 175, 82, 0.9);
+  text-decoration: underline;
+}
+
+.dataUploadBtn {
+  background-color: lightblue;
+  width: 90%;
+  border-radius: 5px;
+  font-weight: bold;
 }
 
 /* ----------------- APP ELEMENT ----------------- */
@@ -160,39 +224,4 @@ code {
   height: 45px;
   margin-top: 10px;
   border-radius: 10px;
-}
-
-/* ----------------- IMAGE UPLOAD ELEMENT ----------------- */
-.dataUploadFullDiv {
-  background-color: lightgray;
-  color: black;
-  border-radius: 10px;
-  width: 35%;
-  height: 500px;
-  padding: 20px;
-  margin: 25px 0;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-evenly;
-  align-items: center;
-}
-
-.dataFileNameInput {
-  border-radius: 5px;
-}
-
-.dataFileBtn {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  align-content: center;
-  width: 70%;
-  font-size: 14px;
-}
-
-.dataUploadBtn {
-  background-color: lightblue;
-  width: 150px;
-  border-radius: 10px;
-  font-weight: bold;
 }

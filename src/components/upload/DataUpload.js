@@ -57,29 +57,33 @@ class DataUpload extends Component {
 
   render() {
     return (
-      <div className="dataUploadFullDiv">
-        <h2 className="dataHeaderText">Upload a CSV</h2>
+      <div className="dataFullDiv">
+        <div className="dataUploadFullDiv">
+          <input
+            className="dataFileNameInput"
+            type="text"
+            name="name"
+            value={this.state.name}
+            placeholder="File Name"
+            onFocus={e => (e.target.placeholder = "")}
+            onBlur={e => (e.target.placeholder = "File Name")}
+            onChange={this.handleNameChange}
+          />
 
-        <input
-          className="dataFileNameInput"
-          type="text"
-          name="name"
-          value={this.state.name}
-          placeholder="File Name"
-          onFocus={e => (e.target.placeholder = "")}
-          onBlur={e => (e.target.placeholder = "File Name")}
-          onChange={this.handleNameChange}
-        />
+          <input
+            className="dataFileBtn"
+            type="file"
+            id="file"
+            onChange={this.handleChange}
+          />
+          <label htmlFor="file" className="uploadFileLink">
+            Choose File
+          </label>
 
-        <input
-          className="dataFileBtn"
-          type="file"
-          onChange={this.handleChange}
-        />
-
-        <button onClick={this.handleUpload} className="dataUploadBtn">
-          Upload
-        </button>
+          <button onClick={this.handleUpload} className="dataUploadBtn">
+            Upload
+          </button>
+        </div>
       </div>
     );
   }
