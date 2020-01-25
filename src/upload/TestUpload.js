@@ -1,7 +1,6 @@
 import * as Papa from "papaparse";
 import React, { Component } from "react";
 import fbDatabase from "../firebase";
-import axios from "./index";
 
 class TestUpload extends Component {
   constructor(props) {
@@ -36,11 +35,11 @@ class TestUpload extends Component {
     this.props.updateData(test);
     const uploadTask = fbDatabase.ref().child("data");
 
-    uploadTask.set(test);
+    uploadTask.push(test);
     uploadTask.on("value", snap => console.log("YOO --", snap.val()));
 
     // uploadTask.on(
-    //   "value",
+    //   "state_changed",
     //   snapshot => {
     //     // PROGRESS FUNCTION
     //     const progress = Math.round(
