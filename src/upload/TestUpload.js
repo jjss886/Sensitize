@@ -8,7 +8,6 @@ class TestUpload extends Component {
     super(props);
     this.state = {
       test: null,
-      url: "",
       progress: 0
     };
   }
@@ -33,42 +32,36 @@ class TestUpload extends Component {
   handleUpload = () => {
     const { test } = this.state;
     console.log("GO GO GO ---", this.state, this.props);
-    const moo = false;
-    if (moo) {
-      // ---------- GOTTA WORK ON THIS DAMN UPLOAD ---------- //
-      const uploadTask = fbDatabase.ref(`test/${test.name}`).put(test);
-      uploadTask.on(
-        "state_changed",
-        snapshot => {
-          // PROGRESS FUNCTION
-          const progress = Math.round(
-            (snapshot.bytesTransferred / snapshot.totalBytes) * 100
-          );
-          this.setState({ progress });
-        },
-        error => {
-          console.log(error);
-        },
-        () => {
-          // COMPLETE UPLOAD FUNCTION
-          fbDatabase
-            .ref("test")
-            .child(test.name)
-            .getDownloadURL()
-            .then(url => {
-              this.setState({ url });
-            });
-        }
-      );
-    } else {
-      this.props.updateData(this.state.test);
-      const jsonObj = JSON.stringify(this.state.test);
-      console.log("launching ...", jsonObj, axios);
-      axios
-        .post("/data.json", jsonObj)
-        .then(resp => console.log("FIREBASE -", resp))
-        .catch(err => console.error("WAH ERROR -", err));
-    }
+
+    this.props.updateData(test);
+    const uploadTask = fbDatabase.ref().child("data");
+
+    uploadTask.set(test);
+    uploadTask.on("value", snap => console.log("YOO --", snap.val()));
+
+    // uploadTask.on(
+    //   "value",
+    //   snapshot => {
+    //     // PROGRESS FUNCTION
+    //     const progress = Math.round(
+    //       (snapshot.bytesTransferred / snapshot.totalBytes) * 100
+    //     );
+    //     this.setState({ progress });
+    //   },
+    //   error => {
+    //     console.log(error);
+    //   },
+    //   () => {
+    //     // COMPLETE UPLOAD FUNCTION
+    //     fbDatabase
+    //       .ref("data")
+    //       .child(test)
+    //       .then(snap => {
+    //         console.log("YOO --", snap.val());
+    //         // this.setState({ url });
+    //       });
+    //   }
+    // );
   };
 
   render() {
@@ -101,15 +94,6 @@ class TestUpload extends Component {
         <button onClick={this.handleUpload} className="testUploadBtn">
           Upload
         </button>
-
-        {/* <img
-          className="testUploadImg"
-          src={
-            this.state.url ||
-            "https://cdn.pixabay.com/photo/2016/01/03/00/43/upload-1118928_960_720.png"
-          }
-          alt="Upload Completed!"
-        /> */}
       </div>
     );
   }
