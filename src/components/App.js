@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
 import { json } from "d3";
 
 // IMPORT COMPONENTS
@@ -8,7 +9,6 @@ import Sidebar from "./Sidebar";
 import NavBar from "./NavBar";
 
 class App extends Component {
-  // ----------------------- TEMP MAYBE ----------------------- //
   state = {
     data: [],
     activeName: null
@@ -25,7 +25,6 @@ class App extends Component {
   updateData = data => this.setState({ data });
 
   updateName = activeName => this.setState({ activeName });
-  // ----------------------- TEMP MAYBE ----------------------- //
 
   render() {
     return (
@@ -50,4 +49,12 @@ class App extends Component {
   }
 }
 
-export default App;
+const mapState = state => {
+  return {};
+};
+
+const mapDispatch = dispatch => {
+  return {};
+};
+
+export default connect(mapState, mapDispatch)(App);

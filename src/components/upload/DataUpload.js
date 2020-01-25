@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import * as Papa from "papaparse";
 import fbDatabase from "../../firebase";
-import { setData } from "../../store";
+import { setData, setFullData } from "../../store";
 
 class DataUpload extends Component {
   constructor(props) {
@@ -14,6 +14,8 @@ class DataUpload extends Component {
       queue: true
     };
   }
+
+  componentDidMount() {}
 
   handleNameChange = evt => {
     this.setState({ ...this.state, [evt.target.name]: evt.target.value });
@@ -106,6 +108,10 @@ class DataUpload extends Component {
             Upload
           </button>
         </div>
+
+        <div className="postUploadFileDiv">
+          <span className="postUploadHeader">Uploaded Files</span>
+        </div>
       </div>
     );
   }
@@ -119,7 +125,8 @@ const mapState = state => {
 
 const mapDispatch = dispatch => {
   return {
-    setData: data => dispatch(setData(data))
+    setData: data => dispatch(setData(data)),
+    setFullData: data => dispatch(setFullData(data))
   };
 };
 
