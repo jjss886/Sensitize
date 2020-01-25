@@ -6,12 +6,14 @@ import { composeWithDevTools } from "redux-devtools-extension";
 // INITIAL STATE
 const initialState = {
   mode: "",
-  data: {}
+  dataSet: {},
+  fullData: []
 };
 
 // ACTION TYPES
 const SET_MODE = "SET_MODE";
-const SET_DATA = "SET_DATA";
+const SET_DATASET = "SET_DATASET";
+const SET_FULL_DATA = "SET_FULL_DATA";
 
 // ACTION CREATORS
 export const setType = mode => {
@@ -23,7 +25,14 @@ export const setType = mode => {
 
 export const setData = data => {
   return {
-    type: SET_DATA,
+    type: SET_DATASET,
+    data
+  };
+};
+
+export const setFullData = data => {
+  return {
+    type: SET_FULL_DATA,
     data
   };
 };
@@ -33,8 +42,10 @@ const reducer = (state = initialState, action) => {
   switch (action.type) {
     case SET_MODE:
       return { ...state, mode: action.mode };
-    case SET_DATA:
-      return { ...state, data: action.data };
+    case SET_DATASET:
+      return { ...state, dataSet: action.data };
+    case SET_FULL_DATA:
+      return { ...state, fullData: [...state.fullData, action.data] };
     default:
       return state;
   }

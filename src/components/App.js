@@ -6,7 +6,6 @@ import AppBar from "./AppBar";
 import AppScatter from "./AppScatter";
 import Sidebar from "./Sidebar";
 import NavBar from "./NavBar";
-import { DataUpload } from "./upload";
 
 class App extends Component {
   // ----------------------- TEMP MAYBE ----------------------- //
