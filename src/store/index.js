@@ -8,7 +8,8 @@ import fbDatabase from "../firebase";
 const initialState = {
   mode: "",
   liveData: {},
-  fullData: {}
+  fullData: {},
+  activeName: ""
 };
 
 // ACTION TYPES
@@ -16,6 +17,7 @@ const GET_STATE = "GET_STATE";
 const SET_MODE = "SET_MODE";
 const SET_LIVE_DATA = "SET_LIVE_DATA";
 const SET_FULL_DATA = "SET_FULL_DATA";
+const SET_ACTIVE_NAME = "SET_ACTIVE_NAME";
 
 // ACTION CREATORS
 export const getState = () => {
@@ -42,6 +44,13 @@ export const setFullData = data => {
   return {
     type: SET_FULL_DATA,
     data
+  };
+};
+
+export const setActiveName = name => {
+  return {
+    type: SET_ACTIVE_NAME,
+    name
   };
 };
 
@@ -80,6 +89,8 @@ const reducer = (state = initialState, action) => {
       return { ...state, liveData: action.data };
     case SET_FULL_DATA:
       return { ...state, fullData: action.data };
+    case SET_ACTIVE_NAME:
+      return { ...state, activeName: action.name };
     default:
       return state;
   }

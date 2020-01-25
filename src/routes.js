@@ -13,12 +13,13 @@ class Routes extends Component {
         <Route
           path="/"
           render={props => (
-            <div>
+            <div className="routeChartFullDiv">
               <AppScatter />
               <AppBar />
             </div>
           )}
         />
+        <Route path="/adminPanel" />
       </Switch>
     );
   }

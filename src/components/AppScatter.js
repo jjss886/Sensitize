@@ -19,14 +19,14 @@ class AppScatter extends Component {
     if (!liveData.length) return "Loading Data !";
     return !status ? (
       <ChartWrapperScatter
-        liveData={liveData}
-        updateName={this.props.updateName}
+      // liveData={liveData}
+      // updateName={this.props.updateName}
       />
     ) : (
       <Table
-        liveData={liveData}
-        updateData={this.props.updateData}
-        activeName={activeName}
+      // liveData={liveData}
+      // updateData={this.props.updateData}
+      // activeName={activeName}
       />
     );
   }
@@ -38,13 +38,13 @@ class AppScatter extends Component {
         <Container className="containerScatterDiv">
           <Row className="row row1">
             <Col md={11} xs={12}>
-              {/* {this.renderData(false)} */}
+              {this.renderData(false)}
             </Col>
           </Row>
 
           <Row className="row row2">
             <Col md={11} xs={12}>
-              {/* {this.renderData(true)} */}
+              {this.renderData(true)}
             </Col>
           </Row>
         </Container>

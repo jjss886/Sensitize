@@ -19,20 +19,20 @@ class Table extends Component {
   };
 
   handleAdd = () => {
-    this.props.updateData([...this.props.data, this.state]);
+    this.props.updateData([...this.props.liveData, this.state]);
     this.setState({ name: "", height: "", age: "" });
   };
 
   handleRemove = evt => {
     const targetName = evt.target.name;
-    const newData = this.props.data.filter(x => x.name !== targetName);
+    const newData = this.props.liveData.filter(x => x.name !== targetName);
     this.props.updateData(newData);
   };
 
   renderRows() {
-    const { data, activeName } = this.props;
+    const { liveData, activeName } = this.props;
 
-    return data.map(student => {
+    return liveData.map(student => {
       const background =
         student.name === activeName ? "rgba(125,210,235,0.8)" : "white";
 
@@ -109,4 +109,10 @@ class Table extends Component {
   }
 }
 
-export default connect(null)(Table);
+const mapState = state => {
+  return {
+    liveData: state.liveData
+  };
+};
+
+export default connect(mapState)(Table);
