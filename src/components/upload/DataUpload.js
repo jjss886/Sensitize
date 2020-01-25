@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import * as Papa from "papaparse";
 import fbDatabase from "../../firebase";
-import { setData, setFullData } from "../../store";
+import { setData, getFullData } from "../../store";
 
 class DataUpload extends Component {
   constructor(props) {
@@ -15,7 +15,9 @@ class DataUpload extends Component {
     };
   }
 
-  componentDidMount() {}
+  componentDidMount() {
+    this.props.getFullData();
+  }
 
   handleNameChange = evt => {
     this.setState({ ...this.state, [evt.target.name]: evt.target.value });
@@ -50,12 +52,12 @@ class DataUpload extends Component {
 
     this.props.updateData(tempData);
     this.props.setData(tempData);
-    this.props.setFullData(tempData);
 
     const uploadTask = fbDatabase.ref().child("data");
     uploadTask.push(tempData);
     uploadTask.on("value", snap => {
       this.setState({ tempData: null, queue: false });
+      this.props.getFullData();
     });
   };
 
@@ -75,6 +77,20 @@ class DataUpload extends Component {
         </span>
       </div>
     ) : null;
+  };
+
+  showUpdatedFiles = fullData => {
+    if (!fullData) return null;
+    const keys = Object.keys(fullData).slice(-10);
+    return (
+      <ul className="postUploadUL">
+        {keys.map(key => (
+          <li className="postUploadList" key={key}>
+            {key.slice(0, 15)}
+          </li>
+        ))}
+      </ul>
+    );
   };
 
   render() {
@@ -114,9 +130,12 @@ class DataUpload extends Component {
           {this.showLatestFile(!this.state.queue)}
         </div>
 
-        <div className="postUploadFileDiv">
-          <span className="postUploadHeader">Uploaded Files</span>
-        </div>
+        {this.props.fullData ? (
+          <div className="postUploadFileDiv">
+            <span className="postUploadHeader">Uploaded Files</span>
+            {this.showUpdatedFiles(this.props.fullData)}
+          </div>
+        ) : null}
       </div>
     );
   }
@@ -124,14 +143,15 @@ class DataUpload extends Component {
 
 const mapState = state => {
   return {
-    data: state.data
+    dataSet: state.dataSet,
+    fullData: state.fullData
   };
 };
 
 const mapDispatch = dispatch => {
   return {
     setData: data => dispatch(setData(data)),
-    setFullData: data => dispatch(setFullData(data))
+    getFullData: data => dispatch(getFullData(data))
   };
 };
 

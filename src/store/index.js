@@ -2,12 +2,13 @@ import { createStore, applyMiddleware } from "redux";
 import { createLogger } from "redux-logger";
 import thunkMiddleware from "redux-thunk";
 import { composeWithDevTools } from "redux-devtools-extension";
+import fbDatabase from "../firebase";
 
 // INITIAL STATE
 const initialState = {
   mode: "",
   dataSet: {},
-  fullData: []
+  fullData: ""
 };
 
 // ACTION TYPES
@@ -37,6 +38,20 @@ export const setFullData = data => {
   };
 };
 
+// THUNKY THUNKS
+export const getFullData = () => {
+  return async dispatch => {
+    try {
+      const data = fbDatabase.ref().child("data");
+      data.on("value", snap => {
+        dispatch(setFullData(snap.val()));
+      });
+    } catch (error) {
+      console.error("WAH ERROR --", error);
+    }
+  };
+};
+
 // REDUCER
 const reducer = (state = initialState, action) => {
   switch (action.type) {
@@ -45,7 +60,7 @@ const reducer = (state = initialState, action) => {
     case SET_DATASET:
       return { ...state, dataSet: action.data };
     case SET_FULL_DATA:
-      return { ...state, fullData: [...state.fullData, action.data] };
+      return { ...state, fullData: action.data };
     default:
       return state;
   }

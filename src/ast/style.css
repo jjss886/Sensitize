@@ -221,6 +221,15 @@ code {
   width: 90%;
 }
 
+.postUploadUL {
+  padding-inline-start: 15px;
+}
+
+.postUploadList {
+  font-size: 12px;
+  font-weight: 400;
+}
+
 /* ----------------- APP ELEMENT ----------------- */
 
 .fileSubmitDiv {

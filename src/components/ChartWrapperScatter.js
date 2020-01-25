@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
 import ScatterPlotD3 from "../d3/ScatterPlotD3";
 
 class ChartWrapperScatter extends Component {
@@ -23,4 +24,10 @@ class ChartWrapperScatter extends Component {
   }
 }
 
-export default ChartWrapperScatter;
+const mapState = state => {
+  return {
+    dataSet: state.dataSet
+  };
+};
+
+export default connect(mapState)(ChartWrapperScatter);
