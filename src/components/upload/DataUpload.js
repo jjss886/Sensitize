@@ -1,5 +1,6 @@
-import * as Papa from "papaparse";
 import React, { Component } from "react";
+import { connect } from "react-redux";
+import * as Papa from "papaparse";
 import fbDatabase from "../../firebase";
 
 class DataUpload extends Component {
@@ -78,4 +79,12 @@ class DataUpload extends Component {
   }
 }
 
-export default DataUpload;
+const mapState = state => {
+  return {};
+};
+
+const mapDispatch = dispatch => {
+  return {};
+};
+
+export default connect(mapState, mapDispatch)(DataUpload);

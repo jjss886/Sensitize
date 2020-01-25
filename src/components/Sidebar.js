@@ -1,33 +1,58 @@
 import React, { Component } from "react";
-import fbDatabase from "../firebase";
+import { connect } from "react-redux";
+import { setType } from "../store";
+import { DataUpload } from "./upload";
 
 class Sidebar extends Component {
-  firebasePull() {
-    console.log("Initial Hello!");
-    const fbData = fbDatabase.ref("test");
-    fbData.on("value", snap => {
-      // const file = snap.val()
-      console.log("Second -", snap);
-      snap.forEach(child => {
-        const childData = child.val();
-        console.log("WOAH - ", childData);
-      });
-    });
+  componentDidMount() {
+    this.props.setType("URL");
   }
+
+  handleModeChange = evt => {
+    const mode = evt.target.value;
+    this.props.setType(mode);
+  };
+
+  strategyLayout = mode => {
+    if (!mode) return <span>Loading Data !</span>;
+
+    if (mode === "CSV Upload") {
+      return <DataUpload />;
+    } else if (mode === "URL") {
+      return <input type="text"></input>;
+    } else if (mode === "Algo") {
+      return (
+        <select>
+          <option>Game of Life</option>
+        </select>
+      );
+    }
+  };
 
   render() {
     return (
       <div className="sideBarFullDiv">
         <p>Sidebar</p>
-        <select>
-          <option>Test</option>
+        <select className="sideBarSelect" onChange={this.handleModeChange}>
+          <option>URL</option>
+          <option>CSV Upload</option>
+          <option>Algo</option>
         </select>
-        <button type="button" onClick={this.firebasePull}>
-          Click
-        </button>
+
+        {this.strategyLayout(this.props.mode)}
       </div>
     );
   }
 }
 
-export default Sidebar;
+const mapState = state => {
+  return {
+    mode: state.mode
+  };
+};
+
+const mapDispatch = dispatch => {
+  return { setType: mode => dispatch(setType(mode)) };
+};
+
+export default connect(mapState, mapDispatch)(Sidebar);
