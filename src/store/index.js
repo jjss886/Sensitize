@@ -12,11 +12,18 @@ const initialState = {
 };
 
 // ACTION TYPES
+const GET_STATE = "GET_STATE";
 const SET_MODE = "SET_MODE";
 const SET_LIVE_DATA = "SET_LIVE_DATA";
 const SET_FULL_DATA = "SET_FULL_DATA";
 
 // ACTION CREATORS
+export const getState = () => {
+  return {
+    type: GET_STATE
+  };
+};
+
 export const setType = mode => {
   return {
     type: SET_MODE,
@@ -24,7 +31,7 @@ export const setType = mode => {
   };
 };
 
-export const setData = data => {
+export const setLiveData = data => {
   return {
     type: SET_LIVE_DATA,
     data
@@ -39,6 +46,16 @@ export const setFullData = data => {
 };
 
 // THUNKY THUNKS
+export const getAllState = () => {
+  return dispatch => {
+    try {
+      dispatch(getState());
+    } catch (error) {
+      console.error("WAH ERROR --", error);
+    }
+  };
+};
+
 export const getFullData = () => {
   return async dispatch => {
     try {
@@ -55,6 +72,8 @@ export const getFullData = () => {
 // REDUCER
 const reducer = (state = initialState, action) => {
   switch (action.type) {
+    case GET_STATE:
+      return { ...state };
     case SET_MODE:
       return { ...state, mode: action.mode };
     case SET_LIVE_DATA:

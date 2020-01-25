@@ -1,12 +1,14 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { json } from "d3";
+import { setLiveData } from "../store";
 
 // IMPORT COMPONENTS
 import AppBar from "./AppBar";
 import AppScatter from "./AppScatter";
 import Sidebar from "./Sidebar";
 import NavBar from "./NavBar";
+import Routes from "../routes";
 
 class App extends Component {
   state = {
@@ -18,6 +20,7 @@ class App extends Component {
     json("https://udemy-react-d3.firebaseio.com/children.json")
       .then(data => {
         this.setState({ data });
+        this.props.setLiveData(data);
       })
       .catch(err => console.error("ERROR -", err));
   }
@@ -41,13 +44,14 @@ class App extends Component {
           <Sidebar updateData={this.updateData} />
 
           <div className="contentPageFullDiv">
-            <AppScatter
+            <Routes />
+            {/* <AppScatter
               state={this.state}
               updateData={this.updateData}
               updateName={this.updateName}
             />
 
-            <AppBar />
+            <AppBar /> */}
           </div>
         </div>
       </div>
@@ -60,7 +64,9 @@ const mapState = state => {
 };
 
 const mapDispatch = dispatch => {
-  return {};
+  return {
+    setLiveData: data => dispatch(setLiveData(data))
+  };
 };
 
 export default connect(mapState, mapDispatch)(App);

@@ -7,15 +7,15 @@ class ChartWrapperScatter extends Component {
     this.setState({
       scatterChart: new ScatterPlotD3(
         this.refs.scatterChart,
-        this.props.data,
+        this.props.liveData,
         this.props.updateName
       )
     });
   }
 
   componentDidUpdate(prevProps) {
-    if (this.props.data.length !== prevProps.data.length) {
-      this.state.scatterChart.update(this.props.data);
+    if (this.props.liveData.length !== prevProps.liveData.length) {
+      this.state.scatterChart.update(this.props.liveData);
     }
   }
 

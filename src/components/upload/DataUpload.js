@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import * as Papa from "papaparse";
 import fbDatabase from "../../firebase";
-import { setData, getFullData } from "../../store";
+import { setLiveData, getFullData } from "../../store";
 
 class DataUpload extends Component {
   constructor(props) {
@@ -56,7 +56,7 @@ class DataUpload extends Component {
     if (!tempData) return alert("Choose File First!");
 
     this.props.updateData(tempData.slice(1));
-    this.props.setData(tempData.slice(1));
+    this.props.setLiveData(tempData.slice(1));
 
     // UPLOAD TO FIREBASE AND UPDATING STORE
     const uploadTask = fbDatabase.ref().child("data");
@@ -96,7 +96,7 @@ class DataUpload extends Component {
           <li
             className="postUploadList linkText"
             key={key}
-            onClick={() => this.props.setData(fullData[key])}
+            onClick={() => this.props.setLiveData(fullData[key])}
           >
             {fullData[key][0].fileName.length > 20
               ? `${fullData[key][0].fileName.slice(0, 20)}...`
@@ -163,7 +163,7 @@ const mapState = state => {
 
 const mapDispatch = dispatch => {
   return {
-    setData: data => dispatch(setData(data)),
+    setLiveData: data => dispatch(setLiveData(data)),
     getFullData: data => dispatch(getFullData(data))
   };
 };

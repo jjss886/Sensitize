@@ -44,12 +44,24 @@ code {
   padding: 10px;
   display: flex;
   align-items: center;
+  justify-content: space-between;
+}
+
+.navBarOne {
+  display: flex;
+  align-items: center;
 }
 
 .navBarHeader {
   color: rgba(0, 152, 195, 0.8);
   font-weight: bold;
   margin: 0;
+}
+
+.navBarText {
+  color: black;
+  font-size: 15px;
+  font-weight: bold;
 }
 
 .belowNavBarFullDiv {
