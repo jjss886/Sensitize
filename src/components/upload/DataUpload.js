@@ -96,7 +96,9 @@ class DataUpload extends Component {
             key={key}
             onClick={() => this.props.setData(fullData[key])}
           >
-            {fullData[key][0].fileName.slice(0, 15)}
+            {fullData[key][0].fileName.length > 20
+              ? `${fullData[key][0].fileName.slice(0, 20)}...`
+              : fullData[key][0].fileName}
           </li>
         ))}
       </ul>
