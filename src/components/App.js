@@ -4,7 +4,7 @@ import React, { Component } from "react";
 import AppBar from "./AppBar";
 import AppScatter from "./AppScatter";
 import Sidebar from "./Sidebar";
-import { TestUpload } from "../upload";
+import { DataUpload } from "./upload";
 import { json } from "d3";
 
 // ADDITIONAL INTERNAL IMPORTS
@@ -44,7 +44,7 @@ class App extends Component {
             <img src={logo} className="appLogo" alt="logo" />
             <p>JAMES SHEN</p>
 
-            <TestUpload updateData={this.updateData} />
+            <DataUpload updateData={this.updateData} />
 
             <AppScatter
               state={this.state}
