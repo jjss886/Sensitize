@@ -20,6 +20,7 @@ class ScatterPlotD3 {
 
     vis.x = d3.scaleLinear().range([0, WIDTH]);
     vis.y = d3.scaleLinear().range([HEIGHT, 0]);
+
     vis.xAxisGroup = vis.g
       .append("g")
       .attr("transform", `translate(0, ${HEIGHT})`);
@@ -82,10 +83,11 @@ class ScatterPlotD3 {
     circles
       .enter()
       .append("circle")
+      .classed("scatterCircle", true)
       .attr("cy", vis.y(0))
       .attr("cx", d => vis.x(d.age))
       .attr("r", 5)
-      .style("fill", "rgba(0,152,195,0.8)")
+      // .style("fill", "rgba(0,152,195,0.8)")
       .on("click", d => vis.updateName(d.name))
       .transition(1000)
       .attr("cy", d => vis.y(d.height));

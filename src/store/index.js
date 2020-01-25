@@ -8,7 +8,7 @@ import fbDatabase from "../firebase";
 const initialState = {
   mode: "",
   liveData: {},
-  fullData: ""
+  fullData: {}
 };
 
 // ACTION TYPES
@@ -58,7 +58,7 @@ const reducer = (state = initialState, action) => {
     case SET_MODE:
       return { ...state, mode: action.mode };
     case SET_LIVE_DATA:
-      return { ...state, dataSet: action.data };
+      return { ...state, liveData: action.data };
     case SET_FULL_DATA:
       return { ...state, fullData: action.data };
     default:

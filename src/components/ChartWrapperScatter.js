@@ -26,7 +26,7 @@ class ChartWrapperScatter extends Component {
 
 const mapState = state => {
   return {
-    dataSet: state.dataSet
+    liveData: state.liveData
   };
 };
 

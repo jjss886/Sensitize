@@ -22,6 +22,12 @@ class App extends Component {
       .catch(err => console.error("ERROR -", err));
   }
 
+  componentDidUpdate(prevProps) {
+    if (this.props.liveData !== prevProps.liveData) {
+      this.setState({ data: this.props.liveData });
+    }
+  }
+
   updateData = data => this.setState({ data });
 
   updateName = activeName => this.setState({ activeName });
@@ -50,7 +56,7 @@ class App extends Component {
 }
 
 const mapState = state => {
-  return {};
+  return { liveData: state.liveData };
 };
 
 const mapDispatch = dispatch => {

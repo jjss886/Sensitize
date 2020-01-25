@@ -85,7 +85,11 @@ class DataUpload extends Component {
     return (
       <ul className="postUploadUL">
         {keys.map(key => (
-          <li className="postUploadList" key={key}>
+          <li
+            className="postUploadList linkText"
+            key={key}
+            onClick={() => this.props.setData(fullData[key])}
+          >
             {key.slice(0, 15)}
           </li>
         ))}
