@@ -143,7 +143,6 @@ class DataUpload extends Component {
 
 const mapState = state => {
   return {
-    dataSet: state.dataSet,
     fullData: state.fullData
   };
 };

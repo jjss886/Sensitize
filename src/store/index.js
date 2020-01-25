@@ -7,13 +7,13 @@ import fbDatabase from "../firebase";
 // INITIAL STATE
 const initialState = {
   mode: "",
-  dataSet: {},
+  liveData: {},
   fullData: ""
 };
 
 // ACTION TYPES
 const SET_MODE = "SET_MODE";
-const SET_DATASET = "SET_DATASET";
+const SET_LIVE_DATA = "SET_LIVE_DATA";
 const SET_FULL_DATA = "SET_FULL_DATA";
 
 // ACTION CREATORS
@@ -26,7 +26,7 @@ export const setType = mode => {
 
 export const setData = data => {
   return {
-    type: SET_DATASET,
+    type: SET_LIVE_DATA,
     data
   };
 };
@@ -57,7 +57,7 @@ const reducer = (state = initialState, action) => {
   switch (action.type) {
     case SET_MODE:
       return { ...state, mode: action.mode };
-    case SET_DATASET:
+    case SET_LIVE_DATA:
       return { ...state, dataSet: action.data };
     case SET_FULL_DATA:
       return { ...state, fullData: action.data };
