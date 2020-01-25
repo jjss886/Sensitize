@@ -54,8 +54,14 @@ class ScatterPlotD3 {
     const vis = this;
     vis.data = data;
 
-    vis.x.domain([0, d3.max(vis.data, d => Number(d.age))]);
-    vis.y.domain([0, d3.max(vis.data, d => Number(d.height))]);
+    vis.x.domain([
+      d3.min(vis.data, d => Number(d.age) * 0.9),
+      d3.max(vis.data, d => Number(d.age))
+    ]);
+    vis.y.domain([
+      d3.min(vis.data, d => Number(d.height) * 0.95),
+      d3.max(vis.data, d => Number(d.height))
+    ]);
 
     const xAxisCall = d3.axisBottom(vis.x);
     const yAxisCall = d3.axisLeft(vis.y);

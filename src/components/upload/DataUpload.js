@@ -58,7 +58,7 @@ class DataUpload extends Component {
     this.props.updateData(tempData.slice(1));
     this.props.setData(tempData.slice(1));
 
-    // UPLOAD TO FIREBASE AND STORING IN STORE
+    // UPLOAD TO FIREBASE AND UPDATING STORE
     const uploadTask = fbDatabase.ref().child("data");
     uploadTask.push(tempData);
     uploadTask.on("value", snap => {
@@ -87,9 +87,11 @@ class DataUpload extends Component {
 
   showUpdatedFiles = fullData => {
     if (!fullData) return null;
-    const keys = Object.keys(fullData).slice(-10);
+    const keys = Object.keys(fullData)
+      .slice(-10)
+      .reverse();
     return (
-      <ul className="postUploadUL">
+      <ol className="postUploadUL">
         {keys.map(key => (
           <li
             className="postUploadList linkText"
@@ -101,7 +103,7 @@ class DataUpload extends Component {
               : fullData[key][0].fileName}
           </li>
         ))}
-      </ul>
+      </ol>
     );
   };
 
@@ -144,7 +146,7 @@ class DataUpload extends Component {
 
         {this.props.fullData ? (
           <div className="postUploadFileDiv">
-            <span className="postUploadHeader">Uploaded Files</span>
+            <span className="postUploadHeader">Last 10 Uploads</span>
             {this.showUpdatedFiles(this.props.fullData)}
           </div>
         ) : null}
