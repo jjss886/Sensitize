@@ -18,8 +18,12 @@ class Table extends Component {
   }
 
   handleInputChange = evt => {
-    const val =
-      evt.target.name !== "name" ? Number(evt.target.value) : evt.target.value;
+    let val = evt.target.value;
+    if (val !== "")
+      val =
+        evt.target.name !== "name"
+          ? Number(evt.target.value)
+          : evt.target.value;
     this.setState({
       [evt.target.name]: val
     });
@@ -75,32 +79,38 @@ class Table extends Component {
 
   render() {
     return (
-      <div>
+      <div className="scatterTableFullDiv">
         <Row>
           <Col xs={3}>
             <Form.Control
-              placeholder={"Name"}
               name={"name"}
               value={this.state.name}
               onChange={this.handleInputChange}
+              placeholder={"Name"}
+              onFocus={e => (e.target.placeholder = "")}
+              onBlur={e => (e.target.placeholder = "Name")}
             />
           </Col>
 
           <Col xs={3}>
             <Form.Control
-              placeholder={"Height"}
               name={"height"}
               value={this.state.height}
               onChange={this.handleInputChange}
+              placeholder={"Height"}
+              onFocus={e => (e.target.placeholder = "")}
+              onBlur={e => (e.target.placeholder = "Height")}
             />
           </Col>
 
           <Col xs={3}>
             <Form.Control
-              placeholder={"Age"}
               name={"age"}
               value={this.state.age}
               onChange={this.handleInputChange}
+              placeholder={"Age"}
+              onFocus={e => (e.target.placeholder = "")}
+              onBlur={e => (e.target.placeholder = "Age")}
             />
           </Col>
 
