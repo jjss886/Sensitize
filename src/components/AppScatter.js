@@ -10,7 +10,10 @@ import Table from "./Table";
 
 class AppScatter extends Component {
   renderData(status) {
-    if (!this.props.liveData.length) return "Load Some Data !";
+    if (!this.props.liveData.length)
+      return !status ? (
+        <h3 className="loadDataText">Load Some Data First!</h3>
+      ) : null;
     return !status ? <ChartWrapperScatter /> : <Table />;
   }
 

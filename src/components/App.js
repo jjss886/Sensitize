@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { json } from "d3";
-import { setLiveData } from "../store";
+import { setLiveData, getFullData } from "../store";
 
 // IMPORT COMPONENTS
 import Sidebar from "./Sidebar";
@@ -12,25 +11,18 @@ import Routes from "../routes";
 const url = "https://udemy-react-d3.firebaseio.com/children.json";
 
 class App extends Component {
-  state = {
-    data: [],
-    activeName: null
-  };
-
   componentDidMount() {
-    console.log("mounting -", this.props);
-    json("https://udemy-react-d3.firebaseio.com/children.json")
-      .then(data => {
-        this.setState({ data });
-        this.props.setLiveData(data);
-      })
-      .catch(err => console.error("WAH ERROR -", err));
+    this.props.getFullData();
   }
 
   componentDidUpdate(prevProps) {
-    if (this.props.liveData !== prevProps.liveData) {
-      this.props.setLiveData(this.props.liveData);
+    const { liveData, fullData } = this.props,
+      fullDataKeys = Object.keys(fullData);
+    if (!Object.keys(liveData).length && fullDataKeys.length) {
+      const lastKey = fullDataKeys[fullDataKeys.length - 1];
+      this.props.setLiveData(fullData[lastKey]);
     }
+    if (liveData !== prevProps.liveData) this.props.setLiveData(liveData);
   }
 
   render() {
@@ -56,7 +48,8 @@ const mapState = state => {
 
 const mapDispatch = dispatch => {
   return {
-    setLiveData: data => dispatch(setLiveData(data))
+    setLiveData: data => dispatch(setLiveData(data)),
+    getFullData: () => dispatch(getFullData())
   };
 };
 

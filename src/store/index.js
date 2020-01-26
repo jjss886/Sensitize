@@ -1,4 +1,5 @@
 import { createStore, applyMiddleware } from "redux";
+// eslint-disable-next-line
 import { createLogger } from "redux-logger";
 import thunkMiddleware from "redux-thunk";
 import { composeWithDevTools } from "redux-devtools-extension";
@@ -127,7 +128,10 @@ const reducer = (state = initialState, action) => {
 };
 
 const middleware = composeWithDevTools(
-  applyMiddleware(thunkMiddleware, createLogger({ collapsed: true }))
+  applyMiddleware(
+    thunkMiddleware
+    // createLogger({ collapsed: true })
+  )
 );
 
 const store = createStore(reducer, middleware);

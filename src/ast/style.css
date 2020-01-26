@@ -279,6 +279,15 @@ code {
   width: 70%;
 }
 
+.loadDataText {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 350px;
+  color: black;
+  margin: 0;
+}
+
 .scatterPlotSvg {
   height: 100%;
 }
