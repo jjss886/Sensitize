@@ -19,11 +19,13 @@ class Table extends Component {
 
   handleInputChange = evt => {
     let val = evt.target.value;
-    if (val !== "")
-      val =
-        evt.target.name !== "name"
-          ? Number(evt.target.value)
-          : evt.target.value;
+    if (evt.target.name !== "name" && isNaN(val)) {
+      this.setState({
+        [evt.target.name]: ""
+      });
+      return alert("Must input numbers");
+    }
+    if (val !== "" && evt.target.name !== "name") val = Number(val);
     this.setState({
       [evt.target.name]: val
     });
