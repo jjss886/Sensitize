@@ -5,12 +5,14 @@ import { withRouter, Route, Switch } from "react-router-dom";
 // COMPONENTS
 import AppScatter from "./components/AppScatter";
 import AppBar from "./components/AppBar";
+import AdminPanel from "./components/AdminPanel";
 
 class Routes extends Component {
   render() {
     return (
       <Switch>
         <Route
+          exact
           path="/"
           render={props => (
             <div className="routeChartFullDiv">
@@ -19,7 +21,7 @@ class Routes extends Component {
             </div>
           )}
         />
-        <Route path="/adminPanel" />
+        <Route exact path="/adminPanel" component={AdminPanel} />
       </Switch>
     );
   }

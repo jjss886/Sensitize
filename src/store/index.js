@@ -141,7 +141,8 @@ const reducer = (state = initialState, action) => {
     case SET_FULL_DATA:
       return { ...state, fullData: action.data };
     case SET_ACTIVE_NAME:
-      return { ...state, activeName: action.name };
+      const newName = state.activeName === action.name ? "" : action.name;
+      return { ...state, activeName: newName };
     default:
       return state;
   }

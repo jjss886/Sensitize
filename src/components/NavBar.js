@@ -10,7 +10,12 @@ class NavBar extends Component {
           <img src={logo} className="appLogo" alt="logo" />
           <h1 className="navBarHeader">SENSITIZE</h1>
         </div>
+
         <div className="navBarTwo">
+          <Link to="/" className="navBarText linkText">
+            Home
+          </Link>
+
           <Link to="/adminPanel" className="navBarText linkText">
             Admin Panel
           </Link>
