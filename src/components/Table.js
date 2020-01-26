@@ -37,7 +37,7 @@ class Table extends Component {
   handleRemove = evt => {
     const targetName = evt.target.name;
     const newData = this.props.liveData.filter(x => x.name !== targetName);
-    this.props.removeDataPoint(this.props.liveKey);
+    this.props.removeDataPoint(this.props.liveKey, newData);
   };
 
   renderRows() {
@@ -134,7 +134,7 @@ const mapDispatch = dispatch => {
     pullLiveKey: () => dispatch(pullLiveKey()),
     addDataPoint: (key, curData, newData) =>
       dispatch(addDataPoint(key, curData, newData)),
-    removeDataPoint: key => dispatch(removeDataPoint(key))
+    removeDataPoint: (key, newData) => dispatch(removeDataPoint(key, newData))
   };
 };
 

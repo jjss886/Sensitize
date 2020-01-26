@@ -69,7 +69,6 @@ class DataUpload extends Component {
 
   showLatestFile = status => {
     if (!status) return null;
-
     const { lastName, queue } = this.state;
     return lastName ? (
       <div className="fileStatusTextDiv">
@@ -155,10 +154,7 @@ class DataUpload extends Component {
         </div>
 
         {this.props.fullData
-          ? // <div className="postUploadFileDiv">
-            //   <span className="postUploadHeader">Last 10 Uploads</span>
-            // </div>
-            this.showUpdatedFiles(this.props.fullData)
+          ? this.showUpdatedFiles(this.props.fullData)
           : null}
       </div>
     );

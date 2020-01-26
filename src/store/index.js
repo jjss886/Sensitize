@@ -109,16 +109,19 @@ export const addDataPoint = (key, curData, newData) => {
   };
 };
 
-export const removeDataPoint = key => {
+export const removeDataPoint = (key, newData) => {
   return dispatch => {
     try {
-      console.log("Thunky 1 - ", key);
-      const targetData = fbDatabase.ref("data/" + key);
-      // targetData.remove();
-      console.log("HMM --", targetData);
-      targetData.on("child_removed", snap => {
-        console.log("Thunky 2 -", snap.val(), snap);
-        // dispatch(setFullData(snap.val()));
+      const allData = fbDatabase.ref().child("data"),
+        singleData = allData.child(key);
+
+      singleData.set(newData);
+
+      allData.on("value", snap => {
+        dispatch(setFullData(snap.val()));
+      });
+      singleData.on("value", snap => {
+        dispatch(setLiveData(snap.val()));
       });
     } catch (error) {
       console.error("WAH ERROR --", error);
