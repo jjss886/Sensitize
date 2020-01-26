@@ -4,6 +4,7 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
+import { pullLiveKey } from "../store";
 
 class Table extends Component {
   state = {
@@ -11,6 +12,10 @@ class Table extends Component {
     height: "",
     age: ""
   };
+
+  componentDidMount() {
+    this.props.pullLiveKey();
+  }
 
   handleInputChange = evt => {
     this.setState({
@@ -30,9 +35,12 @@ class Table extends Component {
   };
 
   renderRows() {
-    const { liveData, activeName } = this.props;
+    const { liveData, activeName } = this.props,
+      adjData = "fileName" in liveData[0] ? liveData.slice(1) : liveData;
 
-    return liveData.map(student => {
+    console.log("TESTING -", activeName, adjData);
+
+    return adjData.map(student => {
       const background =
         student.name === activeName ? "rgba(125,210,235,0.8)" : "white";
 
@@ -111,8 +119,15 @@ class Table extends Component {
 
 const mapState = state => {
   return {
-    liveData: state.liveData
+    liveData: state.liveData,
+    activeName: state.activeName
   };
 };
 
-export default connect(mapState)(Table);
+const mapDispatch = dispatch => {
+  return {
+    pullLiveKey: () => dispatch(pullLiveKey())
+  };
+};
+
+export default connect(mapState, mapDispatch)(Table);

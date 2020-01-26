@@ -14,7 +14,6 @@ const initialState = {
 };
 
 // ACTION TYPES
-const GET_STATE = "GET_STATE";
 const SET_MODE = "SET_MODE";
 const SET_LIVE_KEY = "SET_LIVE_KEY";
 const SET_LIVE_DATA = "SET_LIVE_DATA";
@@ -22,11 +21,6 @@ const SET_FULL_DATA = "SET_FULL_DATA";
 const SET_ACTIVE_NAME = "SET_ACTIVE_NAME";
 
 // ACTION CREATORS
-export const getState = () => {
-  return {
-    type: GET_STATE
-  };
-};
 
 export const setMode = mode => {
   return {
@@ -64,16 +58,6 @@ export const setActiveName = name => {
 };
 
 // THUNKY THUNKS
-export const getAllState = () => {
-  return dispatch => {
-    try {
-      dispatch(getState());
-    } catch (error) {
-      console.error("WAH ERROR --", error);
-    }
-  };
-};
-
 export const getFullData = () => {
   return async dispatch => {
     try {
@@ -92,7 +76,7 @@ export const pullLiveKey = () => {
     try {
       const data = fbDatabase.ref().child("data");
       data.on("value", snap => {
-        const lastKey = Object.keys(snap.val()).slice(-1);
+        const lastKey = Object.keys(snap.val()).slice(-1)[0];
         dispatch(setLiveKey(lastKey));
       });
     } catch (error) {
@@ -104,8 +88,6 @@ export const pullLiveKey = () => {
 // REDUCER
 const reducer = (state = initialState, action) => {
   switch (action.type) {
-    case GET_STATE:
-      return { ...state };
     case SET_MODE:
       return { ...state, mode: action.mode };
     case SET_LIVE_KEY:

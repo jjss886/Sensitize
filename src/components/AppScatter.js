@@ -3,17 +3,13 @@ import { connect } from "react-redux";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Container from "react-bootstrap/Container";
-import { getAllState } from "../store";
+import {} from "../store";
 
 // IMPORT COMPONENTS
 import ChartWrapperScatter from "./ChartWrapperScatter";
 import Table from "./Table";
 
 class AppScatter extends Component {
-  componentDidMount() {
-    this.props.getAllState();
-  }
-
   renderData(status) {
     const { liveData, activeName } = this.props;
     if (!liveData.length) return "Loading Data !";
@@ -60,9 +56,7 @@ const mapState = state => {
 };
 
 const mapDispatch = dispatch => {
-  return {
-    getAllState: () => dispatch(getAllState())
-  };
+  return {};
 };
 
 export default connect(mapState, mapDispatch)(AppScatter);

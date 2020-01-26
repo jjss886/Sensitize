@@ -8,7 +8,6 @@ const HEIGHT = 300 - MARGIN.TOP - MARGIN.BOTTOM;
 class ScatterPlotD3 {
   constructor(element, data) {
     const vis = this;
-    // vis.updateName = updateName;
 
     vis.g = d3
       .select(element)
@@ -94,8 +93,6 @@ class ScatterPlotD3 {
       .attr("cy", vis.y(0))
       .attr("cx", d => vis.x(d.age))
       .attr("r", 5)
-      // .style("fill", "rgba(0,152,195,0.8)")
-      // .on("click", d => vis.updateName(d.name))
       .on("click", d => store.dispatch(setActiveName(d.name)))
       .transition(1000)
       .attr("cy", d => vis.y(d.height));

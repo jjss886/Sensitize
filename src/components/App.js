@@ -27,7 +27,7 @@ class App extends Component {
 
   componentDidUpdate(prevProps) {
     if (this.props.liveData !== prevProps.liveData) {
-      this.setState({ data: this.props.liveData });
+      this.props.setLiveData(this.props.liveData);
     }
   }
 
