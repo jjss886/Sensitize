@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import * as Papa from "papaparse";
 import fbDatabase from "../../firebase";
-import { setLiveKey, setLiveData, getFullData } from "../../store";
+import { setLiveKey, setLiveData, getFullData, pullLiveKey } from "../../store";
 
 class DataUpload extends Component {
   constructor(props) {
@@ -60,11 +60,12 @@ class DataUpload extends Component {
 
     // UPLOAD TO FIREBASE AND UPDATING STORE
     const uploadTask = fbDatabase.ref().child("data");
-    uploadTask.push(tempData);
+    const uploadID = uploadTask.push(tempData).getKey();
     uploadTask.on("value", snap => {
       this.setState({ tempData: null, queue: false });
-      console.log("TESTING --", snap, snap.key);
-      this.props.setLiveKey(snap.key);
+      console.log("TESTING --", snap, snap.key, uploadID);
+      this.props.setLiveKey(uploadID);
+      this.props.pullLiveKey();
       this.props.getFullData();
     });
   };
@@ -167,7 +168,8 @@ const mapDispatch = dispatch => {
   return {
     setLiveKey: key => dispatch(setLiveKey(key)),
     setLiveData: data => dispatch(setLiveData(data)),
-    getFullData: data => dispatch(getFullData(data))
+    getFullData: data => dispatch(getFullData(data)),
+    pullLiveKey: () => dispatch(pullLiveKey())
   };
 };
 

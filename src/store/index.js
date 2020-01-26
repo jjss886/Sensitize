@@ -87,6 +87,20 @@ export const getFullData = () => {
   };
 };
 
+export const pullLiveKey = () => {
+  return async dispatch => {
+    try {
+      const data = fbDatabase.ref().child("data");
+      data.on("value", snap => {
+        const lastKey = Object.keys(snap.val()).slice(-1);
+        dispatch(setLiveKey(lastKey));
+      });
+    } catch (error) {
+      console.error("WAH ERROR --", error);
+    }
+  };
+};
+
 // REDUCER
 const reducer = (state = initialState, action) => {
   switch (action.type) {
