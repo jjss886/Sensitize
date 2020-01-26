@@ -76,8 +76,31 @@ export const pullLiveKey = () => {
     try {
       const data = fbDatabase.ref().child("data");
       data.on("value", snap => {
-        const lastKey = Object.keys(snap.val()).slice(-1)[0];
-        dispatch(setLiveKey(lastKey));
+        if (snap.val()) {
+          const lastKey = Object.keys(snap.val()).slice(-1)[0];
+          dispatch(setLiveKey(lastKey));
+        }
+      });
+    } catch (error) {
+      console.error("WAH ERROR --", error);
+    }
+  };
+};
+
+export const addDataPoint = (key, curData, newData) => {
+  return async dispatch => {
+    try {
+      const newDataSet = [...curData, newData],
+        allData = fbDatabase.ref().child("data"),
+        singleData = allData.child(key);
+
+      singleData.set(newDataSet);
+
+      allData.on("value", snap => {
+        dispatch(setFullData(snap.val()));
+      });
+      singleData.on("value", snap => {
+        dispatch(setLiveData(snap.val()));
       });
     } catch (error) {
       console.error("WAH ERROR --", error);

@@ -4,7 +4,7 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
-import { pullLiveKey } from "../store";
+import { pullLiveKey, addDataPoint } from "../store";
 
 class Table extends Component {
   state = {
@@ -18,27 +18,34 @@ class Table extends Component {
   }
 
   handleInputChange = evt => {
+    const val =
+      evt.target.name !== "name" ? Number(evt.target.value) : evt.target.value;
     this.setState({
-      [evt.target.name]: evt.target.value
+      [evt.target.name]: val
     });
   };
 
   handleAdd = () => {
-    this.props.updateData([...this.props.liveData, this.state]);
+    this.props.addDataPoint(
+      this.props.liveKey,
+      this.props.liveData,
+      this.state
+    );
     this.setState({ name: "", height: "", age: "" });
   };
 
   handleRemove = evt => {
     const targetName = evt.target.name;
     const newData = this.props.liveData.filter(x => x.name !== targetName);
-    this.props.updateData(newData);
+    console.log("removing -", newData);
+    // this.props.updateData(newData);
   };
 
   renderRows() {
-    const { liveData, activeName } = this.props,
+    const { liveData, activeName, liveKey } = this.props,
       adjData = "fileName" in liveData[0] ? liveData.slice(1) : liveData;
 
-    console.log("TESTING -", activeName, adjData);
+    // console.log("TESTING -", activeName, adjData, liveKey);
 
     return adjData.map(student => {
       const background =
@@ -120,13 +127,16 @@ class Table extends Component {
 const mapState = state => {
   return {
     liveData: state.liveData,
-    activeName: state.activeName
+    activeName: state.activeName,
+    liveKey: state.liveKey
   };
 };
 
 const mapDispatch = dispatch => {
   return {
-    pullLiveKey: () => dispatch(pullLiveKey())
+    pullLiveKey: () => dispatch(pullLiveKey()),
+    addDataPoint: (key, curData, newData) =>
+      dispatch(addDataPoint(key, curData, newData))
   };
 };
 

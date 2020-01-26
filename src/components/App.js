@@ -22,7 +22,7 @@ class App extends Component {
         this.setState({ data });
         this.props.setLiveData(data);
       })
-      .catch(err => console.error("ERROR -", err));
+      .catch(err => console.error("WAH ERROR -", err));
   }
 
   componentDidUpdate(prevProps) {

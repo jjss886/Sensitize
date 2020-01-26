@@ -11,8 +11,8 @@ import Table from "./Table";
 
 class AppScatter extends Component {
   renderData(status) {
-    const { liveData, activeName } = this.props;
-    if (!liveData.length) return "Loading Data !";
+    const { liveData } = this.props;
+    if (!liveData.length) return "Load Some Data !";
     return !status ? (
       <ChartWrapperScatter
       // liveData={liveData}
@@ -50,13 +50,8 @@ class AppScatter extends Component {
 
 const mapState = state => {
   return {
-    liveData: state.liveData,
-    state: state
+    liveData: state.liveData
   };
 };
 
-const mapDispatch = dispatch => {
-  return {};
-};
-
-export default connect(mapState, mapDispatch)(AppScatter);
+export default connect(mapState)(AppScatter);
