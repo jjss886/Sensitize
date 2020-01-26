@@ -60,11 +60,11 @@ export const setActiveName = name => {
 
 // THUNKY THUNKS
 export const getFullData = () => {
-  return async dispatch => {
+  return dispatch => {
     try {
       const data = fbDatabase.ref().child("data");
       data.on("value", snap => {
-        dispatch(setFullData(snap.val()));
+        if (snap.val()) dispatch(setFullData(snap.val()));
       });
     } catch (error) {
       console.error("WAH ERROR --", error);
@@ -73,7 +73,7 @@ export const getFullData = () => {
 };
 
 export const pullLiveKey = () => {
-  return async dispatch => {
+  return dispatch => {
     try {
       const data = fbDatabase.ref().child("data");
       data.on("value", snap => {
@@ -89,7 +89,7 @@ export const pullLiveKey = () => {
 };
 
 export const addDataPoint = (key, curData, newData) => {
-  return async dispatch => {
+  return dispatch => {
     try {
       const newDataSet = [...curData, newData],
         allData = fbDatabase.ref().child("data"),
@@ -102,6 +102,23 @@ export const addDataPoint = (key, curData, newData) => {
       });
       singleData.on("value", snap => {
         dispatch(setLiveData(snap.val()));
+      });
+    } catch (error) {
+      console.error("WAH ERROR --", error);
+    }
+  };
+};
+
+export const removeDataPoint = key => {
+  return dispatch => {
+    try {
+      console.log("Thunky 1 - ", key);
+      const targetData = fbDatabase.ref("data/" + key);
+      // targetData.remove();
+      console.log("HMM --", targetData);
+      targetData.on("child_removed", snap => {
+        console.log("Thunky 2 -", snap.val(), snap);
+        // dispatch(setFullData(snap.val()));
       });
     } catch (error) {
       console.error("WAH ERROR --", error);

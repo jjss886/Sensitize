@@ -88,23 +88,32 @@ class DataUpload extends Component {
   showUpdatedFiles = fullData => {
     if (!fullData) return null;
     const keys = Object.keys(fullData)
-      .slice(-10)
-      .reverse();
+        .slice(-10)
+        .reverse(),
+      headerText =
+        keys.length === 0
+          ? `Currently No Uploads`
+          : keys.length === 1
+          ? `Last Upload`
+          : `Last ${keys.length} Uploads`;
 
     return (
-      <ol className="postUploadUL">
-        {keys.map(key => (
-          <li
-            className="postUploadList linkText"
-            key={key}
-            onClick={() => this.props.setLiveData(fullData[key])}
-          >
-            {fullData[key][0].fileName.length > 20
-              ? `${fullData[key][0].fileName.slice(0, 20)}...`
-              : fullData[key][0].fileName}
-          </li>
-        ))}
-      </ol>
+      <div className="postUploadFileDiv">
+        <span className="postUploadHeader">{headerText}</span>
+        <ol className="postUploadUL">
+          {keys.map(key => (
+            <li
+              className="postUploadList linkText"
+              key={key}
+              onClick={() => this.props.setLiveData(fullData[key])}
+            >
+              {fullData[key][0].fileName.length > 20
+                ? `${fullData[key][0].fileName.slice(0, 20)}...`
+                : fullData[key][0].fileName}
+            </li>
+          ))}
+        </ol>
+      </div>
     );
   };
 
@@ -145,12 +154,12 @@ class DataUpload extends Component {
           {this.showLatestFile(!this.state.queue)}
         </div>
 
-        {this.props.fullData ? (
-          <div className="postUploadFileDiv">
-            <span className="postUploadHeader">Last 10 Uploads</span>
-            {this.showUpdatedFiles(this.props.fullData)}
-          </div>
-        ) : null}
+        {this.props.fullData
+          ? // <div className="postUploadFileDiv">
+            //   <span className="postUploadHeader">Last 10 Uploads</span>
+            // </div>
+            this.showUpdatedFiles(this.props.fullData)
+          : null}
       </div>
     );
   }

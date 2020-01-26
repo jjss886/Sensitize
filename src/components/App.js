@@ -18,6 +18,7 @@ class App extends Component {
   componentDidUpdate(prevProps) {
     const { liveData, fullData } = this.props,
       fullDataKeys = Object.keys(fullData);
+
     if (!Object.keys(liveData).length && fullDataKeys.length) {
       const lastKey = fullDataKeys[fullDataKeys.length - 1];
       this.props.setLiveData(fullData[lastKey]);

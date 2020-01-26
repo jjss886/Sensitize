@@ -4,7 +4,7 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
-import { pullLiveKey, addDataPoint } from "../store";
+import { pullLiveKey, addDataPoint, removeDataPoint } from "../store";
 
 class Table extends Component {
   state = {
@@ -37,7 +37,7 @@ class Table extends Component {
   handleRemove = evt => {
     const targetName = evt.target.name;
     const newData = this.props.liveData.filter(x => x.name !== targetName);
-    console.log("removing -", newData);
+    this.props.removeDataPoint(this.props.liveKey);
   };
 
   renderRows() {
@@ -133,7 +133,8 @@ const mapDispatch = dispatch => {
   return {
     pullLiveKey: () => dispatch(pullLiveKey()),
     addDataPoint: (key, curData, newData) =>
-      dispatch(addDataPoint(key, curData, newData))
+      dispatch(addDataPoint(key, curData, newData)),
+    removeDataPoint: key => dispatch(removeDataPoint(key))
   };
 };
 
