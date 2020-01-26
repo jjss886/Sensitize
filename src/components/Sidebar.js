@@ -41,7 +41,8 @@ class Sidebar extends Component {
   render() {
     return (
       <div className="sideBarFullDiv">
-        <Email />
+        {this.props.liveData && this.props.liveData.length ? <Email /> : null}
+
         <p>Choose Your Dataset</p>
 
         <div className="modeSelectDiv">
@@ -64,7 +65,8 @@ class Sidebar extends Component {
 
 const mapState = state => {
   return {
-    mode: state.mode
+    mode: state.mode,
+    liveData: state.liveData
   };
 };
 
