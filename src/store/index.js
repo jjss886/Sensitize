@@ -7,6 +7,7 @@ import fbDatabase from "../firebase";
 // INITIAL STATE
 const initialState = {
   mode: "",
+  liveKey: "",
   liveData: {},
   fullData: {},
   activeName: ""
@@ -15,6 +16,7 @@ const initialState = {
 // ACTION TYPES
 const GET_STATE = "GET_STATE";
 const SET_MODE = "SET_MODE";
+const SET_LIVE_KEY = "SET_LIVE_KEY";
 const SET_LIVE_DATA = "SET_LIVE_DATA";
 const SET_FULL_DATA = "SET_FULL_DATA";
 const SET_ACTIVE_NAME = "SET_ACTIVE_NAME";
@@ -26,10 +28,17 @@ export const getState = () => {
   };
 };
 
-export const setType = mode => {
+export const setMode = mode => {
   return {
     type: SET_MODE,
     mode
+  };
+};
+
+export const setLiveKey = key => {
+  return {
+    type: SET_LIVE_KEY,
+    key
   };
 };
 
@@ -85,6 +94,8 @@ const reducer = (state = initialState, action) => {
       return { ...state };
     case SET_MODE:
       return { ...state, mode: action.mode };
+    case SET_LIVE_KEY:
+      return { ...state, liveKey: action.key };
     case SET_LIVE_DATA:
       return { ...state, liveData: action.data };
     case SET_FULL_DATA:

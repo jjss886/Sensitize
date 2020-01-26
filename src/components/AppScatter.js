@@ -32,7 +32,6 @@ class AppScatter extends Component {
   }
 
   render() {
-    console.log("RENDER --", this.props);
     return (
       <div className="appScatterDiv">
         <Container className="containerScatterDiv">

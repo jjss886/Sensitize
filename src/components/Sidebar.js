@@ -1,16 +1,16 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { setType } from "../store";
+import { setMode } from "../store";
 import { DataUpload } from "./upload";
 
 class Sidebar extends Component {
   componentDidMount() {
-    this.props.setType("CSV");
+    this.props.setMode("CSV");
   }
 
   handleModeChange = evt => {
     const mode = evt.target.value;
-    this.props.setType(mode);
+    this.props.setMode(mode);
   };
 
   strategyLayout = mode => {
@@ -67,7 +67,7 @@ const mapState = state => {
 };
 
 const mapDispatch = dispatch => {
-  return { setType: mode => dispatch(setType(mode)) };
+  return { setMode: mode => dispatch(setMode(mode)) };
 };
 
 export default connect(mapState, mapDispatch)(Sidebar);
