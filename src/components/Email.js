@@ -17,16 +17,26 @@ class Email extends Component {
     this.setState({ [evt.target.name]: evt.target.value });
   };
 
+  validateEmail = email => {
+    const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    return re.test(String(email).toLowerCase());
+  };
+
   handleSubmit = evt => {
     evt.preventDefault();
+    const { feedback, email } = this.state;
+    if (!this.validateEmail(email)) {
+      this.setState({ email: "" });
+      return alert("Invalid email input");
+    }
     const serviceId = "sensitized_analysis",
       templateId = "sensitized_analysis",
       userId = "user_AZj3ffxVL9YBbjm9jaQTq",
       content = {
         analysis_number: 100,
-        message: this.state.feedback,
-        user_name: this.state.email.split("@")[0],
-        user_email: this.state.email
+        message: feedback,
+        user_name: email.split("@")[0],
+        user_email: email
       };
 
     emailjs
@@ -35,6 +45,8 @@ class Email extends Component {
         console.log("Email success -", res);
       })
       .catch(err => console.error("WAH ERROR -", err));
+
+    this.setState({ feedback: "", email: "" });
   };
 
   render() {
@@ -43,16 +55,6 @@ class Email extends Component {
         <span className="emailHeaderText">Let's see if it works</span>
 
         <div className="emailInsideDiv">
-          <div>
-            <textarea
-              name="feedback"
-              onChange={this.handleChange}
-              placeholder="Text Here"
-              value={this.state.feedback}
-              style={{ width: "100%", height: "40px" }}
-            />
-          </div>
-
           <input
             className="emailAddressInput"
             type="text"
@@ -63,6 +65,17 @@ class Email extends Component {
             onFocus={e => (e.target.placeholder = "")}
             onBlur={e => (e.target.placeholder = "Email")}
             onChange={this.handleChange}
+          />
+
+          <textarea
+            className="emailFeedbackInput"
+            name="feedback"
+            onChange={this.handleChange}
+            placeholder="Message (Optional)"
+            onFocus={e => (e.target.placeholder = "")}
+            onBlur={e => (e.target.placeholder = "Message (Optional)")}
+            value={this.state.feedback}
+            style={{ width: "100%", height: "40px" }}
           />
 
           <input
