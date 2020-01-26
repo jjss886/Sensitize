@@ -17,7 +17,7 @@ class Sidebar extends Component {
     if (!mode) return <span>Loading Data !</span>;
 
     if (mode === "CSV") {
-      return <DataUpload updateData={this.props.updateData} />;
+      return <DataUpload />;
     } else if (mode === "URL") {
       return (
         <input

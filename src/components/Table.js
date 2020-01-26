@@ -38,14 +38,11 @@ class Table extends Component {
     const targetName = evt.target.name;
     const newData = this.props.liveData.filter(x => x.name !== targetName);
     console.log("removing -", newData);
-    // this.props.updateData(newData);
   };
 
   renderRows() {
-    const { liveData, activeName, liveKey } = this.props,
+    const { liveData, activeName } = this.props,
       adjData = "fileName" in liveData[0] ? liveData.slice(1) : liveData;
-
-    // console.log("TESTING -", activeName, adjData, liveKey);
 
     return adjData.map(student => {
       const background =

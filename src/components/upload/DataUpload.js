@@ -40,7 +40,6 @@ class DataUpload extends Component {
           const { data: fileData } = result;
           // ADDING NAME TO INDEX 0 OF DATA SET
           fileData.unshift({ fileName: newName });
-          console.log("UMM -", fileData);
           this.setState({
             tempData: fileData,
             lastName: newName,
@@ -56,7 +55,6 @@ class DataUpload extends Component {
     const { tempData } = this.state;
     if (!tempData) return alert("Choose File First!");
 
-    // this.props.updateData(tempData.slice(1));
     this.props.setLiveData(tempData);
 
     // UPLOAD TO FIREBASE AND UPDATING STORE
@@ -92,7 +90,7 @@ class DataUpload extends Component {
     const keys = Object.keys(fullData)
       .slice(-10)
       .reverse();
-    console.log("hmm --", fullData);
+
     return (
       <ol className="postUploadUL">
         {keys.map(key => (

@@ -4,11 +4,12 @@ import { json } from "d3";
 import { setLiveData } from "../store";
 
 // IMPORT COMPONENTS
-import AppBar from "./AppBar";
-import AppScatter from "./AppScatter";
 import Sidebar from "./Sidebar";
 import NavBar from "./NavBar";
 import Routes from "../routes";
+
+// eslint-disable-next-line
+const url = "https://udemy-react-d3.firebaseio.com/children.json";
 
 class App extends Component {
   state = {
@@ -17,6 +18,7 @@ class App extends Component {
   };
 
   componentDidMount() {
+    console.log("mounting -", this.props);
     json("https://udemy-react-d3.firebaseio.com/children.json")
       .then(data => {
         this.setState({ data });
@@ -31,27 +33,16 @@ class App extends Component {
     }
   }
 
-  updateData = data => this.setState({ data });
-
-  updateName = activeName => this.setState({ activeName });
-
   render() {
     return (
       <div className="App">
         <NavBar />
 
         <div className="belowNavBarFullDiv">
-          <Sidebar updateData={this.updateData} />
+          <Sidebar />
 
           <div className="contentPageFullDiv">
             <Routes />
-            {/* <AppScatter
-              state={this.state}
-              updateData={this.updateData}
-              updateName={this.updateName}
-            />
-
-            <AppBar /> */}
           </div>
         </div>
       </div>
@@ -60,7 +51,7 @@ class App extends Component {
 }
 
 const mapState = state => {
-  return { liveData: state.liveData };
+  return { liveData: state.liveData, fullData: state.fullData };
 };
 
 const mapDispatch = dispatch => {

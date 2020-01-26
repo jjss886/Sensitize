@@ -3,7 +3,6 @@ import { connect } from "react-redux";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Container from "react-bootstrap/Container";
-import {} from "../store";
 
 // IMPORT COMPONENTS
 import ChartWrapperScatter from "./ChartWrapperScatter";
@@ -11,20 +10,8 @@ import Table from "./Table";
 
 class AppScatter extends Component {
   renderData(status) {
-    const { liveData } = this.props;
-    if (!liveData.length) return "Load Some Data !";
-    return !status ? (
-      <ChartWrapperScatter
-      // liveData={liveData}
-      // updateName={this.props.updateName}
-      />
-    ) : (
-      <Table
-      // liveData={liveData}
-      // updateData={this.props.updateData}
-      // activeName={activeName}
-      />
-    );
+    if (!this.props.liveData.length) return "Load Some Data !";
+    return !status ? <ChartWrapperScatter /> : <Table />;
   }
 
   render() {
