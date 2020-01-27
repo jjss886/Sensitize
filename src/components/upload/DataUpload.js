@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import * as Papa from "papaparse";
 import fbDatabase from "../../firebase";
-import { setLiveData, getFullData, pullLiveKey } from "../../store";
+import { setLiveData, getFullData, pullLiveKey, setLiveKey } from "../../store";
 
 class DataUpload extends Component {
   constructor(props) {
@@ -75,7 +75,7 @@ class DataUpload extends Component {
         {queue ? (
           <span className="queuedStatusText">In Queue:</span>
         ) : (
-          <span className="uploadedStatusText">Uploaded / Viewing:</span>
+          <span className="uploadedStatusText">Uploaded:</span>
         )}
         <span className="lastFileUploadText">
           {lastName.length > 15 ? `${lastName.slice(0, 15)}...` : lastName}
@@ -89,6 +89,7 @@ class DataUpload extends Component {
     const keys = Object.keys(fullData)
         .slice(-10)
         .reverse(),
+      len = 20,
       headerText =
         keys.length === 0
           ? `Currently No Uploads`
@@ -104,10 +105,13 @@ class DataUpload extends Component {
             <li
               className="postUploadList linkText"
               key={key}
-              onClick={() => this.props.setLiveData(fullData[key])}
+              onClick={() => {
+                this.props.setLiveData(fullData[key]);
+                this.props.setLiveKey(key);
+              }}
             >
-              {fullData[key][0].fileName.length > 20
-                ? `${fullData[key][0].fileName.slice(0, 20)}...`
+              {fullData[key][0].fileName.length > len
+                ? `${fullData[key][0].fileName.slice(0, len)}...`
                 : fullData[key][0].fileName}
             </li>
           ))}
@@ -171,7 +175,8 @@ const mapDispatch = dispatch => {
   return {
     setLiveData: data => dispatch(setLiveData(data)),
     getFullData: data => dispatch(getFullData(data)),
-    pullLiveKey: () => dispatch(pullLiveKey())
+    pullLiveKey: () => dispatch(pullLiveKey()),
+    setLiveKey: key => dispatch(setLiveKey(key))
   };
 };
 

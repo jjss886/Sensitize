@@ -42,8 +42,8 @@ const SMTPEmail = {
     };
 
     Email.send({
-      // SecureToken: "a998cc6b-ddbb-4c8b-b2d1-951f8bca070d",
-      SecureToken: "30fc3d42-b111-46df-9e5d-faaab9e06260 ",
+      // SecureToken: "a998cc6b-ddbb-4c8b-b2d1-951f8bca070d", // MAILTRAP.IO
+      SecureToken: "30fc3d42-b111-46df-9e5d-faaab9e06260",
       To: toEmail,
       From: "jjss886@gmail.com",
       Subject: subject,
@@ -52,8 +52,6 @@ const SMTPEmail = {
         {
           name: "Sensitize_Chart.png",
           data: attachURL
-          // path:
-          //   "https://networkprogramming.files.wordpress.com/2017/11/smtpjs.png"
         }
       ]
     }).then(() =>

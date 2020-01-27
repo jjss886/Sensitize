@@ -95,12 +95,15 @@ export const addDataPoint = (key, curData, newData) => {
         allData = fbDatabase.ref().child("data"),
         singleData = allData.child(key);
 
+      console.log("testing -", singleData);
+
       singleData.set(newDataSet);
 
       allData.on("value", snap => {
         dispatch(setFullData(snap.val()));
       });
       singleData.on("value", snap => {
+        console.log("two -", snap.val());
         dispatch(setLiveData(snap.val()));
       });
     } catch (error) {
@@ -149,10 +152,7 @@ const reducer = (state = initialState, action) => {
 };
 
 const middleware = composeWithDevTools(
-  applyMiddleware(
-    thunkMiddleware
-    // createLogger({ collapsed: true })
-  )
+  applyMiddleware(thunkMiddleware, createLogger({ collapsed: true }))
 );
 
 const store = createStore(reducer, middleware);

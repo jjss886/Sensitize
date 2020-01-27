@@ -1,8 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import html2canvas from "html2canvas";
-import emailjs from "emailjs-com";
-import SMTPEmail from "./SMTPEmail";
+import SMTPEmail from "../utils/SMTPEmail";
 
 class EmailComponent extends Component {
   constructor(props) {
@@ -11,8 +10,6 @@ class EmailComponent extends Component {
       feedback: "",
       email: ""
     };
-    this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   handleChange = evt => {
@@ -24,43 +21,7 @@ class EmailComponent extends Component {
     return re.test(String(email).toLowerCase());
   };
 
-  getScreenShot = evt => {
-    evt.preventDefault();
-    const ele = document.getElementsByClassName("chartScreenshot")[0],
-      box = document.getElementById("box1"),
-      test = document.getElementById("test");
-
-    // await html2canvas(ele).then(canvas => {
-    //   const base64image = canvas
-    //     .toDataURL("image/png")
-    //     .replace("image/png", "image/octet-stream");
-    //   console.log("COME ON -", canvas, base64image);
-    //   return base64image;
-    // });
-    console.log("first -", ele, box, test);
-
-    html2canvas(ele, {
-      onrendered: function(canvas) {
-        console.log("second -", canvas, ele);
-        box.html("");
-        if (
-          navigator.userAgent.indexOf("MSIE ") > 0 ||
-          navigator.userAgent.match(/Trident.*rv\:11\./)
-        ) {
-          const blob = canvas.msToBlob();
-          console.log("um -", blob);
-          window.navigator.msSaveBlob(blob, "Test file.png");
-        } else {
-          test.attr("href", canvas.toDataURL("image/png"));
-          test.attr("download", "screenshot.png");
-          test[0].click();
-          console.log("hehe -", test);
-        }
-      }
-    });
-  };
-
-  handleSubmit = async evt => {
+  handleSubmit = evt => {
     evt.preventDefault();
     const { feedback, email } = this.state;
     if (!this.validateEmail(email)) {
@@ -69,21 +30,8 @@ class EmailComponent extends Component {
     }
     const ele = document.getElementsByClassName("chartScreenshot")[0];
 
-    await html2canvas(ele).then(canvas => {
-      const base64image = canvas.toDataURL("image/png"),
-        // .replace("image/png", "image/octet-stream"),
-        content = {
-          analysis_number: 100,
-          message: feedback,
-          image: `<img src="cid:${base64image}" />`,
-          user_name: email.split("@")[0],
-          user_email: email
-        },
-        serviceId = "sensitized_analysis",
-        templateId = "sensitized_analysis",
-        userId = "user_AZj3ffxVL9YBbjm9jaQTq";
-
-      console.log("testing -", content);
+    html2canvas(ele).then(canvas => {
+      const base64image = canvas.toDataURL("image/png");
 
       SMTPEmail.sendEmail(
         email,
@@ -91,11 +39,6 @@ class EmailComponent extends Component {
         feedback,
         base64image
       );
-
-      // emailjs
-      //   .send(serviceId, templateId, content, userId)
-      //   .then(res => console.log("Email success -", res))
-      //   .catch(err => console.error("WAH ERROR -", err));
 
       this.setState({ feedback: "", email: "" });
     });
@@ -134,13 +77,6 @@ class EmailComponent extends Component {
             value="Submit"
             className="emailSubmitBtn"
             onClick={this.handleSubmit}
-          />
-
-          <input
-            type="button"
-            value="Screenshot"
-            className="emailSubmitBtn"
-            onClick={this.getScreenShot}
           />
         </div>
 
