@@ -1,17 +1,23 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { setMode, setLiveData, setLiveKey } from "../../store";
+import { setMode, setLiveData, setLiveKey, setChartType } from "../../store";
 import { DataUpload, URLUpload } from "../upload";
 import EmailComponent from "./EmailComponent";
 
 class Sidebar extends Component {
   componentDidMount() {
     this.props.setMode("CSV");
+    this.props.setChartType("Scatter Plot");
   }
 
   handleModeChange = evt => {
     const mode = evt.target.value;
     this.props.setMode(mode);
+  };
+
+  handleChartChange = evt => {
+    const chartType = evt.target.value;
+    this.props.setChartType(chartType);
   };
 
   strategyLayout = mode => {
@@ -76,20 +82,29 @@ class Sidebar extends Component {
   };
 
   render() {
+    const { liveData, fullData, mode, liveKey } = this.props;
     return (
       <div className="sideBarFullDiv">
-        {this.props.liveData && this.props.liveData.length ? (
-          <EmailComponent />
-        ) : null}
+        {liveData && liveData.length ? <EmailComponent /> : null}
 
-        {this.props.fullData
-          ? this.showUpdatedFiles(this.props.fullData, this.props.liveKey)
-          : null}
+        {fullData ? this.showUpdatedFiles(fullData, liveKey) : null}
 
-        <p className="sideBarHeaderText">Choose Your Dataset</p>
+        <p className="sideBarHeaderText">Choose Your Setup</p>
 
         <div className="modeSelectDiv">
-          <span className="modeLabel">Mode: </span>
+          <span className="modeLabel">Style: </span>
+          <select
+            className="modeSideBarSelect"
+            onChange={this.handleChartChange}
+          >
+            <option>Scatter Plot</option>
+            <option>Bar Chart</option>
+            <option>FishEye</option>
+          </select>
+        </div>
+
+        <div className="modeSelectDiv">
+          <span className="modeLabel">Load: </span>
           <select
             className="modeSideBarSelect"
             onChange={this.handleModeChange}
@@ -100,7 +115,7 @@ class Sidebar extends Component {
           </select>
         </div>
 
-        {this.strategyLayout(this.props.mode)}
+        {this.strategyLayout(mode)}
       </div>
     );
   }
@@ -119,7 +134,8 @@ const mapDispatch = dispatch => {
   return {
     setMode: mode => dispatch(setMode(mode)),
     setLiveData: data => dispatch(setLiveData(data)),
-    setLiveKey: key => dispatch(setLiveKey(key))
+    setLiveKey: key => dispatch(setLiveKey(key)),
+    setChartType: chartType => dispatch(setChartType(chartType))
   };
 };
 

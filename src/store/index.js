@@ -8,6 +8,7 @@ import fbDatabase from "../firebase";
 // INITIAL STATE
 const initialState = {
   mode: "",
+  chartType: "",
   liveKey: "",
   liveData: {},
   fullData: {},
@@ -16,6 +17,7 @@ const initialState = {
 
 // ACTION TYPES
 const SET_MODE = "SET_MODE";
+const SET_CHART_TYPE = "SET_CHART_TYPE";
 const SET_LIVE_KEY = "SET_LIVE_KEY";
 const SET_LIVE_DATA = "SET_LIVE_DATA";
 const SET_FULL_DATA = "SET_FULL_DATA";
@@ -26,6 +28,13 @@ export const setMode = mode => {
   return {
     type: SET_MODE,
     mode
+  };
+};
+
+export const setChartType = chartType => {
+  return {
+    type: SET_CHART_TYPE,
+    chartType
   };
 };
 
@@ -173,6 +182,8 @@ const reducer = (state = initialState, action) => {
   switch (action.type) {
     case SET_MODE:
       return { ...state, mode: action.mode };
+    case SET_CHART_TYPE:
+      return { ...state, chartType: action.chartType };
     case SET_LIVE_KEY:
       return { ...state, liveKey: action.key };
     case SET_LIVE_DATA:
@@ -188,8 +199,8 @@ const reducer = (state = initialState, action) => {
 };
 
 const middleware = composeWithDevTools(
-  // applyMiddleware(thunkMiddleware, createLogger({ collapsed: true }))
-  applyMiddleware(thunkMiddleware)
+  applyMiddleware(thunkMiddleware, createLogger({ collapsed: true }))
+  // applyMiddleware(thunkMiddleware)
 );
 
 const store = createStore(reducer, middleware);
