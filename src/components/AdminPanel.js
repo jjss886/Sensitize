@@ -19,7 +19,6 @@ class AdminPanel extends Component {
   render() {
     return (
       <div className="adminPageFullDiv">
-        <h1>PAGE UNDER CONSTRUCTION</h1>
         {this.renderDataRows(this.props.fullData)}
       </div>
     );

@@ -136,7 +136,15 @@ export const removeDataSet = key => {
     try {
       const allData = fbDatabase.ref().child("data"),
         singleData = allData.child(key);
-      console.log("Thunky -", key, allData, singleData);
+
+      singleData.remove();
+      allData.on("value", snap => {
+        dispatch(setFullData(snap.val()));
+      });
+      singleData.on("value", snap => {
+        dispatch(setLiveData(snap.val()));
+        dispatch(setLiveKey(snap.key));
+      });
     } catch (error) {
       console.error("WAH ERROR --", error);
     }

@@ -19,6 +19,7 @@ class ScatterPlotD3 {
       .append("g")
       .attr("transform", `translate(${MARGIN.LEFT}, ${MARGIN.TOP})`);
 
+    // SCALE
     vis.x = d3.scaleLinear().range([0, WIDTH]);
     vis.y = d3.scaleLinear().range([HEIGHT, 0]);
 
@@ -27,6 +28,7 @@ class ScatterPlotD3 {
       .attr("transform", `translate(0, ${HEIGHT})`);
     vis.yAxisGroup = vis.g.append("g");
 
+    // X AXIS LABEL
     vis.g
       .append("text")
       .attr("x", WIDTH / 2)
@@ -37,6 +39,7 @@ class ScatterPlotD3 {
       .attr("text-anchor", "middle")
       .text("Age");
 
+    // Y AXIS LABEL
     vis.g
       .append("text")
       .attr("x", -(HEIGHT / 2))

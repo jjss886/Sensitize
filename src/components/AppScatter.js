@@ -6,8 +6,8 @@ import ChartWrapperScatter from "./ChartWrapperScatter";
 import Table from "./Table";
 
 class AppScatter extends Component {
-  renderData(status) {
-    if (!this.props.liveData.length)
+  renderData(liveData, status) {
+    if (!liveData || !liveData.length)
       return !status ? (
         <h3 className="loadDataText">Load Some Data First!</h3>
       ) : null;
@@ -21,8 +21,8 @@ class AppScatter extends Component {
           ref="chartScreenshot"
           className="containerScatterDiv chartScreenshot"
         >
-          {this.renderData(false)}
-          {this.renderData(true)}
+          {this.renderData(this.props.liveData, false)}
+          {this.renderData(this.props.liveData, true)}
         </div>
       </div>
     );
