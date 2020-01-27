@@ -4,9 +4,9 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
-import { pullLiveKey, addDataPoint, removeDataPoint } from "../store";
+import { pullLiveKey, addDataPoint, removeDataPoint } from "../../store";
 
-class Table extends Component {
+class ScatterTable extends Component {
   state = {
     name: "",
     xState: "",
@@ -160,4 +160,4 @@ const mapDispatch = dispatch => {
   };
 };
 
-export default connect(mapState, mapDispatch)(Table);
+export default connect(mapState, mapDispatch)(ScatterTable);

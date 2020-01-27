@@ -32,7 +32,7 @@ class App extends Component {
           <Sidebar />
 
           <div className="contentPageFullDiv">
-            <Routes />
+            <Routes chartType={this.props.chartType} />
           </div>
         </div>
       </div>
@@ -41,7 +41,11 @@ class App extends Component {
 }
 
 const mapState = state => {
-  return { liveData: state.liveData, fullData: state.fullData };
+  return {
+    liveData: state.liveData,
+    fullData: state.fullData,
+    chartType: state.chartType
+  };
 };
 
 const mapDispatch = dispatch => {

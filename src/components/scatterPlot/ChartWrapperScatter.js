@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import ScatterPlotD3 from "../d3/ScatterPlotD3";
+import ScatterPlotD3 from "../../d3/ScatterPlotD3";
 
 class ChartWrapperScatter extends Component {
   componentDidMount() {

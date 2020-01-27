@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 
 // IMPORT COMPONENTS
 import ChartWrapperScatter from "./ChartWrapperScatter";
-import Table from "./Table";
+import ScatterTable from "./ScatterTable";
 
 class AppScatter extends Component {
   renderData(liveData, status) {
@@ -11,7 +11,7 @@ class AppScatter extends Component {
       return !status ? (
         <h3 className="loadDataText">Load Some Data First!</h3>
       ) : null;
-    return !status ? <ChartWrapperScatter /> : <Table />;
+    return !status ? <ChartWrapperScatter /> : <ScatterTable />;
   }
 
   render() {

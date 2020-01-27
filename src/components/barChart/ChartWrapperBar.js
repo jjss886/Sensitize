@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import BarChartD3 from "../d3/BarChartD3";
+import BarChartD3 from "../../d3/BarChartD3";
 
 class ChartWrapperBar extends Component {
   componentDidMount() {
