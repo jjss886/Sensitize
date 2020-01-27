@@ -9,6 +9,10 @@ class FishEyeD3 {
   constructor(element, data) {
     const vis = this;
 
+    // const random = d3.randomPareto(3);
+    const random = d3.randomUniform(1, 10)();
+    console.log("HMM -", random);
+
     vis.g = d3
       .select(element)
       .append("svg")

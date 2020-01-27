@@ -107,7 +107,7 @@ class ScatterPlotD3 {
       .classed("scatterCircle", true)
       .attr("cy", vis.y(0))
       .attr("cx", d => vis.x(d[xAttr]))
-      .attr("r", 5)
+      .attr("r", 9)
       .on("click", d => store.dispatch(setActiveName(d.name)))
       .transition(1000)
       .attr("cy", d => vis.y(d[yAttr]));

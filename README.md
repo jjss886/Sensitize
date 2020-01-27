@@ -1,5 +1,7 @@
 SENSITIZE your data and glean some impactful insights!
 
+https://sensitize-56568.firebaseapp.com
+
 ## Available Scripts
 
 In the project directory, you can run:
