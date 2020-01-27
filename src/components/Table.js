@@ -33,12 +33,12 @@ class Table extends Component {
     });
   };
 
-  handleAdd = () => {
-    this.props.addDataPoint(
-      this.props.liveKey,
-      this.props.liveData,
-      this.state
-    );
+  handleAdd = (xKey, yKey) => {
+    this.props.addDataPoint(this.props.liveKey, this.props.liveData, {
+      name: this.state.name,
+      [xKey]: this.state.xState,
+      [yKey]: this.state.yState
+    });
     this.setState({ name: "", xState: "", yState: "" });
   };
 
@@ -105,6 +105,7 @@ class Table extends Component {
           <Col xs={3}>
             <Form.Control
               name={"yState"}
+              type="number"
               value={this.state.yState}
               onChange={this.handleInputChange}
               placeholder={yAttr}
@@ -116,6 +117,7 @@ class Table extends Component {
           <Col xs={3}>
             <Form.Control
               name={"xState"}
+              type="number"
               value={this.state.xState}
               onChange={this.handleInputChange}
               placeholder={xAttr}
@@ -129,7 +131,7 @@ class Table extends Component {
               variant={"primary"}
               type={"button"}
               style={{ width: "100%" }}
-              onClick={this.handleAdd}
+              onClick={() => this.handleAdd(xKey, yKey)}
             >
               Add
             </Button>
