@@ -17,10 +17,7 @@ class AppScatter extends Component {
   render() {
     return (
       <div className="appScatterDiv">
-        <div
-          ref="chartScreenshot"
-          className="containerScatterDiv chartScreenshot"
-        >
+        <div className="containerScatterDiv chartScreenshot">
           {this.renderData(this.props.liveData, false)}
           {this.renderData(this.props.liveData, true)}
         </div>

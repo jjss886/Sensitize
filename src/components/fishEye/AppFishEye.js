@@ -13,11 +13,8 @@ class AppFishEye extends Component {
 
   render() {
     return (
-      <div className="appScatterDiv">
-        <div
-          ref="chartScreenshot"
-          className="containerScatterDiv chartScreenshot"
-        >
+      <div className="appFishEyeDiv">
+        <div className="containerFishEyeDiv chartScreenshot">
           {this.renderData(this.props.liveData)}
         </div>
       </div>
