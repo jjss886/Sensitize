@@ -137,7 +137,7 @@ class ScatterTable extends Component {
             </Button>
           </Col>
         </Row>
-        {this.renderRows(xKey, yKey)}
+        <div className="scatterItemTableDiv">{this.renderRows(xKey, yKey)}</div>
       </div>
     );
   }

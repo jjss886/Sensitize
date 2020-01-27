@@ -460,11 +460,18 @@ code {
   padding-left: 25px;
 }
 
+.scatterItemTableDiv {
+  overflow-y: scroll;
+  max-height: 400px;
+  padding: 5px;
+}
+
 .scatterStudentRow {
   display: flex;
   color: rgba(100, 100, 100, 1);
   font-weight: bold;
   align-items: center;
+
   height: 45px;
   margin-top: 10px;
   border-radius: 10px;

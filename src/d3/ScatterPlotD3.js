@@ -3,7 +3,7 @@ import store, { setActiveName } from "../store";
 
 const MARGIN = { TOP: 10, BOTTOM: 80, LEFT: 70, RIGHT: 70 };
 const WIDTH = 500 - MARGIN.LEFT - MARGIN.RIGHT;
-const HEIGHT = 300 - MARGIN.TOP - MARGIN.BOTTOM;
+const HEIGHT = 400 - MARGIN.TOP - MARGIN.BOTTOM;
 
 class ScatterPlotD3 {
   constructor(element, data) {
