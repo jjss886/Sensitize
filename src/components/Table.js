@@ -66,16 +66,15 @@ class Table extends Component {
           <Col xs={3}>{student[yKey]}</Col>
           <Col xs={3}>{student[xKey]}</Col>
           <Col>
-            <Button
+            <button
               variant={"danger"}
               className="scatterRemoveBtn"
               type={"button"}
-              style={{ width: "100%" }}
               name={student.name}
               onClick={this.handleRemove}
             >
               Remove
-            </Button>
+            </button>
           </Col>
         </Row>
       );

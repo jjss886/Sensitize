@@ -480,9 +480,13 @@ code {
 }
 
 .scatterRemoveBtn {
-  margin: 0;
-  padding: 0;
-  height: 100%;
+  width: 90%;
+  height: 35px;
+  font-size: 16px;
+  color: rgb(65, 65, 65);
+  font-weight: bold;
+  background-color: rgba(236, 125, 61, 0.8);
+  border-radius: 7px;
 }
 
 /* ----------------- APP BAR ELEMENT ----------------- */

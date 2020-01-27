@@ -13,9 +13,30 @@ class ChartWrapperScatter extends Component {
   }
 
   componentDidUpdate(prevProps) {
-    if (this.props.liveData.length !== prevProps.liveData.length) {
-      this.state.scatterChart.update(this.props.liveData.slice(1));
+    const { liveData } = this.props;
+    if (this.checkLiveDataArray(liveData, prevProps.liveData))
+      this.state.scatterChart.update(liveData.slice(1));
+  }
+
+  checkLiveDataArray(one, two) {
+    for (let i = 0; i < Math.max(one.length, two.length); i++) {
+      const oneObj = one[i],
+        twoObj = two[i];
+      if (!oneObj || !twoObj) return true;
+      const oneKeys = Object.keys(oneObj),
+        twoKeys = Object.keys(twoObj),
+        oneVals = Object.values(oneObj),
+        twoVals = Object.values(twoObj);
+      if (oneKeys.length !== twoKeys.length) return true;
+      for (let j = 0; j < oneKeys.length; j++) {
+        const oneKey = oneKeys[j],
+          twoKey = twoKeys[j],
+          oneVal = oneVals[j],
+          twoVal = twoVals[j];
+        if (oneKey !== twoKey || oneVal !== twoVal) return true;
+      }
     }
+    return false;
   }
 
   render() {
