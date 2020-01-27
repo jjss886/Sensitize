@@ -30,7 +30,7 @@ class AdminRow extends Component {
         </span>
 
         <span className="adminRow adminSizeRow">
-          <strong>Size: </strong>
+          <strong>Data Points: </strong>
           {Object.keys(data).length - 1}
         </span>
 

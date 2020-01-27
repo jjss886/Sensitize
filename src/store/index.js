@@ -72,6 +72,23 @@ export const getFullData = () => {
   };
 };
 
+export const addDataSet = newFullData => {
+  return dispatch => {
+    try {
+      const uploadTask = fbDatabase.ref().child("data");
+      uploadTask.push(newFullData);
+      uploadTask.on("value", snap => {
+        const keys = Object.keys(snap.val());
+        dispatch(setLiveData(newFullData));
+        dispatch(setLiveKey(keys[keys.length - 1]));
+        dispatch(setFullData(snap.val()));
+      });
+    } catch (error) {
+      console.error("WAH ERROR --", error);
+    }
+  };
+};
+
 export const pullLiveKey = () => {
   return dispatch => {
     try {
@@ -139,6 +156,11 @@ export const removeDataSet = key => {
 
       singleData.remove();
       allData.on("value", snap => {
+        const keys = Object.keys(snap.val()),
+          lastKey = keys[keys.length - 1];
+
+        dispatch(setLiveKey(lastKey));
+        dispatch(setLiveData(snap.val()[lastKey]));
         dispatch(setFullData(snap.val()));
       });
     } catch (error) {

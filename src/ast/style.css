@@ -128,11 +128,41 @@ code {
   font-size: 14px;
 }
 
-.urlTextInput {
-  width: 90%;
+.urlFullDiv {
+  background-color: lightgray;
+  color: black;
+  border-radius: 10px;
+  width: 95%;
+  padding: 10px 5px;
+  margin-bottom: 15px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+.urlNameInput {
+  width: 95%;
   height: 25px;
   border-radius: 5px;
-  margin-bottom: 15px;
+  margin: 10px 0;
+  font-size: 14px;
+}
+
+.urlTextInput {
+  width: 95%;
+  font-size: 14px;
+  height: 25px;
+  border-radius: 5px;
+  margin: 10px 0;
+}
+
+.urlUploadBtn {
+  background-color: lightblue;
+  width: 95%;
+  border-radius: 5px;
+  margin: 5px 0;
+  font-weight: bold;
 }
 
 .algoModeSelect {
@@ -231,7 +261,11 @@ code {
   font-size: 14px;
 }
 
-.postUploadFileDiv {
+.postUploadFullDiv {
+  width: 95%;
+}
+
+.postUploadInsideDiv {
   background-color: lightgray;
   color: black;
   border-radius: 10px;
@@ -306,7 +340,7 @@ code {
   background-color: rgba(184, 231, 122, 0.9);
 }
 
-.emailLineBreak {
+.lineBreak {
   background-color: white;
   width: 100%;
   height: 1px;
@@ -339,7 +373,7 @@ code {
 }
 
 .adminRowFullDiv {
-  background-color: steelblue;
+  background-color: rgba(70, 150, 220, 0.6);
   width: 95%;
   color: black;
   border-radius: 5px;

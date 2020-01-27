@@ -7,9 +7,6 @@ import Sidebar from "./Sidebar";
 import NavBar from "./NavBar";
 import Routes from "../routes";
 
-// eslint-disable-next-line
-const url = "https://udemy-react-d3.firebaseio.com/children.json";
-
 class App extends Component {
   componentDidMount() {
     this.props.getFullData();

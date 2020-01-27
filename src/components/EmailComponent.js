@@ -47,7 +47,7 @@ class EmailComponent extends Component {
   render() {
     return (
       <div className="emailFullDiv">
-        <span className="emailHeaderText">Let's see if it works</span>
+        <span className="emailHeaderText">Mail Your Analysis!</span>
 
         <div className="emailInsideDiv">
           <input
@@ -80,7 +80,7 @@ class EmailComponent extends Component {
           />
         </div>
 
-        <hr className="emailLineBreak" />
+        <hr className="lineBreak" />
       </div>
     );
   }

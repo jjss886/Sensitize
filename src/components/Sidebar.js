@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { setMode } from "../store";
-import { DataUpload } from "./upload";
+import { setMode, setLiveData, setLiveKey } from "../store";
+import { DataUpload, URLUpload } from "./upload";
 import EmailComponent from "./EmailComponent";
 
 class Sidebar extends Component {
@@ -20,15 +20,7 @@ class Sidebar extends Component {
     if (mode === "CSV") {
       return <DataUpload />;
     } else if (mode === "URL") {
-      return (
-        <input
-          type="text"
-          className="urlTextInput"
-          placeholder="URL Here"
-          onFocus={e => (e.target.placeholder = "")}
-          onBlur={e => (e.target.placeholder = "URL Here")}
-        ></input>
-      );
+      return <URLUpload />;
     } else if (mode === "Algo") {
       return (
         <select className="algoModeSelect">
@@ -38,12 +30,61 @@ class Sidebar extends Component {
     }
   };
 
+  showUpdatedFiles = (fullData, liveKey) => {
+    if (!fullData) return null;
+    const keys = Object.keys(fullData)
+        .slice(-10)
+        .reverse(),
+      len = 20,
+      headerText =
+        keys.length === 0
+          ? `Currently No Uploads`
+          : keys.length === 1
+          ? `Last Upload`
+          : `Last ${keys.length} Uploads`;
+
+    return (
+      <div className="postUploadFullDiv">
+        <div className="postUploadInsideDiv">
+          <span className="postUploadHeader">{headerText}</span>
+          <ol className="postUploadUL">
+            {keys.map(key => {
+              const fontColor =
+                key === liveKey ? "rgba(18,100,210,0.9)" : "black";
+
+              return (
+                <li
+                  className="postUploadList linkText"
+                  key={key}
+                  onClick={() => {
+                    this.props.setLiveData(fullData[key]);
+                    this.props.setLiveKey(key);
+                  }}
+                  style={{ color: fontColor }}
+                >
+                  {fullData[key][0].fileName.length > len
+                    ? `${fullData[key][0].fileName.slice(0, len)}...`
+                    : fullData[key][0].fileName}
+                </li>
+              );
+            })}
+          </ol>
+        </div>
+        <hr className="lineBreak" />
+      </div>
+    );
+  };
+
   render() {
     return (
       <div className="sideBarFullDiv">
         {this.props.liveData && this.props.liveData.length ? (
           <EmailComponent />
         ) : null}
+
+        {this.props.fullData
+          ? this.showUpdatedFiles(this.props.fullData, this.props.liveKey)
+          : null}
 
         <p className="sideBarHeaderText">Choose Your Dataset</p>
 
@@ -68,12 +109,18 @@ class Sidebar extends Component {
 const mapState = state => {
   return {
     mode: state.mode,
-    liveData: state.liveData
+    liveData: state.liveData,
+    liveKey: state.liveKey,
+    fullData: state.fullData
   };
 };
 
 const mapDispatch = dispatch => {
-  return { setMode: mode => dispatch(setMode(mode)) };
+  return {
+    setMode: mode => dispatch(setMode(mode)),
+    setLiveData: data => dispatch(setLiveData(data)),
+    setLiveKey: key => dispatch(setLiveKey(key))
+  };
 };
 
 export default connect(mapState, mapDispatch)(Sidebar);

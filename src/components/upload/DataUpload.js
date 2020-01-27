@@ -1,8 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import * as Papa from "papaparse";
-import fbDatabase from "../../firebase";
-import { setLiveData, getFullData, setLiveKey } from "../../store";
+import { getFullData, addDataSet } from "../../store";
 
 class DataUpload extends Component {
   constructor(props) {
@@ -55,16 +54,10 @@ class DataUpload extends Component {
     const { tempData } = this.state;
     if (!tempData) return alert("Choose File First!");
 
-    this.props.setLiveData(tempData);
-
     // UPLOAD TO FIREBASE AND UPDATING STORE
-    const uploadTask = fbDatabase.ref().child("data");
-    uploadTask.push(tempData);
-    uploadTask.on("value", snap => {
-      this.setState({ tempData: null, queue: false });
-      this.props.setLiveKey(snap.key);
-      this.props.getFullData();
-    });
+    this.props.addDataSet(tempData);
+    this.setState({ tempData: null, queue: false });
+    this.props.getFullData();
   };
 
   showLatestFile = status => {
@@ -82,48 +75,6 @@ class DataUpload extends Component {
         </span>
       </div>
     ) : null;
-  };
-
-  showUpdatedFiles = (fullData, liveKey) => {
-    if (!fullData) return null;
-    const keys = Object.keys(fullData)
-        .slice(-10)
-        .reverse(),
-      len = 20,
-      headerText =
-        keys.length === 0
-          ? `Currently No Uploads`
-          : keys.length === 1
-          ? `Last Upload`
-          : `Last ${keys.length} Uploads`;
-
-    return (
-      <div className="postUploadFileDiv">
-        <span className="postUploadHeader">{headerText}</span>
-        <ol className="postUploadUL">
-          {keys.map(key => {
-            const fontColor =
-              key === liveKey ? "rgba(18,100,210,0.9)" : "black";
-
-            return (
-              <li
-                className="postUploadList linkText"
-                key={key}
-                onClick={() => {
-                  this.props.setLiveData(fullData[key]);
-                  this.props.setLiveKey(key);
-                }}
-                style={{ color: fontColor }}
-              >
-                {fullData[key][0].fileName.length > len
-                  ? `${fullData[key][0].fileName.slice(0, len)}...`
-                  : fullData[key][0].fileName}
-              </li>
-            );
-          })}
-        </ol>
-      </div>
-    );
   };
 
   render() {
@@ -162,10 +113,6 @@ class DataUpload extends Component {
 
           {this.showLatestFile(!this.state.queue)}
         </div>
-
-        {this.props.fullData
-          ? this.showUpdatedFiles(this.props.fullData, this.props.liveKey)
-          : null}
       </div>
     );
   }
@@ -180,9 +127,8 @@ const mapState = state => {
 
 const mapDispatch = dispatch => {
   return {
-    setLiveData: data => dispatch(setLiveData(data)),
     getFullData: data => dispatch(getFullData(data)),
-    setLiveKey: key => dispatch(setLiveKey(key))
+    addDataSet: newFullData => dispatch(addDataSet(newFullData))
   };
 };
 
