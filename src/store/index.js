@@ -141,10 +141,6 @@ export const removeDataSet = key => {
       allData.on("value", snap => {
         dispatch(setFullData(snap.val()));
       });
-      singleData.on("value", snap => {
-        dispatch(setLiveData(snap.val()));
-        dispatch(setLiveKey(snap.key));
-      });
     } catch (error) {
       console.error("WAH ERROR --", error);
     }
@@ -171,10 +167,7 @@ const reducer = (state = initialState, action) => {
 };
 
 const middleware = composeWithDevTools(
-  applyMiddleware(
-    thunkMiddleware
-    // createLogger({ collapsed: true })
-  )
+  applyMiddleware(thunkMiddleware, createLogger({ collapsed: true }))
 );
 
 const store = createStore(reducer, middleware);
