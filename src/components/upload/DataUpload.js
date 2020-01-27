@@ -84,7 +84,7 @@ class DataUpload extends Component {
     ) : null;
   };
 
-  showUpdatedFiles = fullData => {
+  showUpdatedFiles = (fullData, liveKey) => {
     if (!fullData) return null;
     const keys = Object.keys(fullData)
         .slice(-10)
@@ -101,20 +101,26 @@ class DataUpload extends Component {
       <div className="postUploadFileDiv">
         <span className="postUploadHeader">{headerText}</span>
         <ol className="postUploadUL">
-          {keys.map(key => (
-            <li
-              className="postUploadList linkText"
-              key={key}
-              onClick={() => {
-                this.props.setLiveData(fullData[key]);
-                this.props.setLiveKey(key);
-              }}
-            >
-              {fullData[key][0].fileName.length > len
-                ? `${fullData[key][0].fileName.slice(0, len)}...`
-                : fullData[key][0].fileName}
-            </li>
-          ))}
+          {keys.map(key => {
+            const fontColor =
+              key === liveKey ? "rgba(18,100,210,0.9)" : "black";
+
+            return (
+              <li
+                className="postUploadList linkText"
+                key={key}
+                onClick={() => {
+                  this.props.setLiveData(fullData[key]);
+                  this.props.setLiveKey(key);
+                }}
+                style={{ color: fontColor }}
+              >
+                {fullData[key][0].fileName.length > len
+                  ? `${fullData[key][0].fileName.slice(0, len)}...`
+                  : fullData[key][0].fileName}
+              </li>
+            );
+          })}
         </ol>
       </div>
     );
@@ -158,7 +164,7 @@ class DataUpload extends Component {
         </div>
 
         {this.props.fullData
-          ? this.showUpdatedFiles(this.props.fullData)
+          ? this.showUpdatedFiles(this.props.fullData, this.props.liveKey)
           : null}
       </div>
     );
@@ -167,7 +173,8 @@ class DataUpload extends Component {
 
 const mapState = state => {
   return {
-    fullData: state.fullData
+    fullData: state.fullData,
+    liveKey: state.liveKey
   };
 };
 

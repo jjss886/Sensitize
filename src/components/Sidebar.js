@@ -45,7 +45,7 @@ class Sidebar extends Component {
           <EmailComponent />
         ) : null}
 
-        <p>Choose Your Dataset</p>
+        <p className="sideBarHeaderText">Choose Your Dataset</p>
 
         <div className="modeSelectDiv">
           <span className="modeLabel">Mode: </span>
