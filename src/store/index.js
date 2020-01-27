@@ -131,6 +131,18 @@ export const removeDataPoint = (key, newData) => {
   };
 };
 
+export const removeDataSet = key => {
+  return dispatch => {
+    try {
+      const allData = fbDatabase.ref().child("data"),
+        singleData = allData.child(key);
+      console.log("Thunky -", key, allData, singleData);
+    } catch (error) {
+      console.error("WAH ERROR --", error);
+    }
+  };
+};
+
 // REDUCER
 const reducer = (state = initialState, action) => {
   switch (action.type) {
@@ -151,7 +163,10 @@ const reducer = (state = initialState, action) => {
 };
 
 const middleware = composeWithDevTools(
-  applyMiddleware(thunkMiddleware, createLogger({ collapsed: true }))
+  applyMiddleware(
+    thunkMiddleware
+    // createLogger({ collapsed: true })
+  )
 );
 
 const store = createStore(reducer, middleware);
