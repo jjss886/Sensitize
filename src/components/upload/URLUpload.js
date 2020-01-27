@@ -4,7 +4,7 @@ import { json } from "d3";
 import { addDataSet, getFullData } from "../../store";
 
 // eslint-disable-next-line
-const url = "https://udemy-react-d3.firebaseio.com/children.json";
+const urlExample = ["https://udemy-react-d3.firebaseio.com/children.json"];
 
 class URLUpload extends Component {
   state = {
@@ -12,7 +12,7 @@ class URLUpload extends Component {
     url: ""
   };
 
-  handelURLChange = evt => {
+  handleStateChange = evt => {
     this.setState({ [evt.target.name]: evt.target.value });
   };
 
@@ -39,7 +39,7 @@ class URLUpload extends Component {
           placeholder="File Name"
           onFocus={e => (e.target.placeholder = "")}
           onBlur={e => (e.target.placeholder = "File Name")}
-          onChange={this.handelURLChange}
+          onChange={this.handleStateChange}
         />
 
         <input
@@ -47,10 +47,10 @@ class URLUpload extends Component {
           name="url"
           value={this.state.url}
           className="urlTextInput"
-          placeholder="URL Here"
+          placeholder="URL Here (JSON)"
           onFocus={e => (e.target.placeholder = "")}
-          onBlur={e => (e.target.placeholder = "URL Here")}
-          onChange={this.handelURLChange}
+          onBlur={e => (e.target.placeholder = "URL Here (JSON)")}
+          onChange={this.handleStateChange}
         />
 
         <button type="button" onClick={this.uploadURL} className="urlUploadBtn">

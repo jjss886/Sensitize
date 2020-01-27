@@ -41,13 +41,17 @@ const SMTPEmail = {
       }
     };
 
+    const endingPuncs = [".", "!", "?"];
+
     Email.send({
       // SecureToken: "a998cc6b-ddbb-4c8b-b2d1-951f8bca070d", // MAILTRAP.IO
       SecureToken: "30fc3d42-b111-46df-9e5d-faaab9e06260",
       To: toEmail,
       From: "jjss886@gmail.com",
       Subject: subject,
-      Body: body,
+      Body: `${body}${
+        !endingPuncs.includes(body.slice(-1)) ? "." : ""
+      } Please check out the attachment!`,
       Attachments: [
         {
           name: "Sensitize_Chart.png",
