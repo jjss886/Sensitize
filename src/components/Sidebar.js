@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { setMode } from "../store";
 import { DataUpload } from "./upload";
-import Email from "./Email";
+import EmailComponent from "./EmailComponent";
 
 class Sidebar extends Component {
   componentDidMount() {
@@ -41,7 +41,9 @@ class Sidebar extends Component {
   render() {
     return (
       <div className="sideBarFullDiv">
-        {this.props.liveData && this.props.liveData.length ? <Email /> : null}
+        {this.props.liveData && this.props.liveData.length ? (
+          <EmailComponent />
+        ) : null}
 
         <p>Choose Your Dataset</p>
 

@@ -2,8 +2,9 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import html2canvas from "html2canvas";
 import emailjs from "emailjs-com";
+import SMTPEmail from "./SMTPEmail";
 
-class Email extends Component {
+class EmailComponent extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -25,40 +26,79 @@ class Email extends Component {
 
   getScreenShot = evt => {
     evt.preventDefault();
-    const ele = document.getElementsByClassName("chartScreenshot")[0];
+    const ele = document.getElementsByClassName("chartScreenshot")[0],
+      box = document.getElementById("box1"),
+      test = document.getElementById("test");
 
-    html2canvas(ele).then(canvas => {
-      const cvs = canvas.toDataURL("image/png");
-      console.log("COME ON -", canvas);
-      window.open(cvs, "_blank");
+    // await html2canvas(ele).then(canvas => {
+    //   const base64image = canvas
+    //     .toDataURL("image/png")
+    //     .replace("image/png", "image/octet-stream");
+    //   console.log("COME ON -", canvas, base64image);
+    //   return base64image;
+    // });
+    console.log("first -", ele, box, test);
+
+    html2canvas(ele, {
+      onrendered: function(canvas) {
+        console.log("second -", canvas, ele);
+        box.html("");
+        if (
+          navigator.userAgent.indexOf("MSIE ") > 0 ||
+          navigator.userAgent.match(/Trident.*rv\:11\./)
+        ) {
+          const blob = canvas.msToBlob();
+          console.log("um -", blob);
+          window.navigator.msSaveBlob(blob, "Test file.png");
+        } else {
+          test.attr("href", canvas.toDataURL("image/png"));
+          test.attr("download", "screenshot.png");
+          test[0].click();
+          console.log("hehe -", test);
+        }
+      }
     });
   };
 
-  handleSubmit = evt => {
+  handleSubmit = async evt => {
     evt.preventDefault();
     const { feedback, email } = this.state;
     if (!this.validateEmail(email)) {
       this.setState({ email: "" });
       return alert("Invalid email input");
     }
-    const serviceId = "sensitized_analysis",
-      templateId = "sensitized_analysis",
-      userId = "user_AZj3ffxVL9YBbjm9jaQTq",
-      content = {
-        analysis_number: 100,
-        message: feedback,
-        user_name: email.split("@")[0],
-        user_email: email
-      };
+    const ele = document.getElementsByClassName("chartScreenshot")[0];
 
-    // emailjs
-    //   .send(serviceId, templateId, content, userId)
-    //   .then(res => {
-    //     console.log("Email success -", res);
-    //   })
-    //   .catch(err => console.error("WAH ERROR -", err));
+    await html2canvas(ele).then(canvas => {
+      const base64image = canvas.toDataURL("image/png"),
+        // .replace("image/png", "image/octet-stream"),
+        content = {
+          analysis_number: 100,
+          message: feedback,
+          image: `<img src="cid:${base64image}" />`,
+          user_name: email.split("@")[0],
+          user_email: email
+        },
+        serviceId = "sensitized_analysis",
+        templateId = "sensitized_analysis",
+        userId = "user_AZj3ffxVL9YBbjm9jaQTq";
 
-    this.setState({ feedback: "", email: "" });
+      console.log("testing -", content);
+
+      SMTPEmail.sendEmail(
+        email,
+        "Your Sensitize Analysis",
+        feedback,
+        base64image
+      );
+
+      // emailjs
+      //   .send(serviceId, templateId, content, userId)
+      //   .then(res => console.log("Email success -", res))
+      //   .catch(err => console.error("WAH ERROR -", err));
+
+      this.setState({ feedback: "", email: "" });
+    });
   };
 
   render() {
@@ -87,7 +127,6 @@ class Email extends Component {
             onFocus={e => (e.target.placeholder = "")}
             onBlur={e => (e.target.placeholder = "Message (Optional)")}
             value={this.state.feedback}
-            style={{ width: "100%", height: "40px" }}
           />
 
           <input
@@ -111,4 +150,4 @@ class Email extends Component {
   }
 }
 
-export default connect()(Email);
+export default connect()(EmailComponent);
