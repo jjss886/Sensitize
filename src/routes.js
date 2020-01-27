@@ -5,6 +5,7 @@ import { withRouter, Route, Switch } from "react-router-dom";
 // COMPONENTS
 import AppScatter from "./components/scatterPlot/AppScatter";
 import AppBar from "./components/barChart/AppBar";
+import AppFishEye from "./components/fishEye/AppFishEye";
 import AdminPanel from "./components/adminPanel/AdminPanel";
 
 class Routes extends Component {
@@ -27,6 +28,12 @@ class Routes extends Component {
               return (
                 <div className="routeChartFullDiv">
                   <AppBar />
+                </div>
+              );
+            } else if (chartType === "FishEye") {
+              return (
+                <div className="routeChartFullDiv">
+                  <AppFishEye />
                 </div>
               );
             }
