@@ -23,24 +23,18 @@ class ScatterPlotD3 {
     vis.x = d3.scaleLinear().range([0, WIDTH]);
     vis.y = d3.scaleLinear().range([HEIGHT, 0]);
 
-    vis.xAxisGroup = vis.g
-      .append("g")
-      .attr("transform", `translate(0, ${HEIGHT})`);
-    vis.yAxisGroup = vis.g.append("g");
-
     // X AXIS LABEL
-    vis.g
+    vis.xAxisLabel = vis.g
       .append("text")
       .attr("x", WIDTH / 2)
       .attr("y", HEIGHT + 40)
       .attr("font-size", 20)
       .attr("fill", "white")
       .attr("font-weight", "bold")
-      .attr("text-anchor", "middle")
-      .text("Age");
+      .attr("text-anchor", "middle");
 
     // Y AXIS LABEL
-    vis.g
+    vis.yAxisLabel = vis.g
       .append("text")
       .attr("x", -(HEIGHT / 2))
       .attr("y", -50)
@@ -48,25 +42,42 @@ class ScatterPlotD3 {
       .attr("font-size", 20)
       .attr("fill", "white")
       .attr("font-weight", "bold")
-      .attr("text-anchor", "middle")
-      .text("Height (cm)");
+      .attr("text-anchor", "middle");
+
+    vis.xAxisGroup = vis.g
+      .append("g")
+      .attr("transform", `translate(0, ${HEIGHT})`);
+    vis.yAxisGroup = vis.g.append("g");
 
     vis.update(data);
   }
 
   update(data) {
-    const vis = this;
+    const vis = this,
+      keys = Object.keys(data[0]),
+      noNameKeys = keys.filter(x => x !== "name"),
+      [xAttr, yAttr] = noNameKeys;
     vis.data = data;
 
+    // ADJUST SCALING
     vis.x.domain([
-      d3.min(vis.data, d => Number(d.age) * 0.9),
-      d3.max(vis.data, d => Number(d.age))
+      d3.min(vis.data, d => Number(d[xAttr]) * 0.9),
+      d3.max(vis.data, d => Number(d[xAttr]) * 1.05)
     ]);
     vis.y.domain([
-      d3.min(vis.data, d => Number(d.height) * 0.95),
-      d3.max(vis.data, d => Number(d.height))
+      d3.min(vis.data, d => Number(d[yAttr]) * 0.95),
+      d3.max(vis.data, d => Number(d[yAttr]) * 1.05)
     ]);
 
+    // AXIS LABEL TRANSITION
+    vis.xAxisLabel
+      .transition(1000)
+      .text(xAttr.slice(0, 1).toUpperCase() + xAttr.slice(1));
+    vis.yAxisLabel
+      .transition(1000)
+      .text(yAttr.slice(0, 1).toUpperCase() + yAttr.slice(1));
+
+    // AXIS FIGURES TRANSITION
     const xAxisCall = d3.axisBottom(vis.x);
     const yAxisCall = d3.axisLeft(vis.y);
 
@@ -86,8 +97,8 @@ class ScatterPlotD3 {
     // UPDATE
     circles
       .transition(1000)
-      .attr("cx", d => vis.x(d.age))
-      .attr("cy", d => vis.y(d.height));
+      .attr("cx", d => vis.x(d[xAttr]))
+      .attr("cy", d => vis.y(d[yAttr]));
 
     // ENTER
     circles
@@ -95,11 +106,11 @@ class ScatterPlotD3 {
       .append("circle")
       .classed("scatterCircle", true)
       .attr("cy", vis.y(0))
-      .attr("cx", d => vis.x(d.age))
+      .attr("cx", d => vis.x(d[xAttr]))
       .attr("r", 5)
       .on("click", d => store.dispatch(setActiveName(d.name)))
       .transition(1000)
-      .attr("cy", d => vis.y(d.height));
+      .attr("cy", d => vis.y(d[yAttr]));
   }
 }
 

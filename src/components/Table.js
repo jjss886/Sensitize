@@ -9,8 +9,8 @@ import { pullLiveKey, addDataPoint, removeDataPoint } from "../store";
 class Table extends Component {
   state = {
     name: "",
-    height: "",
-    age: ""
+    xState: "",
+    yState: ""
   };
 
   componentDidMount() {
@@ -39,7 +39,7 @@ class Table extends Component {
       this.props.liveData,
       this.state
     );
-    this.setState({ name: "", height: "", age: "" });
+    this.setState({ name: "", xState: "", yState: "" });
   };
 
   handleRemove = evt => {
@@ -48,7 +48,7 @@ class Table extends Component {
     this.props.removeDataPoint(this.props.liveKey, newData);
   };
 
-  renderRows() {
+  renderRows(xKey, yKey) {
     const { liveData, activeName } = this.props,
       adjData = "fileName" in liveData[0] ? liveData.slice(1) : liveData;
 
@@ -63,8 +63,8 @@ class Table extends Component {
           style={{ backgroundColor: background }}
         >
           <Col xs={3}>{student.name}</Col>
-          <Col xs={3}>{student.height}</Col>
-          <Col xs={3}>{student.age}</Col>
+          <Col xs={3}>{student[yKey]}</Col>
+          <Col xs={3}>{student[xKey]}</Col>
           <Col>
             <Button
               variant={"danger"}
@@ -83,6 +83,12 @@ class Table extends Component {
   }
 
   render() {
+    const keys = Object.keys(this.props.liveData[1]),
+      noNameKeys = keys.filter(x => x !== "name"),
+      [xKey, yKey] = noNameKeys,
+      xAttr = xKey.slice(0, 1).toUpperCase() + xKey.slice(1),
+      yAttr = yKey.slice(0, 1).toUpperCase() + yKey.slice(1);
+
     return (
       <div className="scatterTableFullDiv">
         <Row>
@@ -99,23 +105,23 @@ class Table extends Component {
 
           <Col xs={3}>
             <Form.Control
-              name={"height"}
-              value={this.state.height}
+              name={"yState"}
+              value={this.state.yState}
               onChange={this.handleInputChange}
-              placeholder={"Height"}
+              placeholder={yAttr}
               onFocus={e => (e.target.placeholder = "")}
-              onBlur={e => (e.target.placeholder = "Height")}
+              onBlur={e => (e.target.placeholder = `${yAttr}`)}
             />
           </Col>
 
           <Col xs={3}>
             <Form.Control
-              name={"age"}
-              value={this.state.age}
+              name={"xState"}
+              value={this.state.xState}
               onChange={this.handleInputChange}
-              placeholder={"Age"}
+              placeholder={xAttr}
               onFocus={e => (e.target.placeholder = "")}
-              onBlur={e => (e.target.placeholder = "Age")}
+              onBlur={e => (e.target.placeholder = `${xAttr}`)}
             />
           </Col>
 
@@ -130,7 +136,7 @@ class Table extends Component {
             </Button>
           </Col>
         </Row>
-        {this.renderRows()}
+        {this.renderRows(xKey, yKey)}
       </div>
     );
   }
