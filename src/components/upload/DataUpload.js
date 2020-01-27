@@ -62,7 +62,8 @@ class DataUpload extends Component {
     uploadTask.push(tempData);
     uploadTask.on("value", snap => {
       this.setState({ tempData: null, queue: false });
-      this.props.pullLiveKey();
+      this.props.setLiveKey(snap.key);
+      // this.props.pullLiveKey();
       this.props.getFullData();
     });
   };
@@ -129,9 +130,9 @@ class DataUpload extends Component {
             type="text"
             name="name"
             value={this.state.name}
-            placeholder="File Name"
+            placeholder="File Name (Optional)"
             onFocus={e => (e.target.placeholder = "")}
-            onBlur={e => (e.target.placeholder = "File Name")}
+            onBlur={e => (e.target.placeholder = "File Name (Optional)")}
             onChange={this.handleNameChange}
           />
 

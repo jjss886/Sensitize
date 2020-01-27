@@ -68,6 +68,7 @@ class Table extends Component {
           <Col>
             <Button
               variant={"danger"}
+              className="scatterRemoveBtn"
               type={"button"}
               style={{ width: "100%" }}
               name={student.name}
