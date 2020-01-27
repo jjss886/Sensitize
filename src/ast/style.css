@@ -479,6 +479,10 @@ code {
   fill: lightpink;
 }
 
+.colRemoveBtn {
+  display: flex;
+}
+
 .scatterRemoveBtn {
   width: 90%;
   height: 35px;

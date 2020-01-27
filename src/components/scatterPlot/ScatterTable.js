@@ -65,7 +65,7 @@ class ScatterTable extends Component {
           <Col xs={3}>{student.name}</Col>
           <Col xs={3}>{student[yKey]}</Col>
           <Col xs={3}>{student[xKey]}</Col>
-          <Col>
+          <Col className="colRemoveBtn">
             <button
               variant={"danger"}
               className="scatterRemoveBtn"
