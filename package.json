@@ -20,6 +20,7 @@
     "firebase": "^7.7.0",
     "firebase-tools": "^7.12.1",
     "history": "^4.10.1",
+    "html2canvas": "^1.0.0-rc.5",
     "papaparse": "^5.1.1",
     "react": "^16.12.0",
     "react-bootstrap": "^1.0.0-beta.16",

@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import html2canvas from "html2canvas";
 import emailjs from "emailjs-com";
 
 class Email extends Component {
@@ -22,6 +23,17 @@ class Email extends Component {
     return re.test(String(email).toLowerCase());
   };
 
+  getScreenShot = evt => {
+    evt.preventDefault();
+    const ele = document.getElementsByClassName("chartScreenshot")[0];
+
+    html2canvas(ele).then(canvas => {
+      const cvs = canvas.toDataURL("image/png");
+      console.log("COME ON -", canvas);
+      window.open(cvs, "_blank");
+    });
+  };
+
   handleSubmit = evt => {
     evt.preventDefault();
     const { feedback, email } = this.state;
@@ -39,12 +51,12 @@ class Email extends Component {
         user_email: email
       };
 
-    emailjs
-      .send(serviceId, templateId, content, userId)
-      .then(res => {
-        console.log("Email success -", res);
-      })
-      .catch(err => console.error("WAH ERROR -", err));
+    // emailjs
+    //   .send(serviceId, templateId, content, userId)
+    //   .then(res => {
+    //     console.log("Email success -", res);
+    //   })
+    //   .catch(err => console.error("WAH ERROR -", err));
 
     this.setState({ feedback: "", email: "" });
   };
@@ -83,6 +95,13 @@ class Email extends Component {
             value="Submit"
             className="emailSubmitBtn"
             onClick={this.handleSubmit}
+          />
+
+          <input
+            type="button"
+            value="Screenshot"
+            className="emailSubmitBtn"
+            onClick={this.getScreenShot}
           />
         </div>
 

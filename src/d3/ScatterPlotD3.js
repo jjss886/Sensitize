@@ -15,6 +15,7 @@ class ScatterPlotD3 {
       .attr("width", WIDTH + MARGIN.LEFT + MARGIN.RIGHT)
       .attr("height", HEIGHT + MARGIN.TOP + MARGIN.BOTTOM)
       .classed("scatterPlotSvg", true)
+      .classed("svgChart", true)
       .append("g")
       .attr("transform", `translate(${MARGIN.LEFT}, ${MARGIN.TOP})`);
 
