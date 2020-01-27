@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import html2canvas from "html2canvas";
-import SMTPEmail from "../utils/SMTPEmail";
+import SMTPEmail from "../../utils/SMTPEmail";
 
 class EmailComponent extends Component {
   constructor(props) {

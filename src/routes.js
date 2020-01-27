@@ -5,7 +5,7 @@ import { withRouter, Route, Switch } from "react-router-dom";
 // COMPONENTS
 import AppScatter from "./components/AppScatter";
 import AppBar from "./components/AppBar";
-import AdminPanel from "./components/AdminPanel";
+import AdminPanel from "./components/adminPanel/AdminPanel";
 
 class Routes extends Component {
   render() {

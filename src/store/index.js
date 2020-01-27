@@ -22,7 +22,6 @@ const SET_FULL_DATA = "SET_FULL_DATA";
 const SET_ACTIVE_NAME = "SET_ACTIVE_NAME";
 
 // ACTION CREATORS
-
 export const setMode = mode => {
   return {
     type: SET_MODE,
@@ -189,7 +188,8 @@ const reducer = (state = initialState, action) => {
 };
 
 const middleware = composeWithDevTools(
-  applyMiddleware(thunkMiddleware, createLogger({ collapsed: true }))
+  // applyMiddleware(thunkMiddleware, createLogger({ collapsed: true }))
+  applyMiddleware(thunkMiddleware)
 );
 
 const store = createStore(reducer, middleware);

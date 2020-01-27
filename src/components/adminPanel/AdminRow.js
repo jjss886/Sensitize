@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { removeDataSet } from "./../store";
+import { removeDataSet } from "../../store";
 
 class AdminRow extends Component {
   removeDataCollection = liveKey => {

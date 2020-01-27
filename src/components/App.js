@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { setLiveData, getFullData } from "../store";
 
 // IMPORT COMPONENTS
-import Sidebar from "./Sidebar";
+import Sidebar from "./sidebar/Sidebar";
 import NavBar from "./NavBar";
 import Routes from "../routes";
 

@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { getFullData } from "./../store";
+import { getFullData } from "../../store";
 import AdminRow from "./AdminRow";
 
 class AdminPanel extends Component {

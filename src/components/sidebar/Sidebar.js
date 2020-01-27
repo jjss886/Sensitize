@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { setMode, setLiveData, setLiveKey } from "../store";
-import { DataUpload, URLUpload } from "./upload";
+import { setMode, setLiveData, setLiveKey } from "../../store";
+import { DataUpload, URLUpload } from "../upload";
 import EmailComponent from "./EmailComponent";
 
 class Sidebar extends Component {
