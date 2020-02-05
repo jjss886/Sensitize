@@ -32,7 +32,10 @@ class App extends Component {
           <Sidebar />
 
           <div className="contentPageFullDiv">
-            <h1>1. Upload! --> 2. Analyze! --> 3. Send!</h1>
+            <h2 className="appHeader">
+              1. Upload &nbsp;&nbsp;&nbsp; ---> &nbsp;&nbsp;&nbsp; 2. Analyze
+              &nbsp;&nbsp;&nbsp; ---> &nbsp;&nbsp;&nbsp; 3. Send
+            </h2>
             <Routes chartType={this.props.chartType} />
           </div>
         </div>
