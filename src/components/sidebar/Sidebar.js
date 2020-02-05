@@ -41,7 +41,7 @@ class Sidebar extends Component {
     const keys = Object.keys(fullData)
         .slice(-10)
         .reverse(),
-      len = 20,
+      len = 17,
       headerText =
         keys.length === 0
           ? `Currently No Uploads`

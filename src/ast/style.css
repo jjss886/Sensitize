@@ -45,6 +45,7 @@ code {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  padding-left: 14vw;
 }
 
 .navBarOne {
@@ -77,10 +78,9 @@ code {
 .sideBarFullDiv {
   position: fixed;
   background-color: rgba(15, 75, 128, 0.9);
-  width: 12vw;
+  width: 14vw;
   min-height: 100vh;
-  /* max-height: 100%; */
-  padding: 25px 5px;
+  padding: 15px 5px;
   color: white;
   font-weight: bold;
   display: flex;
@@ -88,12 +88,14 @@ code {
   align-items: center;
   z-index: 2;
   overflow-y: scroll;
+  top: 0;
+  bottom: 0;
 }
 
 .contentPageFullDiv {
   background-color: #282c34;
   min-height: 100vh;
-  margin-left: 12vw;
+  margin-left: 14vw;
   font-size: calc(10px + 2vmin);
   color: white;
   text-align: center;
@@ -180,7 +182,6 @@ code {
   flex-direction: column;
   justify-content: center;
   width: 95%;
-  overflow-y: scroll;
 }
 
 .dataUploadFullDiv {

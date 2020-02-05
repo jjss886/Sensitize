@@ -71,7 +71,7 @@ class DataUpload extends Component {
           <span className="uploadedStatusText">Uploaded:</span>
         )}
         <span className="lastFileUploadText">
-          {lastName.length > 15 ? `${lastName.slice(0, 15)}...` : lastName}
+          {lastName.length > 13 ? `${lastName.slice(0, 13)}...` : lastName}
         </span>
       </div>
     ) : null;
