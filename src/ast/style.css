@@ -436,7 +436,7 @@ code {
   padding: 35px 25px;
   display: flex;
   justify-content: center;
-  width: 75vw;
+  width: 82vw;
 }
 
 .loadDataText {
@@ -519,7 +519,7 @@ code {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  width: 75vw;
+  width: 82vw;
 }
 
 .barChartArea {
@@ -543,7 +543,7 @@ code {
   padding: 35px 25px;
   display: flex;
   justify-content: center;
-  width: 75vw;
+  width: 82vw;
 }
 
 .fishEyeChartArea {
