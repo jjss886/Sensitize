@@ -1,7 +1,7 @@
 // import * as firebase from "firebase";
 import firebase from "firebase/app";
 import "firebase/database";
-import fbKeys from "../../firebaseKeys";
+import fbKeys from "./firebaseKeys";
 
 // PERSONAL FIREBASE CONFIGURATION
 const firebaseConfig = fbKeys;
