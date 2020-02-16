@@ -4,7 +4,7 @@ Sensitize is a democratized dashboarding application that allows any user to upl
 
 Tech Stack: React, Redux, D3, Firebase, HTML2Canvas, SMTPEmail, Bootstrap
 
-Deployed: https://sensitize-b76e6.firebaseapp.com/
+Deployed: https://sensitize-b76e6.firebaseapp.com
 Github: https://github.com/jjss886/Sensitize
 
 Initialized with Create-React-App
