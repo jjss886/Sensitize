@@ -25,3 +25,5 @@ yarn-error.log*
 
 # files
 firebaseKeys.js
+firestore.rules
+firebase.json
