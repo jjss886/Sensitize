@@ -23,7 +23,7 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
-# files
+# firebase setup
 firebaseKeys.js
 firestore.rules
 firebase.json
