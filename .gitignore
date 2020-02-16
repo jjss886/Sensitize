@@ -28,3 +28,4 @@ firebaseKeys.js
 firestore.rules
 firebase.json
 .firebaserc
+database.rules.json
