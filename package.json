@@ -12,7 +12,7 @@
     "extends": "react-app"
   },
   "dependencies": {
-    "axios": "^0.21.1",
+    "axios": "^0.21.2",
     "bootstrap": "^4.4.1",
     "csvtojson": "^2.0.10",
     "d3": "^5.15.0",
