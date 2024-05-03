@@ -19,7 +19,7 @@
     "d3-random": "^3.0.1",
     "emailjs-com": "^3.2.0",
     "firebase": "^9.6.7",
-    "firebase-tools": "^13.0.2",
+    "firebase-tools": "^13.6.0",
     "history": "^5.3.0",
     "html2canvas": "^1.0.0-rc.5",
     "papaparse": "^5.1.1",
